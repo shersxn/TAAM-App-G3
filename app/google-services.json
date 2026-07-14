@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "981188919569",
+    "project_id": "cscb07-group3-taamapp",
+    "storage_bucket": "cscb07-group3-taamapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981188919569:android:3a37fc16e1cf14e6f3ccb0",
+        "android_client_info": {
+          "package_name": "com.group3.taamapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB03PCsCuylfhIwf6BF8aAc0tSxjVoDvpc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
