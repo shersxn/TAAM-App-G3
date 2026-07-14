@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/taam_background"
+    android:orientation="vertical"
+    android:padding="32dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Toronto Asian Art Museum"
+        android:fontFamily="@font/dm_sans"
+        android:textSize="32sp"
+        android:padding="32dp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/taam_text_dark"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign In"
+        android:textSize="24sp"
+        android:padding="24dp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/taam_text_dark"
+        />
+
+    <EditText
+        android:id="@+id/loginEmail"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Enter Email Here"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/taam_text_dark"
+        />
+
+    <EditText
+        android:id="@+id/loginPassword"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Enter Password Here"
+        android:layout_marginTop="30dp"
+        android:inputType="textPassword"
+        android:textColor="@color/taam_text_dark"
+        />
+
+    <Button
+        android:id="@+id/signInBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign In"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/taam_brown_medium"
+
+        />
+
+    <TextView
+        android:id="@+id/signUpBtnLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New to TAAM? Create an Account"
+        android:clickable="true"
+        android:textSize="18sp"
+        android:padding="36dp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/taam_text_dark"
+        />
+
+</LinearLayout>
