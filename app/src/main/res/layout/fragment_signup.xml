@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/taam_background"
+    android:background="@color/background_cream"
     android:orientation="vertical"
     android:padding="32dp">
 
@@ -14,7 +14,7 @@
         android:gravity="center"
         android:padding="32dp"
         android:text="Toronto Asian Art Museum"
-        android:textColor="@color/taam_text_dark"
+        android:textColor="@color/brown_dark_text"
         android:textSize="32sp"
         android:textStyle="bold" />
 
@@ -27,7 +27,7 @@
         android:textStyle="bold"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@color/taam_text_dark"
+        android:textColor="@color/brown_dark_text"
         />
 
     <EditText
@@ -36,7 +36,7 @@
         android:layout_height="48dp"
         android:hint="Enter Email Here"
         android:layout_marginTop="30dp"
-        android:textColor="@color/taam_text_dark"
+        android:textColor="@color/brown_dark_text"
         />
 
     <EditText
@@ -45,7 +45,7 @@
         android:layout_height="48dp"
         android:hint="Enter Username Here"
         android:layout_marginTop="30dp"
-        android:textColor="@color/taam_text_dark"
+        android:textColor="@color/brown_dark_text"
         />
 
     <EditText
@@ -55,7 +55,7 @@
         android:hint="Enter Password Here"
         android:layout_marginTop="30dp"
         android:inputType="textPassword"
-        android:textColor="@color/taam_text_dark"
+        android:textColor="@color/brown_dark_text"
         />
 
     <Button
@@ -65,7 +65,7 @@
         android:text="Sign Up"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/taam_brown_medium"
+        android:backgroundTint="@color/brown_medium"
         />
 
     <TextView
@@ -79,7 +79,7 @@
         android:textStyle="bold"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@color/taam_text_dark"
+        android:textColor="@color/brown_dark_text"
         />
 
 </LinearLayout>
