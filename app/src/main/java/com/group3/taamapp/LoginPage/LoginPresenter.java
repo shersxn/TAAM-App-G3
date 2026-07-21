@@ -1,6 +1,9 @@
-package com.group3.taamapp;
+package com.group3.taamapp.LoginPage;
 
-import static com.group3.taamapp.AuthModel.*;
+import static com.group3.taamapp.Model.AuthModel.*;
+
+import com.group3.taamapp.Contract.LoginContract;
+import com.group3.taamapp.Model.AuthModel;
 
 public class LoginPresenter implements LoginContract.Presenter {
     private final AuthModel model;

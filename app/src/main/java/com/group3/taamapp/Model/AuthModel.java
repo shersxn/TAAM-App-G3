@@ -1,4 +1,4 @@
-package com.group3.taamapp;
+package com.group3.taamapp.Model;
 
 public interface AuthModel {
     public static interface StatusCallback<F extends Enum<F>> {

@@ -1,4 +1,4 @@
-package com.group3.taamapp;
+package com.group3.taamapp.Bases;
 
 import android.os.Bundle;
 
@@ -6,6 +6,8 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.group3.taamapp.R;
 
 public abstract class BaseMainActivity extends AppCompatActivity {
     @Override

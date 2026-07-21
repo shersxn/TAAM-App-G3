@@ -1,6 +1,8 @@
-package com.group3.taamapp;
+package com.group3.taamapp.Contract;
 
 import android.content.Context;
+
+import com.group3.taamapp.Bases.BaseViewContract;
 
 public interface LoginContract {
     public static interface Presenter {
@@ -9,7 +11,6 @@ public interface LoginContract {
     }
 
     public static interface View extends BaseViewContract {
-        public abstract Context getContext();
         public abstract String getEmail();
         public abstract String getPassword();
         public abstract void toMainPage(String email);

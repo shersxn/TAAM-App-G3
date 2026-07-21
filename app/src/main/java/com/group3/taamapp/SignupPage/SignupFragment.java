@@ -1,8 +1,14 @@
-package com.group3.taamapp;
+package com.group3.taamapp.SignupPage;
 
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.group3.taamapp.Bases.BaseFragment;
+import com.group3.taamapp.Contract.SignupContract;
+import com.group3.taamapp.LoginPage.LoginFragment;
+import com.group3.taamapp.Model.AuthModelFirebase;
+import com.group3.taamapp.R;
 
 public class SignupFragment extends BaseFragment implements SignupContract.View {
     private SignupContract.Presenter presenter;

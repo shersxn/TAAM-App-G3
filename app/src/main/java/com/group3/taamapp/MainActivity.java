@@ -1,12 +1,9 @@
 package com.group3.taamapp;
 
-import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import com.group3.taamapp.Bases.BaseMainActivity;
+import com.group3.taamapp.LoginPage.LoginFragment;
+import com.group3.taamapp.Model.AuthModel;
+import com.group3.taamapp.Model.AuthModelFirebase;
 
 public class MainActivity extends BaseMainActivity {
     @Override

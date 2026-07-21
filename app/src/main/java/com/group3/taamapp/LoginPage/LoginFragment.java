@@ -1,14 +1,16 @@
-package com.group3.taamapp;
+package com.group3.taamapp.LoginPage;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import com.group3.taamapp.Bases.BaseFragment;
+import com.group3.taamapp.Bases.BundleInitializer;
+import com.group3.taamapp.Contract.LoginContract;
+import com.group3.taamapp.Model.AuthModelFirebase;
+import com.group3.taamapp.R;
+import com.group3.taamapp.SignupPage.SignupFragment;
 
 public class LoginFragment extends BaseFragment implements LoginContract.View {
     private LoginContract.Presenter presenter;

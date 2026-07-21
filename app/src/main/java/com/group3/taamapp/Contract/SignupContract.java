@@ -1,6 +1,8 @@
-package com.group3.taamapp;
+package com.group3.taamapp.Contract;
 
 import android.content.Context;
+
+import com.group3.taamapp.Bases.BaseViewContract;
 
 public interface SignupContract {
     public interface Presenter {
@@ -9,7 +11,6 @@ public interface SignupContract {
     }
 
     public interface View extends BaseViewContract {
-        public Context getContext();
         public String getEmail();
         public String getUsername();
         public String getPassword();

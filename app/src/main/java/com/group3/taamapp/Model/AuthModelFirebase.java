@@ -1,4 +1,4 @@
-package com.group3.taamapp;
+package com.group3.taamapp.Model;
 
 import android.content.Context;
 import android.content.SharedPreferences;

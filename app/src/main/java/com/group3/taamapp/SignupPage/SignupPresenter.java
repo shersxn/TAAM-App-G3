@@ -1,5 +1,8 @@
-package com.group3.taamapp;
-import static com.group3.taamapp.AuthModel.*;
+package com.group3.taamapp.SignupPage;
+import static com.group3.taamapp.Model.AuthModel.*;
+
+import com.group3.taamapp.Contract.SignupContract;
+import com.group3.taamapp.Model.AuthModel;
 
 public class SignupPresenter implements SignupContract.Presenter {
     AuthModel model;
