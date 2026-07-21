@@ -17,7 +17,7 @@ public class AuthModelFirebase implements AuthModel {
     private final SharedPreferences sharedPref;
 
     public AuthModelFirebase(Context context) {
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        FirebaseDatabase db = FirebaseDatabase.getInstance("https://cscb07-group3-taamapp-default-rtdb.firebaseio.com/");
         authRef = db.getReference("Auth");
         sharedPref = context.getSharedPreferences("Session", Context.MODE_PRIVATE);
     }
