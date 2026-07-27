@@ -118,6 +118,10 @@ public class ExpandedArtifact {
         this.saveCount = saveCount;
     }
 
+    public int getSaveCount() {
+        return saveCount;
+    }
+
 }
 
 

@@ -1,42 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <Button
-        android:id="@+id/delete_comment"
-        android:text="delete\ncomment"
-        android:textSize="12sp"
-        app:backgroundTint="#a47e5a"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/comment"
-        app:layout_constraintStart_toStartOf="parent" />
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@color/background_cream">
 
     <TextView
         android:id="@+id/commenter"
-        android:text="commenter"
-        android:textSize="30sp"
+        android:text="Username"
+        android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="#402410"
+        android:fontFamily="@font/dm_sans"
+        android:textColor="@color/brown_dark_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/comment"
-        app:layout_constraintStart_toEndOf="@+id/delete_comment" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/delete_comment"
+        android:layout_marginEnd="8dp"/>
 
     <TextView
         android:id="@+id/comment"
-        android:text="comment"
-        android:textColor="#402410"
+        android:text="This is a comment text."
+        android:textSize="14sp"
+        android:fontFamily="@font/dm_sans"
+        android:textColor="@color/brown_dark_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/delete_comment"
-        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/commenter"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/delete_comment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"/>
+
+    <Button
+        android:id="@+id/delete_comment"
+        android:text="Delete"
+        android:textSize="12sp"
+        android:fontFamily="@font/dm_sans"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/brown_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
