@@ -12,7 +12,6 @@ public class ExpandedArtifact {
     private String dynastyPeriod;
     private String imageUrl;
     private int likeCount;
-    private int saveCount;
 
     public ExpandedArtifact() {
 
@@ -27,8 +26,7 @@ public class ExpandedArtifact {
             String material,
             String dynastyPeriod,
             String imageUrl,
-            int likeCount,
-            int saveCount
+            int likeCount
     ) {
         this.id = id;
         this.lotNumber = lotNumber;
@@ -39,7 +37,6 @@ public class ExpandedArtifact {
         this.dynastyPeriod = dynastyPeriod;
         this.imageUrl = imageUrl;
         this.likeCount = likeCount;
-        this.saveCount = saveCount;
     }
 
     public String getId() {
@@ -112,14 +109,6 @@ public class ExpandedArtifact {
 
     public void setLikeCount(int likeCount) {
         this.likeCount = likeCount;
-    }
-
-    public void setSaveCount(int saveCount) {
-        this.saveCount = saveCount;
-    }
-
-    public int getSaveCount() {
-        return saveCount;
     }
 
 }

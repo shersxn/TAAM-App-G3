@@ -3,4 +3,6 @@
     <string name="delete_artifact_title">Delete Artifact</string>
     <string name="deleteButton_title">Delete</string>
     <string name="hint_title">Search or Select Artifact</string>
+    <string name="like_count_format">%1$d likes</string>
+    <string name="save_count_format">%1$d saves</string>
 </resources>
