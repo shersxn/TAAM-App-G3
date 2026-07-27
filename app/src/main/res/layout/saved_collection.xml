@@ -15,7 +15,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="20dp"
-        android:fontFamily="@font/dm_sans"
+        android:fontFamily="@font/playfair_display_sc"
         android:text="My Collection"
         android:textColor="@color/brown_dark_text"
         android:textSize="24sp"
