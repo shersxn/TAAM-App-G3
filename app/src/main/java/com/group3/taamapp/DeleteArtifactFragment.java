@@ -14,17 +14,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class DeleteArtifactFragment extends Fragment {
 
     private AutoCompleteTextView autoCompleteArtifacts;
     private Button deleteButton;
-    private List<String> artifactDatabase;
+    private List<String> artifactList;
     private ArrayAdapter<String> adapter;
 
-    private boolean isCurrentUserAdmin = true;
+    private DeleteArtifactHelper dbHelper;
+    private String currentUserEmail = "";
 
     public DeleteArtifactFragment() {
         // Required empty public constructor
@@ -33,64 +33,72 @@ public class DeleteArtifactFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflate the layout
         View view = inflater.inflate(R.layout.delete_artifact, container, false);
-
-        // Bind the UI elements
+        // Initialize all UI Components
         autoCompleteArtifacts = view.findViewById(R.id.autoCompleteArtifacts);
         deleteButton = view.findViewById(R.id.delete_button);
 
-        // Using a dummy database for now: Just to test the logic
-        artifactDatabase = new ArrayList<>(Arrays.asList(
-                "Ancient Vase",
-                "Gold Coin",
-                "Dinosaur Fossil",
-                "Roman Sword",
-                "Emerald Crown"
-        ));
-
-        // Build and attach the adapter
-        adapter = new ArrayAdapter<>(
-                requireContext(),
-                android.R.layout.simple_dropdown_item_1line,
-                artifactDatabase
-        );
+        dbHelper = new DeleteArtifactHelper();
+        artifactList = new ArrayList<>();
+        adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, artifactList);
         autoCompleteArtifacts.setAdapter(adapter);
 
+        setUiEnabled(false);
 
-        if (!isCurrentUserAdmin) {
-            deleteButton.setEnabled(false);
-            autoCompleteArtifacts.setEnabled(false); // Optional: Locks the dropdown too
-            Toast.makeText(requireContext(), "View-Only Mode: You are not an admin.", Toast.LENGTH_LONG).show();
+        // Extract the current user's email from the custom login Bundle
+        Bundle args = getArguments();
+        if (args != null && args.containsKey("email")) {
+            currentUserEmail = args.getString("email");
         }
+
+        // Verify Admin Status
+        dbHelper.verifyAdminStatus(currentUserEmail, (isAdmin, message) -> {
+            if (isAdmin) {
+                setUiEnabled(true);
+                loadArtifacts();
+            } else {
+                Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show();
+            }
+        });
 
         // Delete Button Logic
         deleteButton.setOnClickListener(v -> {
             String selectedName = autoCompleteArtifacts.getText().toString().trim();
 
-            // Check if empty
             if (selectedName.isEmpty()) {
                 Toast.makeText(requireContext(), "Please search or select an artifact.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Check if the typed item actually exists in our dummy list
-            if (!artifactDatabase.contains(selectedName)) {
-                Toast.makeText(requireContext(), "Artifact not found.", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            // Simulate the deletion
-            artifactDatabase.remove(selectedName);
-            adapter.notifyDataSetChanged();
-
-            // Clean up the UI
-            autoCompleteArtifacts.setText("", false);
-            autoCompleteArtifacts.clearFocus();
-
-            Toast.makeText(requireContext(), selectedName + " successfully deleted!", Toast.LENGTH_SHORT).show();
+            dbHelper.deleteArtifactByName(selectedName, (success, message) -> {
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+                if (success) {
+                    // Update the UI immediately after a successful database deletion
+                    artifactList.remove(selectedName);
+                    adapter.notifyDataSetChanged();
+                    autoCompleteArtifacts.setText("", false);
+                    autoCompleteArtifacts.clearFocus();
+                }
+            });
         });
 
         return view;
+    }
+
+    private void loadArtifacts() {
+        dbHelper.fetchArtifactNames((names, error) -> {
+            if (names != null) {
+                artifactList.clear();
+                artifactList.addAll(names);
+                adapter.notifyDataSetChanged();
+            } else {
+                Toast.makeText(requireContext(), "Error loading artifacts: " + error, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setUiEnabled(boolean isEnabled) {
+        deleteButton.setEnabled(isEnabled);
+        autoCompleteArtifacts.setEnabled(isEnabled);
     }
 }
