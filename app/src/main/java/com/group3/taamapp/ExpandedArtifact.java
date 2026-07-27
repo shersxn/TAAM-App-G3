@@ -3,7 +3,6 @@ package com.group3.taamapp;
 
 public class ExpandedArtifact {
 
-    private String id;
     private String lotNumber;
     private String artifactName;
     private String description;
@@ -18,7 +17,6 @@ public class ExpandedArtifact {
     }
 
     public ExpandedArtifact(
-            String id,
             String lotNumber,
             String artifactName,
             String description,
@@ -28,7 +26,6 @@ public class ExpandedArtifact {
             String imageUrl,
             int likeCount
     ) {
-        this.id = id;
         this.lotNumber = lotNumber;
         this.artifactName = artifactName;
         this.description = description;
@@ -39,13 +36,6 @@ public class ExpandedArtifact {
         this.likeCount = likeCount;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getLotNumber() {
         return lotNumber;

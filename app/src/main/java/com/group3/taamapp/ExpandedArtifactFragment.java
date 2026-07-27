@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+import com.group3.taamapp.Bases.BaseFragment;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
@@ -19,6 +20,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ExpandedArtifactFragment extends BaseFragment {
+
+    public static final String ARG_EMAIL = "email";
+    public static final String ARG_LOT_NUMBER = "lotNumber";
+
+    private static final String NODE_ARTIFACTS = "Artifacts";
+    private static final String NODE_USERS = "Users";
+    private static final String FIELD_COLLECTIONS = "collections";
 
     private MaterialToolbar artifactToolbar;
     private ImageView artifactImageView;
@@ -90,7 +98,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
         }
 
         artifactReference = FirebaseDatabase.getInstance()
-                .getReference("Artifacts")
+                .getReference(NODE_ARTIFACTS)
                 .child(lotNumber);
 
         loadArtifact();
@@ -99,12 +107,12 @@ public class ExpandedArtifactFragment extends BaseFragment {
 
     @Override
     protected void setEvents() {
-        // Like/Unlike teammate will connect this button.
+        // Like/Unlike to be done.
     }
 
     @Override
     protected void setPresenter() {
-        // MVP is not required for this page.
+
     }
 
     private void readArguments() {
@@ -114,8 +122,8 @@ public class ExpandedArtifactFragment extends BaseFragment {
             return;
         }
 
-        currentUserEmail = arguments.getString("email");
-        lotNumber = arguments.getString("lotNumber");
+        currentUserEmail = arguments.getString(ARG_EMAIL);
+        lotNumber = arguments.getString(ARG_LOT_NUMBER);
     }
 
     private boolean hasRequiredArguments() {
@@ -153,6 +161,14 @@ public class ExpandedArtifactFragment extends BaseFragment {
                             return;
                         }
 
+                        String firebaseLotNumber = snapshot.getKey();
+                        if (firebaseLotNumber == null
+                                || firebaseLotNumber.trim().isEmpty()) {
+                            showMessage("Artifact lot number is missing.");
+                            return;
+                        }
+
+                        lotNumber = firebaseLotNumber;
                         displayArtifact(snapshot);
                     }
 
@@ -237,13 +253,15 @@ public class ExpandedArtifactFragment extends BaseFragment {
     }
 
     private void configureSaveFeature() {
+        saveButton.setEnabled(false);
+
         String encodedEmail = encodeEmail(currentUserEmail);
 
         collectionsReference =
                 FirebaseDatabase.getInstance()
-                        .getReference("Users")
+                        .getReference(NODE_USERS)
                         .child(encodedEmail)
-                        .child("collections");
+                        .child(FIELD_COLLECTIONS);
 
         loadSaveState();
 
@@ -282,12 +300,14 @@ public class ExpandedArtifactFragment extends BaseFragment {
                                 }
 
                                 updateSaveButton();
+                                saveButton.setEnabled(true);
                             }
 
                             @Override
                             public void onCancelled(
                                     @NonNull DatabaseError error
                             ) {
+                                saveButton.setEnabled(true);
                                 showMessage(
                                         "Unable to load saved status."
                                 );
