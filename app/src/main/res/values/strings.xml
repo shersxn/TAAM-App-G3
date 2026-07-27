@@ -4,6 +4,10 @@
     <string name="deleteButton_title">Delete</string>
     <string name="hint_title">Search or Select Artifact</string>
 
+    <string name="like_count_format">%1$d likes</string>
+    <string name="save_count_format">%1$d saves</string>
+
+
     <string-array name="categories_array">
         <item>Painting and Calligraphy</item>
         <item>Ceramics</item>
@@ -57,5 +61,6 @@
         <item>Qing Dynasty (1644–1912 CE)</item>
         <item>Republic of China Period (1912–1949 CE)</item>
     </string-array>
+
 
 </resources>

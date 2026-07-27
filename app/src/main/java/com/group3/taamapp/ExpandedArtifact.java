@@ -3,7 +3,6 @@ package com.group3.taamapp;
 
 public class ExpandedArtifact {
 
-    private String id;
     private String lotNumber;
     private String artifactName;
     private String description;
@@ -12,14 +11,12 @@ public class ExpandedArtifact {
     private String dynastyPeriod;
     private String imageUrl;
     private int likeCount;
-    private int saveCount;
 
     public ExpandedArtifact() {
 
     }
 
     public ExpandedArtifact(
-            String id,
             String lotNumber,
             String artifactName,
             String description,
@@ -27,10 +24,8 @@ public class ExpandedArtifact {
             String material,
             String dynastyPeriod,
             String imageUrl,
-            int likeCount,
-            int saveCount
+            int likeCount
     ) {
-        this.id = id;
         this.lotNumber = lotNumber;
         this.artifactName = artifactName;
         this.description = description;
@@ -39,16 +34,8 @@ public class ExpandedArtifact {
         this.dynastyPeriod = dynastyPeriod;
         this.imageUrl = imageUrl;
         this.likeCount = likeCount;
-        this.saveCount = saveCount;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getLotNumber() {
         return lotNumber;
@@ -112,14 +99,6 @@ public class ExpandedArtifact {
 
     public void setLikeCount(int likeCount) {
         this.likeCount = likeCount;
-    }
-
-    public void setSaveCount(int saveCount) {
-        this.saveCount = saveCount;
-    }
-
-    public int getSaveCount() {
-        return saveCount;
     }
 
 }
