@@ -1,7 +1,7 @@
 package com.group3.taamapp;
 
 import com.group3.taamapp.Bases.BaseMainActivity;
-import com.group3.taamapp.LoginPage.LoginFragment;
+//import com.group3.taamapp.LoginPage.LoginFragment;
 import com.group3.taamapp.Model.AuthModel;
 import com.group3.taamapp.Model.AuthModelFirebase;
 
