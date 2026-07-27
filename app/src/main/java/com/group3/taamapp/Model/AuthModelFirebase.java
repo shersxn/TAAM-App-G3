@@ -12,13 +12,39 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class AuthModelFirebase implements AuthModel {
-    private final DatabaseReference authRef;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * AuthModel implementation using Firebase(cloud) & SharedPreferences(local)
+ */
+public class AuthModelFirebase implements AuthModel{
+    /**
+     * Reference used for accessing firebase
+     */
+    private final DatabaseReference rootRef;
+
+    /**
+     * Reference used for accessing local storage
+     */
     private final SharedPreferences sharedPref;
 
+    /**
+     * encode email in a Firebase friendly way, to solve the problem that firebase cannot contain .
+     * @param email email to encode
+     * @return return encoded email
+     */
+    private String encodeEmail(String email) {
+        return email.replace('.', ',');
+    }
+
+    /**
+     * Constructor of AuthModelFirebase
+     * @param context context required for SharedPreferences reference
+     */
     public AuthModelFirebase(Context context) {
-        FirebaseDatabase db = FirebaseDatabase.getInstance("https://cscb07-group3-taamapp-default-rtdb.firebaseio.com/");
-        authRef = db.getReference("Auth");
+        rootRef = FirebaseDatabase.getInstance("https://cscb07-group3-taamapp-default-rtdb.firebaseio.com/").getReference();
         sharedPref = context.getSharedPreferences("Session", Context.MODE_PRIVATE);
     }
 
@@ -41,7 +67,7 @@ public class AuthModelFirebase implements AuthModel {
             loginCallback.onFailure(LoginFailure.EMPTY_PASSWORD);
             return;
         }
-        authRef.child(email).addListenerForSingleValueEvent(new ValueEventListener() {
+        rootRef.child("Auth").child(encodeEmail(email)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(!snapshot.exists()){
@@ -92,7 +118,7 @@ public class AuthModelFirebase implements AuthModel {
             signUpCallback.onFailure(SignUpFailure.EMPTY_PASSWORD);
             return;
         }
-        authRef.child(email).addListenerForSingleValueEvent(new ValueEventListener() {
+        rootRef.child("Auth").child(encodeEmail(email)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
@@ -103,8 +129,17 @@ public class AuthModelFirebase implements AuthModel {
                     signUpCallback.onFailure(SignUpFailure.INVALID_EMAIL);
                     return;
                 }
-                authRef.child(email).setValue(password);
-                signUpCallback.onSuccess();
+                Map<String, Object> updates = new HashMap<>();
+                // update in Auth
+                updates.put("/Auth/"+encodeEmail(email), password);
+                // update in Users
+                User user = new User(username, new ArrayList<>(), false);
+                updates.put("/Users/"+encodeEmail(email), user);
+                rootRef.updateChildren(updates).addOnSuccessListener(
+                        aVoid -> signUpCallback.onSuccess()
+                ).addOnFailureListener(
+                        e -> signUpCallback.onError(e.getMessage())
+                );
             }
 
             @Override
