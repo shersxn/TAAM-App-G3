@@ -44,4 +44,5 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     implementation(libs.google.firebase.database)
     implementation("com.firebaseui:firebase-ui-database:9.1.1")
+    implementation("com.github.bumptech.glide:glide:5.0.5")
 }
