@@ -107,7 +107,7 @@ public class SavedArtifactModelFirebase implements SavedArtifactModel {
         String userKey = encodeEmailKey(userEmail);
         savedRef.child(userKey).child(lotNumber).setValue(true)
                 .addOnSuccessListener(unused -> {
-                    // Best-effort save-count increment; does not block the save itself
+                    // Best-effort save-count increment, does not block the save itself
                     artifactsRef.child(lotNumber).child("saveCount").runTransaction(new Transaction.Handler() {
                         @NonNull
                         @Override
