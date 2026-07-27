@@ -1,0 +1,80 @@
+package com.group3.taamapp.LoginPage;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.group3.taamapp.Bases.BaseFragment;
+import com.group3.taamapp.Bases.BundleInitializer;
+import com.group3.taamapp.Contract.LoginContract;
+import com.group3.taamapp.Model.AuthModelFirebase;
+import com.group3.taamapp.R;
+import com.group3.taamapp.SignupPage.SignupFragment;
+
+/**
+ * Implementation of LoginContract.View
+ */
+public class LoginFragment extends BaseFragment implements LoginContract.View {
+    /**
+     * used for accessing LoginContract.Presenter functions
+     */
+    private LoginContract.Presenter presenter;
+
+    /**
+     * UI components in this fragment
+     */
+    private EditText editTextEmail, editTextPassword;
+    private Button buttonSignIn, buttonSignUp;
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_login;
+    }
+
+    @Override
+    protected void setUIComponents(View view) {
+        editTextEmail = view.findViewById(R.id.loginEmail);
+        editTextPassword = view.findViewById(R.id.loginPassword);
+        buttonSignIn = view.findViewById(R.id.signInBtn);
+        buttonSignUp = view.findViewById(R.id.signUpBtnLink);
+    }
+
+    @Override
+    protected void setEvents() {
+        buttonSignIn.setOnClickListener(v -> presenter.login());
+        buttonSignUp.setOnClickListener(v -> presenter.toSignUp());
+    }
+
+    @Override
+    protected void setPresenter() {
+        presenter = new LoginPresenter(this, new AuthModelFirebase(this.getContext()));
+    }
+
+    @Override
+    public String getEmail() {
+        return editTextEmail.getText().toString().trim();
+    }
+
+    @Override
+    public String getPassword() {
+        return editTextPassword.getText().toString().trim();
+    }
+
+    @Override
+    public void toMainPage(String email) {
+        loadFragment(
+        new ViewActivty(),
+        new BundleInitializer() {
+            @Override
+            public void initBundle(Bundle bundle) {
+                bundle.putString("email", email);
+            }
+        });
+    }
+
+    @Override
+    public void toSignUp() {
+        loadFragment(new SignupFragment(), null);
+    }
+}

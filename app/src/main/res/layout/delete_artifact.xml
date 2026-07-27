@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EDE5D4">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/playfair_display_sc"
+        android:text="@string/delete_artifact_title"
+        android:textColor="#402410"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="379dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="@string/hint_title"
+        app:boxStrokeColor="#493828"
+        app:endIconTint="#493828"
+        app:hintTextColor="#453428"
+        app:layout_constraintBottom_toTopOf="@+id/delete_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.5">
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteArtifacts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:height="48dp"
+            android:inputType="text"
+            android:textCursorDrawable="@null"
+            tools:ignore="SpeakableTextPresentCheck,LabelFor" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="136dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="#BD936B"
+        android:outlineProvider="none"
+        android:text="@string/deleteButton_title"
+        android:textColor="#402410"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:strokeWidth="1dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

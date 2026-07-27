@@ -39,8 +39,11 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.constraintlayout)
     implementation(libs.material)
+    testImplementation("org.mockito:mockito-core:5.23.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)
     implementation(libs.google.firebase.database)
+    implementation("com.firebaseui:firebase-ui-database:9.1.1")
+    implementation("com.github.bumptech.glide:glide:5.0.5")
 }
