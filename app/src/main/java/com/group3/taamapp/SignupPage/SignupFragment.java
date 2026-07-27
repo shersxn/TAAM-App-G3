@@ -10,8 +10,18 @@ import com.group3.taamapp.LoginPage.LoginFragment;
 import com.group3.taamapp.Model.AuthModelFirebase;
 import com.group3.taamapp.R;
 
+/**
+ * Implementation of SignupContract.View
+ */
 public class SignupFragment extends BaseFragment implements SignupContract.View {
+    /**
+     * used for accessing SignupContract.Presenter functions
+     */
     private SignupContract.Presenter presenter;
+
+    /**
+     * UI components in this fragment
+     */
     private EditText editTextEmail, editTextUsername, editTextPassword;
     private Button buttonSignup, buttonToLogin;
 

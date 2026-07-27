@@ -1,9 +1,12 @@
 package com.group3.taamapp;
 
+import android.os.Bundle;
+
 import com.group3.taamapp.Bases.BaseMainActivity;
 import com.group3.taamapp.LoginPage.LoginFragment;
 import com.group3.taamapp.Model.AuthModel;
 import com.group3.taamapp.Model.AuthModelFirebase;
+import com.group3.taamapp.Bases.BundleInitializer;
 
 public class MainActivity extends BaseMainActivity {
     @Override
@@ -14,10 +17,15 @@ public class MainActivity extends BaseMainActivity {
     @Override
     public void loadFirstFragment() {
         AuthModel model = new AuthModelFirebase(this);
-        if(model.getCurrentAccount() == null) {
+        String email = model.getCurrentAccount()
+        if(email == null) {
             loadFragment(new LoginFragment(), null);
             return;
         }
-        //TODO: load Main Page
+        loadFragment(new ViewActivty(), new BundleInitializer() {
+            public void initBundle(Bundle bundle) {
+                bundle.putString("email", email);
+            }
+        });
     }
 }
