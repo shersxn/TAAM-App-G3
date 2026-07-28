@@ -46,4 +46,5 @@ dependencies {
     implementation(libs.google.firebase.database)
     implementation("com.firebaseui:firebase-ui-database:9.1.1")
     implementation("com.github.bumptech.glide:glide:5.0.5")
+    implementation("com.squareup.okhttp3:okhttp:5.4.0")
 }
