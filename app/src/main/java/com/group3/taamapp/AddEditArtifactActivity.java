@@ -187,7 +187,7 @@ public class AddEditArtifactActivity extends AppCompatActivity {
                 == true && isAdding == true){
             dataReference = db.getReference("Artifacts");
             String id = dataReference.push().getKey();
-            ExpandedArtifact artifact = new ExpandedArtifact(id, lotNumber, name, description,
+            ExpandedArtifact artifact = new ExpandedArtifact(lotNumber, name, description,
                     category, material, dynastyPeriod, /*String: image URL*/, 0, 0);
 
             dataReference.child(id).setValue(artifact).addOnCompleteListener(task -> {
