@@ -26,9 +26,30 @@ public class AddCommentFragment extends Fragment {
     private CommentAdapter adapter;
     private CommentReaderWriter commentWriter;
 
-    private String currentLotNumber = "LOT123";
-    private String currentUsername = "group3user";
-    private boolean isUserAdmin = false;
+    private String currentLotNumber;
+    private String currentUsername;
+    private boolean isUserAdmin;
+
+    public static AddCommentFragment newInstance(String lotNumber, String username,
+                                                 boolean isAdmin) {
+        AddCommentFragment fragment = new AddCommentFragment();
+        Bundle args = new Bundle();
+        args.putString("LOT_NUMBER", lotNumber);
+        args.putString("USERNAME", username);
+        args.putBoolean("IS_ADMIN", isAdmin);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            currentLotNumber = getArguments().getString("LOT_NUMBER");
+            currentUsername = getArguments().getString("USERNAME");
+            isUserAdmin = getArguments().getBoolean("IS_ADMIN");
+        }
+    }
 
     @Nullable
     @Override
