@@ -1,4 +1,7 @@
 <resources>
+    <string name="supabase_url">https://zbackdndprbcnossakbs.supabase.co</string>
+    <string name="supabase_anon_key">sb_publishable_FtzNt3nUNfH5x71_zXUoNw_piNRqOBf</string>
+    <string name="supabase_image_bucket">taam-app-bucket</string>
     <string name="app_name">My Application</string>
     <string name="delete_artifact_title">Delete Artifact</string>
     <string name="deleteButton_title">Delete</string>
