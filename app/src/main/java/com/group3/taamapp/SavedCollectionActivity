@@ -1,0 +1,99 @@
+package com.group3.taamapp;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Displays the artifacts the current user has saved to their collection
+ * (activity_saved_collection.xml). Data comes from Firebase Realtime
+ * Database via SavedArtifactsRepository.
+ */
+public class SavedCollectionActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private LinearLayout emptyStateLayout;
+    private SavedArtifactsAdapter adapter;
+    private final List<ExpandedArtifact> savedArtifacts = new ArrayList<>();
+    private final SavedArtifactsRepository repository = new SavedArtifactsRepository();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_saved_collection);
+
+        recyclerView = findViewById(R.id.rv_saved_artifacts);
+        emptyStateLayout = findViewById(R.id.layout_empty_state);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        adapter = new SavedArtifactsAdapter(savedArtifacts, new SavedArtifactsAdapter.OnArtifactActionListener() {
+            @Override
+            public void onUnsave(ExpandedArtifact artifact, int position) {
+                repository.unsaveArtifact(artifact.getId(), new SavedArtifactsRepository.UnsaveCallback() {
+                    @Override
+                    public void onSuccess() {
+                        adapter.removeAt(position);
+                        toggleEmptyState();
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(SavedCollectionActivity.this,
+                                "Couldn't remove artifact: " + message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onOpenArtifact(ExpandedArtifact artifact) {
+                Intent intent = new Intent(SavedCollectionActivity.this, ExpandedArtifactActivity.class);
+                intent.putExtra("artifactId", artifact.getId());
+                startActivity(intent);
+            }
+        });
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Reload each time the screen becomes visible, in case the user
+        // saved/unsaved something from the expanded artifact view.
+        loadSavedArtifacts();
+    }
+
+    private void loadSavedArtifacts() {
+        repository.fetchSavedArtifacts(new SavedArtifactsRepository.SavedArtifactsCallback() {
+            @Override
+            public void onSuccess(List<ExpandedArtifact> artifacts) {
+                savedArtifacts.clear();
+                savedArtifacts.addAll(artifacts);
+                adapter.notifyDataSetChanged();
+                toggleEmptyState();
+            }
+
+            @Override
+            public void onError(String message) {
+                Toast.makeText(SavedCollectionActivity.this,
+                        "Couldn't load your collection: " + message, Toast.LENGTH_SHORT).show();
+                toggleEmptyState();
+            }
+        });
+    }
+
+    /** Shows the empty-state message when there are no saved artifacts. */
+    private void toggleEmptyState() {
+        boolean isEmpty = savedArtifacts.isEmpty();
+        emptyStateLayout.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
+        recyclerView.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
+    }
+}
