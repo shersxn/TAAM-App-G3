@@ -46,13 +46,15 @@ public class AddEditArtifactFragment extends Fragment {
     private String category;
     private String material;
     private String dynastyPeriod;
+    private String userEmail;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_edit_artifact, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_edit_artifact, container,
+                false);
 
         // Initialize class fields corresponding to UI components
         db = FirebaseDatabase.getInstance(
@@ -95,15 +97,40 @@ public class AddEditArtifactFragment extends Fragment {
                     }
                 });
 
-        // Update isAdding and editingArtifactId
+        // Update isAdding, editingArtifactId, and userEmail with data from the Bundle
         Bundle fragmentBundle = getArguments();
         if (fragmentBundle != null) {
-            isAdding = false;
-            editingArtifactId = fragmentBundle.getString(/*String: string key in bundle based on calling page*/ "artifactId");
+            userEmail = fragmentBundle.getString(/*String: key in bundle based on calling page*/ "userEmail");
+            editingArtifactId = fragmentBundle.getString(/*String: key in bundle based on calling page*/ "artifactId");
         }
 
         if (editingArtifactId == null) {
             isAdding = true;
+        }
+
+        // Verify admin status
+        if (userEmail != null){
+            String emailKeyInFirebase = userEmail.replace(".", ",");
+            dataReference = db.getReference("Users").child(emailKeyInFirebase).child(
+                    "admin");
+            dataReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (!Boolean.TRUE.equals(dataSnapshot.getValue(Boolean.class))) {
+                        // Disable access to add or edit artifact if the user is not an admin
+                        Toast.makeText(requireContext(),
+                                "You do not have access to the Add / Edit Artifact page",
+                                Toast.LENGTH_SHORT).show();
+                        getParentFragmentManager().popBackStack(); /*subject to change based on calling page*/
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(requireContext(), "Failed to retrieve data from Firebase",
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         // Set default inputs when editing an artifact
