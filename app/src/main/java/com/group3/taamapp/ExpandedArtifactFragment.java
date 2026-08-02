@@ -103,6 +103,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
 
         loadArtifact();
         configureSaveFeature();
+        configureComments();
     }
 
     @Override
@@ -412,5 +413,82 @@ public class ExpandedArtifactFragment extends BaseFragment {
                 message,
                 Toast.LENGTH_SHORT
         ).show();
+    }
+
+    public String getCurrentLotNumber() {
+        return lotNumber;
+    }
+
+    public String getCurrentUserEmail() {
+        return currentUserEmail;
+    }
+
+    private void configureComments() {
+        String encodedEmail = encodeEmail(currentUserEmail);
+
+        DatabaseReference userReference =
+                FirebaseDatabase.getInstance()
+                        .getReference(NODE_USERS)
+                        .child(encodedEmail);
+
+        userReference.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(
+                            @NonNull DataSnapshot snapshot
+                    ) {
+                        String username =
+                                snapshot.child("username")
+                                        .getValue(String.class);
+
+                        Boolean adminValue =
+                                snapshot.child("admin")
+                                        .getValue(Boolean.class);
+
+                        if (username == null
+                                || username.trim().isEmpty()) {
+                            username = currentUserEmail;
+                        }
+
+                        boolean isAdmin =
+                                adminValue != null && adminValue;
+
+                        displayCommentFragment(
+                                username,
+                                isAdmin
+                        );
+                    }
+
+                    @Override
+                    public void onCancelled(
+                            @NonNull DatabaseError error
+                    ) {
+                        displayCommentFragment(
+                                currentUserEmail,
+                                false
+                        );
+                    }
+                }
+        );
+    }
+
+    private void displayCommentFragment(
+            String username,
+            boolean isAdmin
+    ) {
+        AddCommentFragment commentFragment =
+                AddCommentFragment.newInstance(
+                        lotNumber,
+                        username,
+                        isAdmin
+                );
+
+        getChildFragmentManager()
+                .beginTransaction()
+                .replace(
+                        R.id.commentFragmentContainer,
+                        commentFragment
+                )
+                .commit();
     }
 }

@@ -40,7 +40,7 @@
             android:paddingEnd="20dp"
             android:paddingBottom="32dp">
 
-            <!-- Artifact image: loaded using imageUrl -->
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
@@ -236,22 +236,8 @@
                         android:layout_marginTop="16dp"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="120dp"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/dm_sans"
-                            android:text="Artifact ID"
-                            android:textColor="@color/brown_dark_text"
-                            android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/artifactIdTextView"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/dm_sans"
-                            android:textColor="@color/brown_dark_text"
-                            tools:text="artifact-001" />
+
 
                     </LinearLayout>
 
@@ -362,6 +348,11 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/commentFragmentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_marginTop="16dp" />
 
             <TextView
                 android:id="@+id/imageUrlTextView"
