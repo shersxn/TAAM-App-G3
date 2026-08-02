@@ -30,6 +30,7 @@ public class AddCommentFragment extends Fragment {
     private String currentUsername;
     private boolean isUserAdmin;
 
+    // Receives artifact lot number and admin status from parent Activity
     public static AddCommentFragment newInstance(String lotNumber, String username,
                                                  boolean isAdmin) {
         AddCommentFragment fragment = new AddCommentFragment();
@@ -100,6 +101,7 @@ public class AddCommentFragment extends Fragment {
         return view;
     }
 
+    // FirebaseUI requires startListening() and stopListening()
     @Override
     public void onStart() {
         super.onStart();
