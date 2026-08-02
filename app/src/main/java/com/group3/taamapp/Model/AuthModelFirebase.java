@@ -80,7 +80,7 @@ public class AuthModelFirebase implements AuthModel{
                 }
                 // store email to local
                 SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("email", email);
+                editor.putString("email", encodeEmail(email));
                 editor.commit();
                 loginCallback.onSuccess();
             }

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
+// This class displays comments in a RecyclerView list
 public class CommentAdapter extends FirebaseRecyclerAdapter<Comment, CommentAdapter.CommentViewHolder> {
 
     private boolean isAdmin;
@@ -33,6 +34,7 @@ public class CommentAdapter extends FirebaseRecyclerAdapter<Comment, CommentAdap
         holder.commenterTextView.setText(model.getUsername());
         holder.commentTextView.setText(model.getText());
 
+        // Make sure only admins can see the delete button
         if (isAdmin) {
             holder.deleteButton.setVisibility(View.VISIBLE);
 

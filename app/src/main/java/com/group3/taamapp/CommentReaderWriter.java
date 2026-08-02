@@ -3,6 +3,7 @@ package com.group3.taamapp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+// Helper class for managing Firebase comments
 public class CommentReaderWriter {
 
     private DatabaseReference data;

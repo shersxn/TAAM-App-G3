@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_cream"
     android:padding="24dp"
-    tools:context=".LogoutActivity">
+    tools:context=".LogoutPage.LogoutFragment">
 
     <ImageView
         android:id="@+id/iv_logout_icon"

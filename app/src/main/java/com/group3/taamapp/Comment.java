@@ -1,10 +1,13 @@
 package com.group3.taamapp;
 
+// This class represents a user's comment on an artifact
+// Firebase uses this class to process JSON data
 public class Comment {
     private String commentId;
     private String username;
     private String text;
 
+    // Firebase requires an empty constructor
     public Comment(){
 
     }

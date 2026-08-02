@@ -20,7 +20,7 @@ import com.group3.taamapp.R;
  * - setEvents()
  * - setPresenter()
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends EquippedFragment {
 
     /**
      * Template for onCreateView, defined by
@@ -76,22 +76,5 @@ public abstract class BaseFragment extends Fragment {
      */
     public void toastMakeText(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Go to another fragment, a frequently used function when implementing View contract functions
-     * @param fragment instance of the fragment to go
-     * @param bundleInitializer defines how to pass the data to the fragment
-     */
-    protected void loadFragment(Fragment fragment, BundleInitializer bundleInitializer) {
-        if(bundleInitializer != null) {
-            Bundle bundle = new Bundle();
-            bundleInitializer.initBundle(bundle);
-            fragment.setArguments(bundle);
-        }
-        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 }
