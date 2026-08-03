@@ -1,5 +1,5 @@
 package com.group3.taamapp;
-
+import java.util.Map;
 
 public class ExpandedArtifact {
 
@@ -11,6 +11,7 @@ public class ExpandedArtifact {
     private String dynastyPeriod;
     private String imageUrl;
     private int likeCount;
+    private Map<String, Comment> comments;
 
     public ExpandedArtifact() {
 
@@ -24,7 +25,8 @@ public class ExpandedArtifact {
             String material,
             String dynastyPeriod,
             String imageUrl,
-            int likeCount
+            int likeCount,
+            Map<String, Comment> comments
     ) {
         this.lotNumber = lotNumber;
         this.artifactName = artifactName;
@@ -34,6 +36,7 @@ public class ExpandedArtifact {
         this.dynastyPeriod = dynastyPeriod;
         this.imageUrl = imageUrl;
         this.likeCount = likeCount;
+        this.comments = null;
     }
 
 
@@ -101,6 +104,13 @@ public class ExpandedArtifact {
         this.likeCount = likeCount;
     }
 
+    public Map<String, Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Map<String, Comment> comments) {
+        this.comments = comments;
+    }
 }
 
 
