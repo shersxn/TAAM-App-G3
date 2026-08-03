@@ -55,7 +55,8 @@ public class ExpandedArtifactFragment extends BaseFragment {
 
     private DatabaseReference artifactReference;
     private DatabaseReference collectionsReference;
-
+    private DatabaseReference likesReference;
+    private boolean isLiked;
     private boolean isSaved;
     private View adminControlsLayout;
     private MaterialButton editArtifactButton;
@@ -110,11 +111,15 @@ public class ExpandedArtifactFragment extends BaseFragment {
         artifactReference = FirebaseDatabase.getInstance()
                 .getReference(NODE_ARTIFACTS)
                 .child(lotNumber);
-
+        likesReference = FirebaseDatabase.getInstance()
+                .getReference(NODE_ARTIFACTS)
+                .child(lotNumber)
+                .child("likes");
         loadArtifact();
         configureSaveFeature();
         configureComments();
         configureAdminControls();
+        configureLikeFeature();
 
         // Setup Related Artifacts Bonus
         relatedRecyclerView = view.findViewById(R.id.related_recycler_view);
@@ -130,7 +135,6 @@ public class ExpandedArtifactFragment extends BaseFragment {
 
     @Override
     protected void setEvents() {
-        // Like/Unlike to be done.
     }
 
     @Override
@@ -294,7 +298,90 @@ public class ExpandedArtifactFragment extends BaseFragment {
                 toggleSave()
         );
     }
+    private void toggleLike(String encodedEmail) {
+        likeButton.setEnabled(false);
 
+        if (isLiked) {
+            // Remove the like
+            likesReference.child(encodedEmail).removeValue()
+                    .addOnSuccessListener(unused -> {
+                        // Ask the database for the new total after unliking
+                        likesReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (!isAdded()) {
+                                    return;
+                                }
+                                long newLikeCount = snapshot.getChildrenCount();
+                                likeCountTextView.setText(getString(R.string.like_count_format, newLikeCount));
+                                likeButton.setEnabled(true);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                likeButton.setEnabled(true);
+                            }
+                        });
+                    })
+                    .addOnFailureListener(error -> {
+                        likeButton.setEnabled(true);
+                        showMessage("Failed to unlike artifact.");
+                    });
+        } else {
+            // Add the like
+            likesReference.child(encodedEmail).setValue(true)
+                    .addOnSuccessListener(unused -> {
+                        // Ask the database for the new total after liking
+                        likesReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (!isAdded()) {
+                                    return;
+                                }
+                                long newLikeCount = snapshot.getChildrenCount();
+                                likeCountTextView.setText(getString(R.string.like_count_format, newLikeCount));
+                                likeButton.setEnabled(true);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                likeButton.setEnabled(true);
+                            }
+                        });
+                    })
+                    .addOnFailureListener(error -> {
+                        likeButton.setEnabled(true);
+                        showMessage("Failed to like artifact.");
+                    });
+        }
+    }
+
+    private void updateLikeButton() {
+        // Update like button text based on if the user already liked or hasn't
+        likeButton.setText(isLiked ? "Unlike" : "Like");
+    }
+    private void configureLikeFeature() {
+        likeButton.setEnabled(false);
+        String encodedEmail = encodeEmail(currentUserEmail);
+        likesReference.child(encodedEmail).addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        // If the user's email exists, they liked it
+                        isLiked = snapshot.exists();
+                        updateLikeButton();
+                        likeButton.setEnabled(true);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        likeButton.setEnabled(true);
+                        showMessage("Unable to load like status.");
+                    }
+                }
+        );
+        likeButton.setOnClickListener(view -> toggleLike(encodedEmail));
+    }
     private String encodeEmail(String email) {
         return email.replace(".", ",");
     }
