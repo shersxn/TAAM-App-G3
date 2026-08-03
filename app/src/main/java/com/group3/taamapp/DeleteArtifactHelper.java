@@ -30,16 +30,14 @@ public class DeleteArtifactHelper {
             callback.onResult(false, "No user is currently logged in.");
             return;
         }
-
         String safeEmail = userEmail.replace(".", ",");
-
         databaseRoot.child("Users").child(safeEmail).child("admin")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        // Get value attached to email key, 1 showing they are an admin
-                        Long adminValue = snapshot.getValue(Long.class);
-                        if (adminValue != null && adminValue == 1L) {
+                        // Ask Firebase for a Boolean
+                        Boolean isAdmin = snapshot.getValue(Boolean.class);
+                        if (Boolean.TRUE.equals(isAdmin)) {
                             callback.onResult(true, "Admin verified.");
                         } else {
                             callback.onResult(false, "Access Denied: You are not an admin.");
