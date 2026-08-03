@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class ExpandedArtifactFragment extends BaseFragment {
 
@@ -52,6 +53,10 @@ public class ExpandedArtifactFragment extends BaseFragment {
     private DatabaseReference collectionsReference;
 
     private boolean isSaved;
+    private View adminControlsLayout;
+    private MaterialButton editArtifactButton;
+    private MaterialButton deleteArtifactButton;
+    private boolean isCurrentUserAdmin;
 
     @Override
     protected int getLayoutId() {
@@ -60,29 +65,25 @@ public class ExpandedArtifactFragment extends BaseFragment {
 
     @Override
     protected void setUIComponents(View view) {
+        adminControlsLayout = view.findViewById(R.id.adminControlsLayout);
+        editArtifactButton = view.findViewById(R.id.editArtifactButton);
+        deleteArtifactButton = view.findViewById(R.id.deleteArtifactButton);
         artifactToolbar = view.findViewById(R.id.artifactToolbar);
         artifactImageView = view.findViewById(R.id.artifactImageView);
 
-        artifactNameTextView =
-                view.findViewById(R.id.artifactNameTextView);
+        artifactNameTextView = view.findViewById(R.id.artifactNameTextView);
 
-        dynastyPeriodTextView =
-                view.findViewById(R.id.dynastyPeriodTextView);
+        dynastyPeriodTextView = view.findViewById(R.id.dynastyPeriodTextView);
 
-        descriptionTextView =
-                view.findViewById(R.id.descriptionTextView);
+        descriptionTextView = view.findViewById(R.id.descriptionTextView);
 
-        lotNumberTextView =
-                view.findViewById(R.id.lotNumberTextView);
+        lotNumberTextView = view.findViewById(R.id.lotNumberTextView);
 
-        categoryTextView =
-                view.findViewById(R.id.categoryTextView);
+        categoryTextView = view.findViewById(R.id.categoryTextView);
 
-        materialTextView =
-                view.findViewById(R.id.materialTextView);
+        materialTextView = view.findViewById(R.id.materialTextView);
 
-        likeCountTextView =
-                view.findViewById(R.id.likeCountTextView);
+        likeCountTextView = view.findViewById(R.id.likeCountTextView);
 
         categoryChip = view.findViewById(R.id.categoryChip);
         materialChip = view.findViewById(R.id.materialChip);
@@ -104,6 +105,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
         loadArtifact();
         configureSaveFeature();
         configureComments();
+        configureAdminControls();
     }
 
     @Override
@@ -451,7 +453,16 @@ public class ExpandedArtifactFragment extends BaseFragment {
                         }
 
                         boolean isAdmin =
-                                adminValue != null && adminValue;
+                                Boolean.TRUE.equals(
+                                        snapshot.child("admin").getValue(Boolean.class)
+                                );
+
+                        isCurrentUserAdmin = isAdmin;
+                        adminControlsLayout.setVisibility(
+                                isAdmin ? View.VISIBLE : View.GONE
+                        );
+
+                        displayCommentFragment(username, isAdmin);
 
                         displayCommentFragment(
                                 username,
@@ -490,5 +501,69 @@ public class ExpandedArtifactFragment extends BaseFragment {
                         commentFragment
                 )
                 .commit();
+    }
+
+    private void configureAdminControls() {
+        editArtifactButton.setOnClickListener(view -> {
+            if (!isCurrentUserAdmin) {
+                showMessage("Admin access required.");
+                return;
+            }
+
+            loadFragment(
+                    new AddEditArtifactFragment(),
+                    bundle -> {
+                        bundle.putString("userEmail", currentUserEmail);
+                        bundle.putString("artifactId", lotNumber);
+                    }
+            );
+        });
+
+        deleteArtifactButton.setOnClickListener(view -> {
+            if (!isCurrentUserAdmin) {
+                showMessage("Admin access required.");
+                return;
+            }
+
+            showDeleteConfirmation();
+        });
+    }
+
+    private void showDeleteConfirmation() {
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Delete artifact?")
+                .setMessage(
+                        "This action cannot be undone. "
+                                + "Are you sure you want to delete this artifact?"
+                )
+                .setNegativeButton("Cancel", null)
+                .setPositiveButton("Delete", (dialog, which) ->
+                        deleteCurrentArtifact()
+                )
+                .show();
+    }
+
+    private void deleteCurrentArtifact() {
+        deleteArtifactButton.setEnabled(false);
+
+        artifactReference.removeValue()
+                .addOnSuccessListener(unused -> {
+                    if (!isAdded()) {
+                        return;
+                    }
+
+                    showMessage("Artifact deleted.");
+
+                    getParentFragmentManager()
+                            .popBackStack();
+                })
+                .addOnFailureListener(error -> {
+                    if (!isAdded()) {
+                        return;
+                    }
+
+                    deleteArtifactButton.setEnabled(true);
+                    showMessage("Failed to delete artifact.");
+                });
     }
 }
