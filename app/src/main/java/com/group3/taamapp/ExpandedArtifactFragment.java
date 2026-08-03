@@ -20,6 +20,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+
 public class ExpandedArtifactFragment extends BaseFragment {
 
     public static final String ARG_EMAIL = "email";
@@ -57,6 +61,11 @@ public class ExpandedArtifactFragment extends BaseFragment {
     private MaterialButton editArtifactButton;
     private MaterialButton deleteArtifactButton;
     private boolean isCurrentUserAdmin;
+
+    // Related Artifact Variables
+    private RecyclerView relatedRecyclerView;
+    private ViewCardAdapter relatedAdapter;
+    private ArrayList<ExpandedArtifact> relatedArtifactsList;
 
     @Override
     protected int getLayoutId() {
@@ -106,6 +115,17 @@ public class ExpandedArtifactFragment extends BaseFragment {
         configureSaveFeature();
         configureComments();
         configureAdminControls();
+
+        // Setup Related Artifacts Bonus
+        relatedRecyclerView = view.findViewById(R.id.related_recycler_view);
+        relatedArtifactsList = new ArrayList<>();
+
+        // Make the list scroll sideways
+        relatedRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(),
+                LinearLayoutManager.HORIZONTAL, false));
+
+        relatedAdapter = new ViewCardAdapter(requireContext(), relatedArtifactsList);
+        relatedRecyclerView.setAdapter(relatedAdapter);
     }
 
     @Override
@@ -224,6 +244,8 @@ public class ExpandedArtifactFragment extends BaseFragment {
         );
 
         loadArtifactImage(imageUrl);
+
+        loadRelatedArtifacts(category, lotNumber);
     }
 
     private String getStringValue(
@@ -564,6 +586,49 @@ public class ExpandedArtifactFragment extends BaseFragment {
 
                     deleteArtifactButton.setEnabled(true);
                     showMessage("Failed to delete artifact.");
+                });
+    }
+
+    // This method loads the first 5 related artifacts
+    private void loadRelatedArtifacts(String category, String currentLotNumber) {
+        if (category == null || category.isEmpty()) return;
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(NODE_ARTIFACTS);
+
+        // Find the first 5 artifacts with the exact same category
+        // Set the limit to 6 in case one of the artifacts is the current one
+        ref.orderByChild("category").equalTo(category).limitToFirst(6)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        relatedArtifactsList.clear();
+
+                        Iterable<DataSnapshot> relatedItemsList = snapshot.getChildren();
+                        for (DataSnapshot child : relatedItemsList) {
+                            String lotNum = child.getKey();
+
+                            // This is to make sure the user doesn't see the same artifact as the
+                            // one they are currently looking at
+                            if (lotNum != null && !lotNum.equals(currentLotNumber)) {
+                                ExpandedArtifact artifact = child.getValue(ExpandedArtifact.class);
+                                if (artifact != null) {
+                                    artifact.setLotNumber(lotNum);
+                                    relatedArtifactsList.add(artifact);
+                                }
+                            }
+
+                            if (relatedArtifactsList.size() == 5) {
+                                break;
+                            }
+                        }
+                        relatedAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // This method does nothing, It's just here so that the related artifacts
+                        // section remains blank
+                    }
                 });
     }
 }
