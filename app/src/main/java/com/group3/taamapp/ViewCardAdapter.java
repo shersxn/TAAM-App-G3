@@ -1,6 +1,7 @@
 package com.group3.taamapp;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -58,7 +59,7 @@ public class ViewCardAdapter extends RecyclerView.Adapter<ViewCardAdapter.MyView
                 .load(viewCards.get(position).getImageUrl())
                 .into(holder.imageView);
 
-        holder.itemView.setOnClickListener(v -> {
+        holder.tvCard.setOnClickListener(item -> {
             if (listener != null) listener.onOpenArtifact(artifact);
         });
 

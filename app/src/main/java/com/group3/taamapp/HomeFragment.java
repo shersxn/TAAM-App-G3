@@ -2,6 +2,7 @@ package com.group3.taamapp;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.group3.taamapp.LoginPage.LoginFragment;
 public class HomeFragment extends BaseFragment {
 
     public static final String ARG_EMAIL = "email";
+
     ArrayList <ExpandedArtifact> viewCards = new ArrayList<>();
     ViewCardAdapter adapter;
     //int[] cardImages = {R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground};
@@ -35,7 +37,6 @@ public class HomeFragment extends BaseFragment {
     protected void setUIComponents(View view) {
         readArguments();
         RecyclerView recyclerView = view.findViewById(R.id.artefactsRecycle);
-        ViewCardAdapter.OnArtifactActionListener listener =
         adapter = new ViewCardAdapter(requireContext(), viewCards,
                 new ViewCardAdapter.OnArtifactActionListener() {
                     @Override
@@ -47,6 +48,10 @@ public class HomeFragment extends BaseFragment {
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2));
 
         searchArtifact = view.findViewById(R.id.searchView);
+        ImageButton logout = view.findViewById(R.id.logoutBtn);
+        logout.setOnClickListener(item -> {
+            loadFragment(new LogoutFragment(), null);
+        });
         setUpViewCards();
 
     }
@@ -88,8 +93,12 @@ public class HomeFragment extends BaseFragment {
                 viewCards.clear();
 
                 for (DataSnapshot child : snapshot.getChildren()) {
-                    ExpandedArtifact card = child.getValue(ExpandedArtifact.class);
-                    viewCards.add(card);
+                    ExpandedArtifact artifact = child.getValue(ExpandedArtifact.class);
+                    String lotNum = child.getKey();
+                    if (artifact != null) {
+                        artifact.setLotNumber(lotNum);
+                        viewCards.add(artifact);
+                    }
                 }
                 adapter.notifyDataSetChanged();
             }

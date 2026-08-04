@@ -1,4 +1,4 @@
-package com.group3.taamapp.LogoutPage;
+package com.group3.taamapp;
 
 import com.group3.taamapp.Contract.LogoutContract;
 import com.group3.taamapp.Model.AuthModel;

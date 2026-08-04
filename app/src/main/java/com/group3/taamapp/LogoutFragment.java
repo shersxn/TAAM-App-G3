@@ -1,4 +1,4 @@
-package com.group3.taamapp.LogoutPage;
+package com.group3.taamapp;
 
 import android.view.View;
 
