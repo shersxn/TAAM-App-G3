@@ -9,20 +9,22 @@
     android:padding="24dp"
     tools:context=".LogoutPage.LogoutFragment">
 
+    <!-- Logout symbol -->
     <ImageView
         android:id="@+id/iv_logout_icon"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="Logout icon"
-        android:src="@android:drawable/ic_lock_power_off"
-        app:tint="@color/brown_medium"
+        android:src="@drawable/ic_logout"
         app:layout_constraintBottom_toTopOf="@id/tv_logout_message"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        app:tint="@color/brown_medium" />
 
+    <!-- Are you sure you want to log out message -->
     <TextView
         android:id="@+id/tv_logout_message"
         android:layout_width="wrap_content"
@@ -33,46 +35,105 @@
         android:textAlignment="center"
         android:textColor="@color/brown_dark_text"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/btn_logout"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/logout_button_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_logout_icon" />
 
-    <Button
-        android:id="@+id/btn_logout"
+    <!-- Log out button -->
+    <FrameLayout
+        android:id="@+id/logout_button_container"
         android:layout_width="0dp"
-        android:layout_height="52dp"
+        android:layout_height="60dp"
         android:layout_marginTop="8dp"
-        android:backgroundTint="@color/brown_medium"
-        android:fontFamily="@font/dm_sans"
-        android:text="Log Out"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:cornerRadius="12dp"
-        app:layout_constraintBottom_toTopOf="@id/btn_cancel"
+        app:layout_constraintBottom_toTopOf="@id/cancel_button_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_logout_message"
-        app:layout_constraintWidth_max="320dp" />
+        app:layout_constraintWidth_max="320dp">
 
-    <Button
-        android:id="@+id/btn_cancel"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        <!-- Dark offset layer -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_gravity="bottom"
+            app:cardBackgroundColor="#5A3828"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp" />
+
+        <!-- Main button layer -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_gravity="top"
+            android:backgroundTint="@color/brown_medium"
+            android:fontFamily="@font/dm_sans"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:letterSpacing="0.02"
+            android:text="Log Out"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="22dp"
+            app:icon="@drawable/ic_logout"
+            app:iconGravity="textStart"
+            app:iconPadding="10dp"
+            app:iconSize="20dp"
+            app:iconTint="@color/white"
+            app:rippleColor="@color/brown_dark_text" />
+
+    </FrameLayout>
+
+    <!-- Cancel button -->
+    <FrameLayout
+        android:id="@+id/cancel_button_container"
         android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="12dp"
-        android:fontFamily="@font/dm_sans"
-        android:text="Cancel"
-        android:textAllCaps="false"
-        android:textColor="@color/brown_dark_text"
-        app:cornerRadius="12dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_logout"
+        app:layout_constraintTop_toBottomOf="@id/logout_button_container"
         app:layout_constraintVertical_bias="0"
-        app:layout_constraintWidth_max="320dp"
-        app:strokeColor="@color/brown_medium" />
+        app:layout_constraintWidth_max="320dp">
+
+        <!-- Brown offset layer -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_gravity="bottom"
+            app:cardBackgroundColor="@color/brown_medium"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp" />
+
+        <!-- Main outlined button layer -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_gravity="top"
+            android:backgroundTint="@color/background_cream"
+            android:fontFamily="@font/dm_sans"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:letterSpacing="0.02"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/brown_dark_text"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="22dp"
+            app:rippleColor="@color/brown_medium"
+            app:strokeColor="@color/brown_medium"
+            app:strokeWidth="2dp" />
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
