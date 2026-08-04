@@ -56,10 +56,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="Artifact image"
-                    android:padding="40dp"
-                    android:scaleType="centerInside"
-                    android:src="@android:drawable/ic_menu_gallery"
-                    app:tint="@color/brown_dark_text" />
+                    android:scaleType="centerCrop"
+                    android:src="@android:drawable/ic_menu_gallery" />
 
             </com.google.android.material.card.MaterialCardView>
 
