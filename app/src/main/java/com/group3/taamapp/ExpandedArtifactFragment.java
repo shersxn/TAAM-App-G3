@@ -26,18 +26,22 @@ import java.util.ArrayList;
 
 public class ExpandedArtifactFragment extends BaseFragment {
 
+    // two bundle keys
     public static final String ARG_EMAIL = "email";
     public static final String ARG_LOT_NUMBER = "lotNumber";
 
+    // firebase node names
     private static final String NODE_ARTIFACTS = "Artifacts";
     private static final String NODE_USERS = "Users";
     private static final String FIELD_COLLECTIONS = "collections";
 
+    // page control variables
     private MaterialToolbar artifactToolbar;
     private ImageView artifactImageView;
 
     private TextView artifactNameTextView;
     private TextView dynastyPeriodTextView;
+    private TextView dynastyPeriodDetailTextView;
     private TextView descriptionTextView;
     private TextView lotNumberTextView;
     private TextView categoryTextView;
@@ -50,6 +54,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
     private MaterialButton likeButton;
     private MaterialButton saveButton;
 
+    //variables for the status of current page
     private String currentUserEmail;
     private String lotNumber;
 
@@ -58,6 +63,8 @@ public class ExpandedArtifactFragment extends BaseFragment {
     private DatabaseReference likesReference;
     private boolean isLiked;
     private boolean isSaved;
+
+    // admin control variables
     private View adminControlsLayout;
     private MaterialButton editArtifactButton;
     private MaterialButton deleteArtifactButton;
@@ -68,6 +75,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
     private ViewCardAdapter relatedAdapter;
     private ArrayList<ExpandedArtifact> relatedArtifactsList;
 
+    // initialize the page
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_expanded_artifact;
@@ -75,39 +83,37 @@ public class ExpandedArtifactFragment extends BaseFragment {
 
     @Override
     protected void setUIComponents(View view) {
+        // connect admin controls to their corresponding XML views
         adminControlsLayout = view.findViewById(R.id.adminControlsLayout);
         editArtifactButton = view.findViewById(R.id.editArtifactButton);
         deleteArtifactButton = view.findViewById(R.id.deleteArtifactButton);
+        // connect the toolbar, image, and artifact information views
         artifactToolbar = view.findViewById(R.id.artifactToolbar);
         artifactImageView = view.findViewById(R.id.artifactImageView);
-
         artifactNameTextView = view.findViewById(R.id.artifactNameTextView);
-
         dynastyPeriodTextView = view.findViewById(R.id.dynastyPeriodTextView);
-
+        dynastyPeriodDetailTextView = view.findViewById(R.id.dynastyPeriodDetailTextView);
         descriptionTextView = view.findViewById(R.id.descriptionTextView);
-
         lotNumberTextView = view.findViewById(R.id.lotNumberTextView);
-
         categoryTextView = view.findViewById(R.id.categoryTextView);
-
         materialTextView = view.findViewById(R.id.materialTextView);
-
         likeCountTextView = view.findViewById(R.id.likeCountTextView);
-
+        // connect the category and material chips
         categoryChip = view.findViewById(R.id.categoryChip);
         materialChip = view.findViewById(R.id.materialChip);
-
+        // connect like and save buttons
         likeButton = view.findViewById(R.id.likeButton);
         saveButton = view.findViewById(R.id.saveButton);
 
         readArguments();
         configureToolbar();
 
+        // stop initialization if required args are missing
         if (!hasRequiredArguments()) {
             return;
         }
 
+        // create a firebase reference for current artifact and its likes
         artifactReference = FirebaseDatabase.getInstance()
                 .getReference(NODE_ARTIFACTS)
                 .child(lotNumber);
@@ -115,6 +121,8 @@ public class ExpandedArtifactFragment extends BaseFragment {
                 .getReference(NODE_ARTIFACTS)
                 .child(lotNumber)
                 .child("likes");
+
+        // load the artifact and configure the page features
         loadArtifact();
         configureSaveFeature();
         configureComments();
@@ -133,6 +141,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
         relatedRecyclerView.setAdapter(relatedAdapter);
     }
 
+    // two methods required by BaseFragment
     @Override
     protected void setEvents() {
     }
@@ -142,6 +151,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
 
     }
 
+    // read current user email and artifact lot number
     private void readArguments() {
         Bundle arguments = getArguments();
 
@@ -153,6 +163,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
         lotNumber = arguments.getString(ARG_LOT_NUMBER);
     }
 
+    // check if lot number and user email exists
     private boolean hasRequiredArguments() {
         if (lotNumber == null || lotNumber.trim().isEmpty()) {
             showMessage("Artifact lot number is missing.");
@@ -168,6 +179,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
         return true;
     }
 
+    // set up the return button on the tool bar
     private void configureToolbar() {
         artifactToolbar.setNavigationOnClickListener(view ->
                 requireActivity()
@@ -176,6 +188,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
         );
     }
 
+    // read artifact data from firebase once
     private void loadArtifact() {
         artifactReference.addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -212,10 +225,11 @@ public class ExpandedArtifactFragment extends BaseFragment {
         );
     }
 
+    // display firebase data on xml
     private void displayArtifact(
             @NonNull DataSnapshot snapshot
     ) {
-        String name = getStringValue(snapshot, "name");
+        String name = getStringValue(snapshot, "artifactName");
         String description =
                 getStringValue(snapshot, "description");
         String category =
@@ -223,7 +237,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
         String material =
                 getStringValue(snapshot, "material");
         String dynasty =
-                getStringValue(snapshot, "dynasty");
+                getStringValue(snapshot, "dynastyPeriod");
         String imageUrl =
                 getStringValue(snapshot, "imageUrl");
 
@@ -232,6 +246,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
         categoryTextView.setText(category);
         materialTextView.setText(material);
         dynastyPeriodTextView.setText(dynasty);
+        dynastyPeriodDetailTextView.setText(dynasty);
         lotNumberTextView.setText(lotNumber);
 
         categoryChip.setText(category);
@@ -252,6 +267,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
         loadRelatedArtifacts(category, lotNumber);
     }
 
+    // a helper method to avoid reading firebase fields repeatedly
     private String getStringValue(
             @NonNull DataSnapshot snapshot,
             @NonNull String key
@@ -262,6 +278,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
         return value == null ? "" : value;
     }
 
+    // load artifact images using Glide
     private void loadArtifactImage(String imageUrl) {
         if (imageUrl == null || imageUrl.trim().isEmpty()) {
             artifactImageView.setImageResource(
@@ -281,6 +298,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
                 .into(artifactImageView);
     }
 
+    // configure the feature for saving artifacts
     private void configureSaveFeature() {
         saveButton.setEnabled(false);
 
@@ -298,6 +316,8 @@ public class ExpandedArtifactFragment extends BaseFragment {
                 toggleSave()
         );
     }
+
+    // method for liking artifacts
     private void toggleLike(String encodedEmail) {
         likeButton.setEnabled(false);
 
@@ -386,6 +406,8 @@ public class ExpandedArtifactFragment extends BaseFragment {
         return email.replace(".", ",");
     }
 
+    // read the current user's saved list and check if the current
+    // artifact is in the list
     private void loadSaveState() {
         collectionsReference
                 .addListenerForSingleValueEvent(
@@ -428,6 +450,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
                 );
     }
 
+    // save/unsave based on reading from the save list
     private void toggleSave() {
         saveButton.setEnabled(false);
 
@@ -458,7 +481,9 @@ public class ExpandedArtifactFragment extends BaseFragment {
                 );
     }
 
+
     private void addToCollections() {
+        // create a firebase key and save lot number in it
         collectionsReference.push()
                 .setValue(lotNumber)
                 .addOnSuccessListener(unused -> {
@@ -473,6 +498,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
                 });
     }
 
+    // traverse the user's save list and search for the current artifact
     private void removeFromCollections(
             @NonNull DataSnapshot snapshot
     ) {
@@ -512,12 +538,14 @@ public class ExpandedArtifactFragment extends BaseFragment {
                 });
     }
 
+    // update the save button based on current save state
     private void updateSaveButton() {
         saveButton.setText(
                 isSaved ? "Unsave" : "Save"
         );
     }
 
+    // show a message at the bottom to indicate successful operation
     private void showMessage(String message) {
         Toast.makeText(
                 requireContext(),
@@ -526,6 +554,8 @@ public class ExpandedArtifactFragment extends BaseFragment {
         ).show();
     }
 
+
+    // two methods to let other classes to read user email and lot number
     public String getCurrentLotNumber() {
         return lotNumber;
     }
@@ -537,6 +567,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
     private void configureComments() {
         String encodedEmail = encodeEmail(currentUserEmail);
 
+        // get current user information
         DatabaseReference userReference =
                 FirebaseDatabase.getInstance()
                         .getReference(NODE_USERS)
@@ -552,31 +583,26 @@ public class ExpandedArtifactFragment extends BaseFragment {
                                 snapshot.child("username")
                                         .getValue(String.class);
 
-                        Boolean adminValue =
-                                snapshot.child("admin")
-                                        .getValue(Boolean.class);
-
                         if (username == null
                                 || username.trim().isEmpty()) {
                             username = currentUserEmail;
                         }
 
+                        // get the admin status
                         boolean isAdmin =
                                 Boolean.TRUE.equals(
                                         snapshot.child("admin").getValue(Boolean.class)
                                 );
 
+                        // save the admin status
                         isCurrentUserAdmin = isAdmin;
+                        // show admin control buttons
                         adminControlsLayout.setVisibility(
                                 isAdmin ? View.VISIBLE : View.GONE
                         );
 
                         displayCommentFragment(username, isAdmin);
 
-                        displayCommentFragment(
-                                username,
-                                isAdmin
-                        );
                     }
 
                     @Override
@@ -592,6 +618,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
         );
     }
 
+    // create the comment fragment and pass in lot number, user email, and admin status
     private void displayCommentFragment(
             String username,
             boolean isAdmin
@@ -614,11 +641,13 @@ public class ExpandedArtifactFragment extends BaseFragment {
 
     private void configureAdminControls() {
         editArtifactButton.setOnClickListener(view -> {
+            // double check the admin status
             if (!isCurrentUserAdmin) {
                 showMessage("Admin access required.");
                 return;
             }
 
+            // admin edit button
             loadFragment(
                     new AddEditArtifactFragment(),
                     bundle -> {
@@ -628,6 +657,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
             );
         });
 
+        // admin delete feature
         deleteArtifactButton.setOnClickListener(view -> {
             if (!isCurrentUserAdmin) {
                 showMessage("Admin access required.");
@@ -638,6 +668,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
         });
     }
 
+    // method for users to confirm before deleting an artifact
     private void showDeleteConfirmation() {
         new MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Delete artifact?")
@@ -652,6 +683,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
                 .show();
     }
 
+    // method for deleting
     private void deleteCurrentArtifact() {
         deleteArtifactButton.setEnabled(false);
 

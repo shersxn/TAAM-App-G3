@@ -13,10 +13,12 @@ public class ExpandedArtifact {
     private int likeCount;
     private Map<String, Comment> comments;
 
+    // create an empty ExpandedArtifact object as required by firebase
     public ExpandedArtifact() {
 
     }
 
+    // the actual constructor to create an ExpandedArtifact object with all info
     public ExpandedArtifact(
             String lotNumber,
             String artifactName,
@@ -104,13 +106,9 @@ public class ExpandedArtifact {
         this.likeCount = likeCount;
     }
 
-    public Map<String, Comment> getComments() {
-        return comments;
-    }
+    public Map<String, Comment> getComments() { return comments; }
 
-    public void setComments(Map<String, Comment> comments) {
-        this.comments = comments;
-    }
+    public void setComments(Map<String, Comment> comments) { this.comments = comments; }
 }
 
 

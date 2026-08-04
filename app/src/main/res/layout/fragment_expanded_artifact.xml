@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!-- root layout for expanded artifact page-->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,6 +10,7 @@
     android:background="@color/background_cream"
     tools:context=".ExpandedArtifactFragment">
 
+    <!--top bar for Artifact Details-->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/artifactToolbar"
         android:layout_width="0dp"
@@ -41,6 +43,7 @@
             android:paddingBottom="32dp">
 
 
+            <!--Artifact image card-->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
@@ -60,6 +63,7 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <!--Artifact name-->
             <TextView
                 android:id="@+id/artifactNameTextView"
                 android:layout_width="match_parent"
@@ -71,6 +75,7 @@
                 android:textStyle="bold"
                 tools:text="Autumn Leaf Cup" />
 
+            <!--Button for admin controls-->
             <LinearLayout
                 android:id="@+id/adminControlsLayout"
                 android:layout_width="match_parent"
@@ -80,6 +85,7 @@
                 android:orientation="horizontal"
                 android:visibility="gone">
 
+                <!--edit button-->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/editArtifactButton"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -87,6 +93,7 @@
                     android:layout_height="wrap_content"
                     android:text="Edit" />
 
+                <!--delete button-->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/deleteArtifactButton"
                     android:layout_width="wrap_content"
@@ -99,6 +106,7 @@
             </LinearLayout>
 
 
+            <!--Dynasty/period-->
             <TextView
                 android:id="@+id/dynastyPeriodTextView"
                 android:layout_width="match_parent"
@@ -110,6 +118,7 @@
                 tools:text="Song Dynasty" />
 
 
+            <!--Category and material-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -146,6 +155,7 @@
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal">
 
+                <!--like button-->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/likeButton"
                     android:layout_width="0dp"
@@ -157,6 +167,7 @@
                     app:backgroundTint="@color/brown_medium"
                     app:cornerRadius="16dp" />
 
+                <!--save button-->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/saveButton"
                     style="@style/Widget.Material3.Button.OutlinedButton"
@@ -174,6 +185,7 @@
             </LinearLayout>
 
 
+            <!--like count-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -194,6 +206,7 @@
             </LinearLayout>
 
 
+            <!--description card-->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -232,7 +245,7 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-
+            <!--structured artifact information displayed in a card-->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -262,10 +275,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:orientation="horizontal">
-
-
-
-
                     </LinearLayout>
 
 
@@ -375,6 +384,8 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+
+            <!--Container for the comment fragment-->
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/commentFragmentContainer"
                 android:layout_width="match_parent"
