@@ -8,6 +8,7 @@
     android:background="@color/background_cream"
     tools:context=".SavedArtifactPage.SavedArtifactFragment">
 
+    <!-- Page title -->
     <TextView
         android:id="@+id/tv_header"
         android:layout_width="0dp"
@@ -23,6 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Page subtitle -->
     <TextView
         android:id="@+id/tv_subheader"
         android:layout_width="0dp"
@@ -31,27 +33,94 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/dm_sans"
-        android:text="Artifacts you've saved"
+        android:text="Saved Artifacts"
         android:textColor="@color/brown_medium"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_header" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_saved_artifacts"
+    <!-- Section heading shown above the saved artifact list -->
+    <LinearLayout
+        android:id="@+id/layout_collection_heading"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_subheader">
+
+        <!-- Collection symbol -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:cardBackgroundColor="@color/brown_medium"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="✦"
+                android:textColor="@color/background_cream"
+                android:textSize="18sp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Collection section title -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/dm_sans"
+            android:text="Your saved artifacts"
+            android:textColor="@color/brown_dark_text"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- Panel containing all saved artifacts -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_artifact_collection"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:clipToPadding="false"
-        android:paddingBottom="16dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@color/background_cream"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_subheader"
-        tools:listitem="@layout/artifacts_display_cards" />
+        app:layout_constraintTop_toBottomOf="@id/layout_collection_heading"
+        app:strokeColor="@color/brown_medium"
+        app:strokeWidth="2dp">
 
+        <!-- List of saved artifact cards -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_saved_artifacts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingStart="12dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/artifacts_display_cards" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Empty state shown when no artifacts have been saved -->
     <LinearLayout
         android:id="@+id/layout_empty_state"
         android:layout_width="wrap_content"
@@ -59,27 +128,52 @@
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_subheader"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:visibility="visible">
 
-        <ImageView
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginBottom="12dp"
-            android:contentDescription="No saved artifacts"
-            android:src="@android:drawable/ic_menu_gallery"
-            app:tint="@color/brown_medium" />
+        <!-- Artifact symbol -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="20dp"
+            app:cardBackgroundColor="@color/background_cream"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/brown_medium"
+            app:strokeWidth="2dp">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="🏺"
+                android:textSize="48sp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Main message -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/dm_sans"
-            android:text="No artifacts saved yet"
+            android:fontFamily="@font/playfair_display_sc"
+            android:text="No Saved Artifacts"
             android:textColor="@color/brown_dark_text"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
+
+        <!-- Message -->
+        <TextView
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/dm_sans"
+            android:gravity="center"
+            android:text="Start saving your favorite artifacts to build your collection!"
+            android:textColor="@color/brown_medium"
+            android:textSize="14sp" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
