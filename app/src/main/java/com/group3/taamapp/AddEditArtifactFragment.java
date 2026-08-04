@@ -29,7 +29,6 @@ import com.google.firebase.database.ValueEventListener;
 public class AddEditArtifactFragment extends Fragment {
 
     private ImageButton artifactImageButton;
-    private Button buttonDone;
     private Spinner spinnerCategory, spinnerMaterial, spinnerDynastyPeriod;
     private EditText editTextName, editTextLotNumber, editTextDescription;
     private FirebaseDatabase db;
@@ -60,7 +59,7 @@ public class AddEditArtifactFragment extends Fragment {
         db = FirebaseDatabase.getInstance(
                 "https://cscb07-group3-taamapp-default-rtdb.firebaseio.com");
         artifactImageButton = view.findViewById(R.id.artifactImageButton);
-        buttonDone = view.findViewById(R.id.buttonDone);
+        Button buttonDone = view.findViewById(R.id.buttonDone);
         spinnerCategory = view.findViewById(R.id.spinnerCategory);
         spinnerMaterial = view.findViewById(R.id.spinnerMaterial);
         editTextDescription = view.findViewById(R.id.editTextDescription);
@@ -100,8 +99,8 @@ public class AddEditArtifactFragment extends Fragment {
         // Update isAdding, editingArtifactId, and userEmail with data from the Bundle
         Bundle fragmentBundle = getArguments();
         if (fragmentBundle != null) {
-            userEmail = fragmentBundle.getString(/*String: key in bundle based on calling page*/ "userEmail");
-            editingArtifactId = fragmentBundle.getString(/*String: key in bundle based on calling page*/ "artifactId");
+            userEmail = fragmentBundle.getString("userEmail");
+            editingArtifactId = fragmentBundle.getString("artifactId");
         }
 
         if (editingArtifactId == null) {
@@ -121,7 +120,7 @@ public class AddEditArtifactFragment extends Fragment {
                         Toast.makeText(requireContext(),
                                 "You do not have access to the Add / Edit Artifact page",
                                 Toast.LENGTH_SHORT).show();
-                        getParentFragmentManager().popBackStack(); /*subject to change based on calling page*/
+                        getParentFragmentManager().popBackStack();
                     }
                 }
 
@@ -166,73 +165,66 @@ public class AddEditArtifactFragment extends Fragment {
         }
 
         // Set up ImageButton with Android Photo Picker for artifact image
-        artifactImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                imagePicker.launch(new PickVisualMediaRequest.Builder().setMediaType(
-                        ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE).build());
-            }
-        });
+        artifactImageButton.setOnClickListener(v ->
+            imagePicker.launch(new PickVisualMediaRequest.Builder().setMediaType(
+                    ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE).build()));
 
         // Set up Done button
-        buttonDone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                // Store inputted artifact data in the class fields
-                name = editTextName.getText().toString().trim();
-                lotNumber = editTextLotNumber.getText().toString().trim();
-                description = editTextDescription.getText().toString().trim();
-                category = spinnerCategory.getSelectedItem().toString();
-                material = spinnerMaterial.getSelectedItem().toString();
-                dynastyPeriod = spinnerDynastyPeriod.getSelectedItem().toString();
+        buttonDone.setOnClickListener(v -> {
+            // Store inputted artifact data in the class fields
+            name = editTextName.getText().toString().trim();
+            lotNumber = editTextLotNumber.getText().toString().trim();
+            description = editTextDescription.getText().toString().trim();
+            category = spinnerCategory.getSelectedItem().toString();
+            material = spinnerMaterial.getSelectedItem().toString();
+            dynastyPeriod = spinnerDynastyPeriod.getSelectedItem().toString();
 
-                if (areNonEmptyInputs(name, description, category, material, dynastyPeriod)) {
-                    if (isAdding) {
-                        // Check whether the inputted lot number exists in Firebase
-                        dataReference = db.getReference("Artifacts").child(lotNumber);
-                        dataReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    Toast.makeText(requireContext(),
-                                            "Please ensure the lot number is unique",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-
-                                // Update artifact data in Firebase if the inputted lot number
-                                // is unique
-                                else {
-                                    if (artifactImageUri != null) {
-                                        // Upload image to Supabase if an image has been selected
-                                        // and updateArtifactData() will be called by uploadImage()
-                                        uploadImage();
-                                    }
-
-                                    else {
-                                        updateArtifactData();
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+            if (areNonEmptyInputs(name, description, category, material, dynastyPeriod)) {
+                if (isAdding) {
+                    // Check whether the inputted lot number exists in Firebase
+                    dataReference = db.getReference("Artifacts").child(lotNumber);
+                    dataReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
                                 Toast.makeText(requireContext(),
-                                        "Failed to retrieve data from Firebase",
+                                        "Please ensure the lot number is unique",
                                         Toast.LENGTH_SHORT).show();
                             }
-                        });
+
+                            // Update artifact data in Firebase if the inputted lot number
+                            // is unique
+                            else {
+                                if (artifactImageUri != null) {
+                                    // Upload image to Supabase if an image has been selected
+                                    // and updateArtifactData() will be called by uploadImage()
+                                    uploadImage();
+                                }
+
+                                else {
+                                    updateArtifactData();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Toast.makeText(requireContext(),
+                                    "Failed to retrieve data from Firebase",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+                else {
+                    if (artifactImageUri != null) {
+                        // Upload image to Supabase if an image has been selected and
+                        // updateArtifactData() will be called by uploadImage()
+                        uploadImage();
                     }
 
                     else {
-                        if (artifactImageUri != null) {
-                            // Upload image to Supabase if an image has been selected and
-                            // updateArtifactData() will be called by uploadImage()
-                            uploadImage();
-                        }
-
-                        else {
-                            updateArtifactData();
-                        }
+                        updateArtifactData();
                     }
                 }
             }
@@ -279,15 +271,19 @@ public class AddEditArtifactFragment extends Fragment {
         // Add artifact to Firebase when an admin user is adding an artifact
         if (isAdding) {
             dataReference = db.getReference("Artifacts");
-            ExpandedArtifact artifact = new ExpandedArtifact(lotNumber, name, description,
-                    category, material, dynastyPeriod, artifactImageUrl, 0);
+            ExpandedArtifact artifact = new ExpandedArtifact(lotNumber, name, description, category,
+                    material, dynastyPeriod, artifactImageUrl, 0, null);
 
             dataReference.child(lotNumber).setValue(artifact).addOnCompleteListener(
                     task -> {
                         if (task.isSuccessful()) {
                             Toast.makeText(requireContext(), "Artifact added",
                                     Toast.LENGTH_SHORT).show();
-                        } else {
+
+                            // Return to the fragment that has called AddEditArtifactFragment
+                            getParentFragmentManager().popBackStack();
+                        }
+                        else {
                             Toast.makeText(requireContext(), "Failed to add artifact",
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -314,7 +310,11 @@ public class AddEditArtifactFragment extends Fragment {
                         if (task.isSuccessful()) {
                             Toast.makeText(requireContext(), "Artifact edited",
                                     Toast.LENGTH_SHORT).show();
-                        } else {
+
+                            // Return to the fragment that has called AddEditArtifactFragment
+                            getParentFragmentManager().popBackStack();
+                        }
+                        else {
                             Toast.makeText(requireContext(), "Failed to edit artifact",
                                     Toast.LENGTH_SHORT).show();
                         }
