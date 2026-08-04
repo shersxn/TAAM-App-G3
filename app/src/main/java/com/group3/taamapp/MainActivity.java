@@ -2,6 +2,7 @@ package com.group3.taamapp;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 
@@ -23,8 +24,15 @@ public class MainActivity extends BaseMainActivity {
         BottomNavigationView navigationBar = findViewById(R.id.navigationBar);
         AuthModel model = new AuthModelFirebase(this);
         String email = model.getCurrentAccount();
-        DatabaseReference userRef = db.getReference("Users").child(email);
         Menu menu = navigationBar.getMenu();
+
+        if(email == null) {
+            navigationBar.setVisibility(View.GONE);
+            return;
+        }
+        navigationBar.setVisibility(View.VISIBLE);
+
+        DatabaseReference userRef = db.getReference("Users").child(email);
 
         navigationBar.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home) {
@@ -82,12 +90,10 @@ public class MainActivity extends BaseMainActivity {
         AuthModel model = new AuthModelFirebase(this);
         String email = model.getCurrentAccount();
 
+        updateUserInfo();
         if(email == null) {
             loadFragment(new LoginFragment(), null);
             return;
-        }
-        else {
-            updateUserInfo();
         }
 
         loadFragment(new HomeFragment(), new BundleInitializer() {
