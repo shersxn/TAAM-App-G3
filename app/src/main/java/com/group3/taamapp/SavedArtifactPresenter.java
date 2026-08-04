@@ -1,4 +1,4 @@
-package com.group3.taamapp.SavedArtifactPage;
+package com.group3.taamapp;
 
 import java.util.List;
 
