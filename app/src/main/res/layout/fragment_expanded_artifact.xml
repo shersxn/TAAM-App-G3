@@ -422,6 +422,15 @@
                         android:textSize="21sp"
                         android:textStyle="bold" />
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/dm_sans"
+                        android:text="Swipe left to see more"
+                        android:textColor="@color/brown_medium"
+                        android:textSize="14sp"
+                        android:layout_marginTop="2dp" />
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/related_recycler_view"
                         android:layout_width="match_parent"

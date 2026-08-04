@@ -137,7 +137,21 @@ public class ExpandedArtifactFragment extends BaseFragment {
         relatedRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(),
                 LinearLayoutManager.HORIZONTAL, false));
 
-        relatedAdapter = new ViewCardAdapter(requireContext(), relatedArtifactsList, null);
+        relatedAdapter = new ViewCardAdapter(requireContext(), relatedArtifactsList,
+                new ViewCardAdapter.OnArtifactActionListener() {
+                    @Override
+                    public void onOpenArtifact(ExpandedArtifact artifact) {
+                        loadFragment(new ExpandedArtifactFragment(),
+                                new com.group3.taamapp.Bases.BundleInitializer() {
+                            @Override
+                            public void initBundle(Bundle bundle) {
+                                bundle.putString(ARG_EMAIL, currentUserEmail);
+                                bundle.putString(ARG_LOT_NUMBER, artifact.getLotNumber());
+                            }
+                        });
+                    }
+                });
+
         relatedRecyclerView.setAdapter(relatedAdapter);
     }
 
