@@ -106,7 +106,6 @@ public class SavedArtifactAdapter extends RecyclerView.Adapter<SavedArtifactAdap
             // Connect the card's views to their XML
             ivImage = itemView.findViewById(R.id.iv_artifact_image);
             tvName = itemView.findViewById(R.id.tv_artifact_name);
-            tvCategory = itemView.findViewById(R.id.tv_artifact_category);
             btnRemove = itemView.findViewById(R.id.btn_remove_saved);
         }
     }
