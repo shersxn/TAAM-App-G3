@@ -1,6 +1,8 @@
 package com.group3.taamapp.Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * User model in Firebase
@@ -8,19 +10,22 @@ import java.util.ArrayList;
 public class User {
     private String username;
 
+
     /**
      * Lot number of the collections of the user
      */
-    private ArrayList<String> collections;
+    private Map<String, Boolean> collections;
 
     /**
      * If this user have admin permission
      */
     private boolean admin;
 
-    public User() {}
+    public User() {
+        collections = new HashMap<>();
+    }
 
-    public User(String username, ArrayList<String> collections, boolean admin) {
+    public User(String username, Map<String, Boolean> collections, boolean admin) {
         this.username = username;
         this.collections = collections;
         this.admin = admin;
@@ -34,11 +39,11 @@ public class User {
         this.username = username;
     }
 
-    public ArrayList<String> getCollections() {
+    public  Map<String, Boolean> getCollections() {
         return collections;
     }
 
-    public void setCollections(ArrayList<String> collections) {
+    public void setCollections(Map<String, Boolean> collections) {
         this.collections = collections;
     }
 

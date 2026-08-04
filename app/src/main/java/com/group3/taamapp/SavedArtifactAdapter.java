@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.google.android.material.card.MaterialCardView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,6 +40,7 @@ public class SavedArtifactAdapter extends RecyclerView.Adapter<SavedArtifactAdap
         this.listener = listener;
     }
 
+
     @NonNull
     @Override
     public ArtifactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -71,7 +73,7 @@ public class SavedArtifactAdapter extends RecyclerView.Adapter<SavedArtifactAdap
         }
 
         // Open the expanded artifact page
-        holder.itemView.setOnClickListener(v -> {
+        holder.cardArtifact.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onOpenArtifact(artifact);
             }
@@ -95,6 +97,7 @@ public class SavedArtifactAdapter extends RecyclerView.Adapter<SavedArtifactAdap
      */
     static class ArtifactViewHolder extends RecyclerView.ViewHolder {
 
+        MaterialCardView cardArtifact;
         ImageView ivImage;
         TextView tvName;
         TextView tvCategory;
@@ -103,9 +106,10 @@ public class SavedArtifactAdapter extends RecyclerView.Adapter<SavedArtifactAdap
         ArtifactViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            // Connect the card's views to their XML
+            cardArtifact = itemView.findViewById(R.id.card_saved_artifact);
             ivImage = itemView.findViewById(R.id.iv_artifact_image);
             tvName = itemView.findViewById(R.id.tv_artifact_name);
+            tvCategory = itemView.findViewById(R.id.tv_artifact_category);
             btnRemove = itemView.findViewById(R.id.btn_remove_saved);
         }
     }
