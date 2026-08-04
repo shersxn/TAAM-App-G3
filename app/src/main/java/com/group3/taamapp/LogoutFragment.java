@@ -48,6 +48,9 @@ public class LogoutFragment extends BaseFragment implements LogoutContract.View 
 
     @Override
     public void toLoginPage() {
+        if(getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).updateUserInfo();
+        }
         // Navigate to the login screen after a successful logout
         loadFragment(new LoginFragment(), null);
     }
