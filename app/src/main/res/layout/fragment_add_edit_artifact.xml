@@ -35,12 +35,14 @@
         android:id="@+id/textViewDynastyPeriod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="16dp"
         android:text="Dynasty / Period:"
         android:textColor="#402410"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/spinnerMaterial"
-        app:layout_constraintStart_toStartOf="@id/textViewLotNumber" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/textViewLotNumber"
+        app:layout_constraintTop_toBottomOf="@id/spinnerMaterial" />
 
     <TextView
         android:id="@+id/textViewCategory"
@@ -186,27 +188,32 @@
 
     <Spinner
         android:id="@+id/spinnerCategory"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:spinnerMode="dropdown"
-        app:layout_constraintTop_toBottomOf="@id/textViewCategory"
-        app:layout_constraintStart_toStartOf="@id/textViewLotNumber" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/textViewLotNumber"
+        app:layout_constraintTop_toBottomOf="@id/textViewCategory" />
 
     <Spinner
         android:id="@+id/spinnerMaterial"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:spinnerMode="dropdown"
-        app:layout_constraintTop_toBottomOf="@id/textViewMaterial"
-        app:layout_constraintStart_toStartOf="@id/textViewLotNumber" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/textViewLotNumber"
+        app:layout_constraintTop_toBottomOf="@id/textViewMaterial" />
 
     <Spinner
         android:id="@+id/spinnerDynastyPeriod"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintBottom_toTopOf="@id/buttonDone"
+        android:layout_marginEnd="16dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/textViewLotNumber"
-        app:layout_constraintTop_toBottomOf="@id/textViewDynastyPeriod" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDynastyPeriod" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
