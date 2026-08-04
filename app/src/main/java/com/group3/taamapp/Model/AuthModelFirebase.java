@@ -12,7 +12,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -133,7 +132,7 @@ public class AuthModelFirebase implements AuthModel{
                 // update in Auth
                 updates.put("/Auth/"+encodeEmail(email), password);
                 // update in Users
-                User user = new User(username, new ArrayList<>(), false);
+                User user = new User(username, new HashMap<>(), false);
                 updates.put("/Users/"+encodeEmail(email), user);
                 rootRef.updateChildren(updates).addOnSuccessListener(
                         aVoid -> signUpCallback.onSuccess()

@@ -21,8 +21,11 @@ public class SavedArtifactModelFirebase implements SavedArtifactModel {
     private static final String FIELD_COLLECTIONS = "collections";
 
     public SavedArtifactModelFirebase(Context context) {
-        FirebaseDatabase db = FirebaseDatabase.getInstance("https://cscb07-group3-taamapp-default-rtdb.firebaseio.com/");
-        savedRef = db.getReference("Saved");
+        FirebaseDatabase db = FirebaseDatabase.getInstance(
+                "https://cscb07-group3-taamapp-default-rtdb.firebaseio.com/"
+        );
+
+        savedRef = db.getReference("Users");
         artifactsRef = db.getReference("Artifacts");
     }
 

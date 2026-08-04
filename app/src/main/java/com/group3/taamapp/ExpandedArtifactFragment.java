@@ -409,45 +409,20 @@ public class ExpandedArtifactFragment extends BaseFragment {
     // read the current user's saved list and check if the current
     // artifact is in the list
     private void loadSaveState() {
-        collectionsReference
-                .addListenerForSingleValueEvent(
-                        new ValueEventListener() {
-                            @Override
-                            public void onDataChange(
-                                    @NonNull DataSnapshot snapshot
-                            ) {
-                                isSaved = false;
+        collectionsReference.child(lotNumber)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        isSaved = snapshot.exists();
+                        updateSaveButton();
+                        saveButton.setEnabled(true);
+                    }
 
-                                for (DataSnapshot child
-                                        : snapshot.getChildren()) {
-                                    String savedLotNumber =
-                                            child.getValue(
-                                                    String.class
-                                            );
-
-                                    if (lotNumber.equals(
-                                            savedLotNumber
-                                    )) {
-                                        isSaved = true;
-                                        break;
-                                    }
-                                }
-
-                                updateSaveButton();
-                                saveButton.setEnabled(true);
-                            }
-
-                            @Override
-                            public void onCancelled(
-                                    @NonNull DatabaseError error
-                            ) {
-                                saveButton.setEnabled(true);
-                                showMessage(
-                                        "Unable to load saved status."
-                                );
-                            }
-                        }
-                );
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        saveButton.setEnabled(true);
+                    }
+                });
     }
 
     // save/unsave based on reading from the save list
@@ -484,8 +459,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
 
     private void addToCollections() {
         // create a firebase key and save lot number in it
-        collectionsReference.push()
-                .setValue(lotNumber)
+        collectionsReference.child(lotNumber).setValue(true)
                 .addOnSuccessListener(unused -> {
                     isSaved = true;
                     saveButton.setEnabled(true);
@@ -502,40 +476,13 @@ public class ExpandedArtifactFragment extends BaseFragment {
     private void removeFromCollections(
             @NonNull DataSnapshot snapshot
     ) {
-        DatabaseReference matchingReference = null;
-
-        for (DataSnapshot child : snapshot.getChildren()) {
-            String savedLotNumber =
-                    child.getValue(String.class);
-
-            if (lotNumber.equals(savedLotNumber)) {
-                matchingReference = child.getRef();
-                break;
-            }
-        }
-
-        if (matchingReference == null) {
-            isSaved = false;
-            saveButton.setEnabled(true);
-            updateSaveButton();
-            return;
-        }
-
-        matchingReference.removeValue()
-                .addOnSuccessListener(unused -> {
-                    isSaved = false;
-                    saveButton.setEnabled(true);
-                    updateSaveButton();
-                    showMessage(
-                            "Artifact removed from collection."
-                    );
-                })
-                .addOnFailureListener(error -> {
-                    saveButton.setEnabled(true);
-                    showMessage(
-                            "Failed to remove artifact."
-                    );
-                });
+        collectionsReference.child(lotNumber)
+            .removeValue()
+            .addOnSuccessListener(unused -> {
+                isSaved = false;
+                updateSaveButton();
+                saveButton.setEnabled(true);
+            });
     }
 
     // update the save button based on current save state
