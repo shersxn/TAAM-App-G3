@@ -39,10 +39,20 @@ public class MainActivity extends BaseMainActivity {
                 });
             }
             if (item.getItemId() == R.id.add) {
-                loadFragment(new AddEditArtifactFragment(), null);
+                loadFragment(new AddEditArtifactFragment(), new BundleInitializer() {
+                    @Override
+                    public void initBundle(Bundle bundle) {
+                        bundle.putString("userEmail", email);
+                    }
+                });
             }
             if (item.getItemId() == R.id.saved) {
-                loadFragment(new SavedArtifactFragment(), null);
+                loadFragment(new SavedArtifactFragment(), new BundleInitializer() {
+                    @Override
+                    public void initBundle(Bundle bundle) {
+                        bundle.putString("email", email);
+                    }
+                });
             }
             return false;
         });
