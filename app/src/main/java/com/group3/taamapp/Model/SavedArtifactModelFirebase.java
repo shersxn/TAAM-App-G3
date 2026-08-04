@@ -18,6 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class SavedArtifactModelFirebase implements SavedArtifactModel {
     private final DatabaseReference savedRef;
     private final DatabaseReference artifactsRef;
+    private static final String FIELD_COLLECTIONS = "collections";
 
     public SavedArtifactModelFirebase(Context context) {
         FirebaseDatabase db = FirebaseDatabase.getInstance("https://cscb07-group3-taamapp-default-rtdb.firebaseio.com/");
@@ -33,16 +34,21 @@ public class SavedArtifactModelFirebase implements SavedArtifactModel {
 
     @Override
     public void getSavedArtifacts(String userEmail, SavedArtifactsCallback callback) {
-        if (userEmail == null || userEmail.isEmpty()) {
-            callback.onError("No logged-in user was provided");
-            return;
-        }
         if (callback == null) {
-            throw new NullPointerException("SavedArtifactModelFirebase.getSavedArtifacts: callback cannot be null");
+                throw new NullPointerException(
+                        "SavedArtifactModelFirebase.getSavedArtifacts: callback cannot be null"
+                );
+            }
+
+        if (userEmail == null || userEmail.isEmpty()) {
+            callback.onError("No logged-in user");
+            return;
         }
 
         String userKey = encodeEmailKey(userEmail);
-        savedRef.child(userKey).addListenerForSingleValueEvent(new ValueEventListener() {
+        savedRef.child(userKey)
+        .child(FIELD_COLLECTIONS)
+        .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<String> savedLotNumbers = new ArrayList<>();
@@ -103,7 +109,7 @@ public class SavedArtifactModelFirebase implements SavedArtifactModel {
             }
 
             String userKey = encodeEmailKey(userEmail);
-            savedRef.child(userKey).child(lotNumber).setValue(true)
+            savedRef.child(userKey).child(FIELD_COLLECTIONS).child(lotNumber).setValue(true)
                     .addOnSuccessListener(unused -> callback.onSuccess())
                     .addOnFailureListener(e -> callback.onError(e.getMessage()));
         }
@@ -121,7 +127,7 @@ public class SavedArtifactModelFirebase implements SavedArtifactModel {
             }
 
             String userKey = encodeEmailKey(userEmail);
-            savedRef.child(userKey).child(lotNumber).removeValue()
+            savedRef.child(userKey).child(FIELD_COLLECTIONS).child(lotNumber).removeValue()
                     .addOnSuccessListener(unused -> callback.onSuccess())
                     .addOnFailureListener(e -> callback.onError(e.getMessage()));
         }
