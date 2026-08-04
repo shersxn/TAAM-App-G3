@@ -77,4 +77,16 @@ public abstract class BaseFragment extends EquippedFragment {
     public void toastMakeText(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
+
+    protected void loadFragment(Fragment fragment, BundleInitializer bundleInitializer) {
+        if(bundleInitializer != null) {
+            Bundle bundle = new Bundle();
+            bundleInitializer.initBundle(bundle);
+            fragment.setArguments(bundle);
+        }
+        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 }

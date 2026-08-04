@@ -5,8 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ede5d4"
-    android:backgroundTint="#FFFFFF"
+    android:background="@color/background_cream"
     tools:context=".MainActivity">
 
     <TextView
@@ -40,7 +39,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="100dp"
         android:layout_marginRight="20dp"
-        android:backgroundTint="#e4d9c6"
+        android:backgroundTint="#D4C4AE"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintHorizontal_bias="0.475"
@@ -75,6 +74,16 @@
 
     </FrameLayout>
 
+    <ImageButton
+        android:id="@+id/logoutBtn"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/background_cream"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_logout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

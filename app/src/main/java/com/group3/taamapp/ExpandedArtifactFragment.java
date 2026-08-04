@@ -129,7 +129,7 @@ public class ExpandedArtifactFragment extends BaseFragment {
         relatedRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(),
                 LinearLayoutManager.HORIZONTAL, false));
 
-        relatedAdapter = new ViewCardAdapter(requireContext(), relatedArtifactsList);
+        relatedAdapter = new ViewCardAdapter(requireContext(), relatedArtifactsList, null);
         relatedRecyclerView.setAdapter(relatedAdapter);
     }
 
