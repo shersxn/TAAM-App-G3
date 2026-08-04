@@ -56,7 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="Artifact image"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitCenter"
                     android:src="@android:drawable/ic_menu_gallery" />
 
             </com.google.android.material.card.MaterialCardView>
@@ -384,6 +384,7 @@
 
 
             <!--Container for the comment fragment-->
+
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/commentFragmentContainer"
                 android:layout_width="match_parent"
