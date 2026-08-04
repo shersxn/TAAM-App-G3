@@ -76,8 +76,8 @@
 
     <ImageButton
         android:id="@+id/logoutBtn"
-        android:layout_width="33dp"
-        android:layout_height="33dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginStart="22dp"
         android:layout_marginTop="32dp"
         android:background="@color/background_cream"
