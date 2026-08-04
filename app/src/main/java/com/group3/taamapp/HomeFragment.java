@@ -1,52 +1,58 @@
 package com.group3.taamapp;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.SearchView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.group3.taamapp.Bases.BaseFragment;
+import com.group3.taamapp.Bases.BundleInitializer;
+import com.group3.taamapp.LoginPage.LoginFragment;
+//import com.group3.taamapp.SavedArtifactFragment;
 
-public class ViewActivity extends AppCompatActivity {
+public class HomeFragment extends BaseFragment {
 
+    public static final String ARG_EMAIL = "email";
     ArrayList <ExpandedArtifact> viewCards = new ArrayList<>();
     ViewCardAdapter adapter;
     //int[] cardImages = {R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground};
     SearchView searchArtifact;
-
+    private String currentUserEmail;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.artifacts_view);
+    protected int getLayoutId() {return R.layout.artifacts_view;}
+    @Override
+    protected void setUIComponents(View view) {
+        readArguments();
+        RecyclerView recyclerView = view.findViewById(R.id.artefactsRecycle);
+        ViewCardAdapter.OnArtifactActionListener listener =
+        adapter = new ViewCardAdapter(requireContext(), viewCards,
+                new ViewCardAdapter.OnArtifactActionListener() {
+                    @Override
+                    public void onOpenArtifact(ExpandedArtifact artifact) {
+                        toExpandedArtifact(artifact);
+                    }
+                });
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2));
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        }   );
-
-        RecyclerView recycleView = findViewById(R.id.artefactsRecycle);
-
-
-        this.adapter = new ViewCardAdapter(this, viewCards);
-        recycleView.setAdapter(adapter);
-        recycleView.setLayoutManager(new GridLayoutManager(this, 2));
+        searchArtifact = view.findViewById(R.id.searchView);
         setUpViewCards();
-        searchArtifact = findViewById(R.id.searchView);
+
+    }
+
+    @Override
+    protected void setEvents() {
         searchArtifact.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -94,6 +100,39 @@ public class ViewActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void setPresenter() {
+        //will implement
+    }
+
+    private void readArguments() {
+        Bundle arguments = getArguments();
+
+        if (arguments == null) {
+            return;
+        }
+
+        currentUserEmail = arguments.getString(ARG_EMAIL);
+    }
+
+    public void toExpandedArtifact(ExpandedArtifact artifact) {
+        // Open the selected artifact and pass its required information
+        loadFragment(new ExpandedArtifactFragment(), new BundleInitializer() {
+            @Override
+            public void initBundle(Bundle bundle) {
+                bundle.putString(
+                        ExpandedArtifactFragment.ARG_EMAIL,
+                        currentUserEmail
+                );
+
+                bundle.putString(
+                        ExpandedArtifactFragment.ARG_LOT_NUMBER,
+                        artifact.getLotNumber()
+                );
+            }
+        });
     }
 
 //    private void setUpViewCards() {

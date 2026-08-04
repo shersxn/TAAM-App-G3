@@ -1,9 +1,13 @@
 package com.group3.taamapp;
 
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -12,15 +16,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.LayoutInflater;
 import com.bumptech.glide.Glide;
+import com.group3.taamapp.Bases.BundleInitializer;
 
 public class ViewCardAdapter extends RecyclerView.Adapter<ViewCardAdapter.MyViewHolder> {
-
+    public interface OnArtifactActionListener {
+        void onOpenArtifact(ExpandedArtifact artifact);
+    }
     Context context;
     ArrayList<ExpandedArtifact> viewCards;
+    OnArtifactActionListener listener;
 
-    public ViewCardAdapter(Context context, ArrayList<ExpandedArtifact> viewCards) {
+    public ViewCardAdapter(Context context, ArrayList<ExpandedArtifact> viewCards, OnArtifactActionListener listener) {
         this.context = context;
         this.viewCards = viewCards;
+        this.listener = listener;
     }
 
     @NonNull
@@ -31,21 +40,36 @@ public class ViewCardAdapter extends RecyclerView.Adapter<ViewCardAdapter.MyView
         return new ViewCardAdapter.MyViewHolder(view);
     }
 
+    public String shortend(String s, int n) {
+        if (s.length() > n) {
+            s = s.substring(0, n) + "...";
+        }
+        return s;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ViewCardAdapter.MyViewHolder holder, int position) {
-        holder.tvName.setText(viewCards.get(position).getArtifactName());
-        holder.tvDescription.setText(viewCards.get(position).getDescription());
-        holder.tvPeriod.setText(viewCards.get(position).getDynastyPeriod());
+        ExpandedArtifact artifact = viewCards.get(position);
+
+        holder.tvName.setText(shortend(viewCards.get(position).getArtifactName(), 15));
+        holder.tvDescription.setText(shortend(viewCards.get(position).getDescription(), 40));
+        holder.tvPeriod.setText(shortend(viewCards.get(position).getDynastyPeriod(), 25));
         Glide.with(holder.itemView.getContext())
                 .load(viewCards.get(position).getImageUrl())
                 .into(holder.imageView);
 
-//        holder.tvDetails.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent expandDetails = new Intent(ViewCardAdapter.this, )
-//            }
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) listener.onOpenArtifact(artifact);
+        });
+
+//        holder.tvCard.setOnClickListener(item -> {
+//            loadFragment(new HomeFragment(), new BundleInitializer() {
+//                public void initBundle(Bundle bundle) {
+//                    bundle.putString("email", email);
+//                }
+//            });
 //        });
+
     }
 
     @Override
@@ -62,6 +86,7 @@ public class ViewCardAdapter extends RecyclerView.Adapter<ViewCardAdapter.MyView
 
         ImageView imageView;
         TextView tvName, tvDescription, tvPeriod, tvDetails;
+        CardView tvCard;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -69,7 +94,7 @@ public class ViewCardAdapter extends RecyclerView.Adapter<ViewCardAdapter.MyView
             tvName = itemView.findViewById(R.id.textArtefactName);
             tvDescription = itemView.findViewById(R.id.textDescription);
             tvPeriod = itemView.findViewById(R.id.textPeriod);
-            tvDetails = itemView.findViewById(R.id.btnViewDetails);
+            tvCard = itemView.findViewById(R.id.artifactCard);
         }
     }
 }

@@ -11,7 +11,7 @@ import com.group3.taamapp.Contract.LoginContract;
 import com.group3.taamapp.Model.AuthModelFirebase;
 import com.group3.taamapp.R;
 import com.group3.taamapp.SignupPage.SignupFragment;
-import com.group3.taamapp.ViewActivity;
+import com.group3.taamapp.HomeFragment;
 
 /**
  * Implementation of LoginContract.View
@@ -65,7 +65,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     @Override
     public void toMainPage(String email) {
         loadFragment(
-        new ViewActivity(),
+        new HomeFragment(),
         new BundleInitializer() {
             @Override
             public void initBundle(Bundle bundle) {

@@ -1,4 +1,4 @@
-package com.group3.taamapp.SavedArtifactPage;
+package com.group3.taamapp;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,20 +17,24 @@ import com.group3.taamapp.R;
 import java.util.List;
 
 /**
- * Binds a list of ExpandedArtifact objects to layout/artifacts_display_cards.xml
- * inside the RecyclerView on layout/saved_collection.xml.
+ * Displays saved artifacts inside the RecyclerView.
  */
 public class SavedArtifactAdapter extends RecyclerView.Adapter<SavedArtifactAdapter.ArtifactViewHolder> {
 
+    /**
+     * Handles actions performed on each artifact card.
+     */
     public interface OnArtifactActionListener {
         void onUnsave(ExpandedArtifact artifact);
         void onOpenArtifact(ExpandedArtifact artifact);
     }
 
+    // List of saved artifacts and callback listener
     private final List<ExpandedArtifact> artifacts;
     private final OnArtifactActionListener listener;
 
-    public SavedArtifactAdapter(List<ExpandedArtifact> artifacts, OnArtifactActionListener listener) {
+    public SavedArtifactAdapter(List<ExpandedArtifact> artifacts,
+                                OnArtifactActionListener listener) {
         this.artifacts = artifacts;
         this.listener = listener;
     }
@@ -38,8 +42,10 @@ public class SavedArtifactAdapter extends RecyclerView.Adapter<SavedArtifactAdap
     @NonNull
     @Override
     public ArtifactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Inflate a single artifact card
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.artifacts_display_cards, parent, false);
+
         return new ArtifactViewHolder(view);
     }
 
@@ -47,9 +53,13 @@ public class SavedArtifactAdapter extends RecyclerView.Adapter<SavedArtifactAdap
     public void onBindViewHolder(@NonNull ArtifactViewHolder holder, int position) {
         ExpandedArtifact artifact = artifacts.get(position);
 
+        // Display artifact information
         holder.tvName.setText(artifact.getArtifactName());
-        holder.tvCategory.setText(artifact.getCategory() + " · " + artifact.getDynastyPeriod());
+        holder.tvCategory.setText(
+                artifact.getCategory() + " · " + artifact.getDynastyPeriod()
+        );
 
+        // Load the artifact image, or show a placeholder if not available
         if (artifact.getImageUrl() != null && !artifact.getImageUrl().isEmpty()) {
             Glide.with(holder.itemView)
                     .load(artifact.getImageUrl())
@@ -60,13 +70,18 @@ public class SavedArtifactAdapter extends RecyclerView.Adapter<SavedArtifactAdap
             holder.ivImage.setImageResource(android.R.drawable.ic_menu_gallery);
         }
 
-        // Tapping the card asks the presenter to open the expanded view
+        // Open the expanded artifact page
         holder.itemView.setOnClickListener(v -> {
-            if (listener != null) listener.onOpenArtifact(artifact);
+            if (listener != null) {
+                listener.onOpenArtifact(artifact);
+            }
         });
 
+        // Remove the artifact from the saved collection
         holder.btnRemove.setOnClickListener(v -> {
-            if (listener != null) listener.onUnsave(artifact);
+            if (listener != null) {
+                listener.onUnsave(artifact);
+            }
         });
     }
 
@@ -75,7 +90,11 @@ public class SavedArtifactAdapter extends RecyclerView.Adapter<SavedArtifactAdap
         return artifacts.size();
     }
 
+    /**
+     * Holds references to the views in a single artifact card.
+     */
     static class ArtifactViewHolder extends RecyclerView.ViewHolder {
+
         ImageView ivImage;
         TextView tvName;
         TextView tvCategory;
@@ -83,6 +102,8 @@ public class SavedArtifactAdapter extends RecyclerView.Adapter<SavedArtifactAdap
 
         ArtifactViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            // Connect the card's views to their XML
             ivImage = itemView.findViewById(R.id.iv_artifact_image);
             tvName = itemView.findViewById(R.id.tv_artifact_name);
             tvCategory = itemView.findViewById(R.id.tv_artifact_category);

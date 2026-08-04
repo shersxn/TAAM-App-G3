@@ -280,7 +280,7 @@ public class AddEditArtifactFragment extends Fragment {
         if (isAdding) {
             dataReference = db.getReference("Artifacts");
             ExpandedArtifact artifact = new ExpandedArtifact(lotNumber, name, description,
-                    category, material, dynastyPeriod, artifactImageUrl, 0);
+                    category, material, dynastyPeriod, artifactImageUrl, 0, null);
 
             dataReference.child(lotNumber).setValue(artifact).addOnCompleteListener(
                     task -> {
