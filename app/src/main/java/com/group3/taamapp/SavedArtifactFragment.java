@@ -1,4 +1,4 @@
-package com.group3.taamapp;
+package com.group3.taamapp.SavedArtifactPage;
 
 import android.os.Bundle;
 import android.view.View;
@@ -38,7 +38,6 @@ public class SavedArtifactFragment extends BaseFragment
     private RecyclerView recyclerView;
     private LinearLayout collectionHeading;
     private MaterialCardView collectionCard;
-    private TextView artifactCount;
 
     // Displayed when the user has no saved artifacts
     private LinearLayout emptyStateLayout;
@@ -60,7 +59,6 @@ public class SavedArtifactFragment extends BaseFragment
         emptyStateLayout = view.findViewById(R.id.layout_empty_state);
         collectionHeading = view.findViewById(R.id.layout_collection_heading);
         collectionCard = view.findViewById(R.id.card_artifact_collection);
-        artifactCount = view.findViewById(R.id.tv_artifact_count);
 
         // Get the current user's email from the fragment arguments
         Bundle arguments = getArguments();
@@ -124,9 +122,6 @@ public class SavedArtifactFragment extends BaseFragment
 
         // Hide the empty state
         emptyStateLayout.setVisibility(View.GONE);
-
-        // Update the saved artifact count
-        artifactCount.setText(savedArtifacts.size() + " saved");
     }
 
     @Override
@@ -158,8 +153,6 @@ public class SavedArtifactFragment extends BaseFragment
         // Show the empty state when the final artifact is removed
         if (savedArtifacts.isEmpty()) {
             showEmptyState();
-        } else {
-            artifactCount.setText(savedArtifacts.size() + " saved");
         }
     }
 

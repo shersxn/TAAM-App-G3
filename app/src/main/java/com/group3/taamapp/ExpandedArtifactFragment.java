@@ -20,6 +20,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+
 public class ExpandedArtifactFragment extends BaseFragment {
 
     public static final String ARG_EMAIL = "email";
@@ -51,12 +55,18 @@ public class ExpandedArtifactFragment extends BaseFragment {
 
     private DatabaseReference artifactReference;
     private DatabaseReference collectionsReference;
-
+    private DatabaseReference likesReference;
+    private boolean isLiked;
     private boolean isSaved;
     private View adminControlsLayout;
     private MaterialButton editArtifactButton;
     private MaterialButton deleteArtifactButton;
     private boolean isCurrentUserAdmin;
+
+    // Related Artifact Variables
+    private RecyclerView relatedRecyclerView;
+    private ViewCardAdapter relatedAdapter;
+    private ArrayList<ExpandedArtifact> relatedArtifactsList;
 
     @Override
     protected int getLayoutId() {
@@ -101,16 +111,30 @@ public class ExpandedArtifactFragment extends BaseFragment {
         artifactReference = FirebaseDatabase.getInstance()
                 .getReference(NODE_ARTIFACTS)
                 .child(lotNumber);
-
+        likesReference = FirebaseDatabase.getInstance()
+                .getReference(NODE_ARTIFACTS)
+                .child(lotNumber)
+                .child("likes");
         loadArtifact();
         configureSaveFeature();
         configureComments();
         configureAdminControls();
+        configureLikeFeature();
+
+        // Setup Related Artifacts Bonus
+        relatedRecyclerView = view.findViewById(R.id.related_recycler_view);
+        relatedArtifactsList = new ArrayList<>();
+
+        // Make the list scroll sideways
+        relatedRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(),
+                LinearLayoutManager.HORIZONTAL, false));
+
+        relatedAdapter = new ViewCardAdapter(requireContext(), relatedArtifactsList);
+        relatedRecyclerView.setAdapter(relatedAdapter);
     }
 
     @Override
     protected void setEvents() {
-        // Like/Unlike to be done.
     }
 
     @Override
@@ -224,6 +248,8 @@ public class ExpandedArtifactFragment extends BaseFragment {
         );
 
         loadArtifactImage(imageUrl);
+
+        loadRelatedArtifacts(category, lotNumber);
     }
 
     private String getStringValue(
@@ -272,7 +298,90 @@ public class ExpandedArtifactFragment extends BaseFragment {
                 toggleSave()
         );
     }
+    private void toggleLike(String encodedEmail) {
+        likeButton.setEnabled(false);
 
+        if (isLiked) {
+            // Remove the like
+            likesReference.child(encodedEmail).removeValue()
+                    .addOnSuccessListener(unused -> {
+                        // Ask the database for the new total after unliking
+                        likesReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (!isAdded()) {
+                                    return;
+                                }
+                                long newLikeCount = snapshot.getChildrenCount();
+                                likeCountTextView.setText(getString(R.string.like_count_format, newLikeCount));
+                                likeButton.setEnabled(true);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                likeButton.setEnabled(true);
+                            }
+                        });
+                    })
+                    .addOnFailureListener(error -> {
+                        likeButton.setEnabled(true);
+                        showMessage("Failed to unlike artifact.");
+                    });
+        } else {
+            // Add the like
+            likesReference.child(encodedEmail).setValue(true)
+                    .addOnSuccessListener(unused -> {
+                        // Ask the database for the new total after liking
+                        likesReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (!isAdded()) {
+                                    return;
+                                }
+                                long newLikeCount = snapshot.getChildrenCount();
+                                likeCountTextView.setText(getString(R.string.like_count_format, newLikeCount));
+                                likeButton.setEnabled(true);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                likeButton.setEnabled(true);
+                            }
+                        });
+                    })
+                    .addOnFailureListener(error -> {
+                        likeButton.setEnabled(true);
+                        showMessage("Failed to like artifact.");
+                    });
+        }
+    }
+
+    private void updateLikeButton() {
+        // Update like button text based on if the user already liked or hasn't
+        likeButton.setText(isLiked ? "Unlike" : "Like");
+    }
+    private void configureLikeFeature() {
+        likeButton.setEnabled(false);
+        String encodedEmail = encodeEmail(currentUserEmail);
+        likesReference.child(encodedEmail).addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        // If the user's email exists, they liked it
+                        isLiked = snapshot.exists();
+                        updateLikeButton();
+                        likeButton.setEnabled(true);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        likeButton.setEnabled(true);
+                        showMessage("Unable to load like status.");
+                    }
+                }
+        );
+        likeButton.setOnClickListener(view -> toggleLike(encodedEmail));
+    }
     private String encodeEmail(String email) {
         return email.replace(".", ",");
     }
@@ -564,6 +673,49 @@ public class ExpandedArtifactFragment extends BaseFragment {
 
                     deleteArtifactButton.setEnabled(true);
                     showMessage("Failed to delete artifact.");
+                });
+    }
+
+    // This method loads the first 5 related artifacts
+    private void loadRelatedArtifacts(String category, String currentLotNumber) {
+        if (category == null || category.isEmpty()) return;
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(NODE_ARTIFACTS);
+
+        // Find the first 5 artifacts with the exact same category
+        // Set the limit to 6 in case one of the artifacts is the current one
+        ref.orderByChild("category").equalTo(category).limitToFirst(6)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        relatedArtifactsList.clear();
+
+                        Iterable<DataSnapshot> relatedItemsList = snapshot.getChildren();
+                        for (DataSnapshot child : relatedItemsList) {
+                            String lotNum = child.getKey();
+
+                            // This is to make sure the user doesn't see the same artifact as the
+                            // one they are currently looking at
+                            if (lotNum != null && !lotNum.equals(currentLotNumber)) {
+                                ExpandedArtifact artifact = child.getValue(ExpandedArtifact.class);
+                                if (artifact != null) {
+                                    artifact.setLotNumber(lotNum);
+                                    relatedArtifactsList.add(artifact);
+                                }
+                            }
+
+                            if (relatedArtifactsList.size() == 5) {
+                                break;
+                            }
+                        }
+                        relatedAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // This method does nothing, It's just here so that the related artifacts
+                        // section remains blank
+                    }
                 });
     }
 }
