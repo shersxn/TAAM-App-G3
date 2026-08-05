@@ -33,16 +33,17 @@
                 android:layout_height="wrap_content"
                 android:text="Artefact_name"
                 android:textColor="#402410"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textPeriod"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:text="Period"
                 android:textColor="#7a5c3a"
-                android:textSize="13sp" />
+                android:textSize="8sp" />
 
             <TextView
                 android:id="@+id/textDescription"
@@ -50,16 +51,7 @@
                 android:layout_height="wrap_content"
                 android:text="Description"
                 android:textColor="#5c3d20"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/btnViewDetails"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="View details ->"
-                android:textColor="#7a5c3a"
-                android:textSize="11sp" />
+                android:textSize="10sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>
