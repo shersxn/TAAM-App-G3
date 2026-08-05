@@ -128,7 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/dm_sans"
-                    android:textColor="@color/brown_dark_text"
+                    android:textColor="@color/white"
                     app:chipBackgroundColor="@color/brown_light"
                     app:chipIconVisible="false"
                     tools:text="Ceramics" />
@@ -139,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/dm_sans"
-                    android:textColor="@color/brown_dark_text"
+                    android:textColor="@color/white"
                     app:chipBackgroundColor="@color/brown_light"
                     app:chipIconVisible="false"
                     tools:text="Porcelain" />
