@@ -54,6 +54,7 @@ public class SavedArtifactModelFirebase implements SavedArtifactModel {
         .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Collect all saved artifact IDs (lot numbers) for this user.
                 List<String> savedLotNumbers = new ArrayList<>();
                 for (DataSnapshot child : snapshot.getChildren()) {
                     savedLotNumbers.add(child.getKey());
@@ -73,10 +74,12 @@ public class SavedArtifactModelFirebase implements SavedArtifactModel {
                         public void onDataChange(@NonNull DataSnapshot artifactSnapshot) {
                             ExpandedArtifact artifact = artifactSnapshot.getValue(ExpandedArtifact.class);
                             if (artifact != null) {
+                                // Multiple Firebase callbacks may complete at the same time, so synchronize access to the shared results list.
                                 synchronized (results) {
                                     results.add(artifact);
                                 }
                             }
+                            // Callback only after every artifact has finished loading.
                             if (remaining.decrementAndGet() == 0) {
                                 callback.onSuccess(results);
                             }
