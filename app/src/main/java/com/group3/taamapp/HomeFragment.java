@@ -1,16 +1,21 @@
 package com.group3.taamapp;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SearchView;
+import android.view.inputmethod.InputMethodManager;
+import android.content.Context;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,25 +23,35 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.group3.taamapp.Bases.BaseFragment;
 import com.group3.taamapp.Bases.BundleInitializer;
-import com.group3.taamapp.LoginPage.LoginFragment;
-//import com.group3.taamapp.SavedArtifactFragment;
 
 public class HomeFragment extends BaseFragment {
 
     public static final String ARG_EMAIL = "email";
 
-    ArrayList <ExpandedArtifact> viewCards = new ArrayList<>();
+    ArrayList<ExpandedArtifact> viewCards = new ArrayList<>();
     ViewCardAdapter adapter;
-    //int[] cardImages = {R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground};
+    View homePage;
     SearchView searchArtifact;
+    RecyclerView recyclerView;
+    ImageButton logout;
     private String currentUserEmail;
 
     @Override
-    protected int getLayoutId() {return R.layout.artifacts_view;}
+    protected int getLayoutId() {
+        return R.layout.artifacts_view;
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void setUIComponents(View view) {
         readArguments();
-        RecyclerView recyclerView = view.findViewById(R.id.artefactsRecycle);
+        // Connect fragment fields to their XML views
+        homePage = view.findViewById(R.id.homePage);
+        recyclerView = view.findViewById(R.id.artefactsRecycle);
+        searchArtifact = view.findViewById(R.id.searchView);
+        logout = view.findViewById(R.id.logoutBtn);
+        // Set up view artifacts list
+        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2));
         adapter = new ViewCardAdapter(requireContext(), viewCards,
                 new ViewCardAdapter.OnArtifactActionListener() {
                     @Override
@@ -45,19 +60,14 @@ public class HomeFragment extends BaseFragment {
                     }
                 });
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2));
-
-        searchArtifact = view.findViewById(R.id.searchView);
-        ImageButton logout = view.findViewById(R.id.logoutBtn);
-        logout.setOnClickListener(item -> {
-            loadFragment(new LogoutFragment(), null);
-        });
+        // Display view artifacts list
         setUpViewCards();
-
     }
 
+    // Set up event listeners
     @Override
     protected void setEvents() {
+        // Filter artifacts as the user types in the search bar
         searchArtifact.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -70,12 +80,57 @@ public class HomeFragment extends BaseFragment {
                 return true;
             }
         });
+
+        // Open the logout page
+        logout.setOnClickListener(item -> {
+            loadFragment(new LogoutFragment(), null);
+        });
+
+        // Unfocus the search bar when user clicks anywhere on the home page
+        homePage.setOnClickListener(item -> {
+            homePage.requestFocus();
+            InputMethodManager inputManager = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (inputManager != null) {
+                inputManager.hideSoftInputFromWindow(searchArtifact.getWindowToken(), 0);
+            }
+        });
+
+        // Unfocus the search bar when user clicks on RecyclerView
+        recyclerView.setOnTouchListener((v, event) -> {
+            homePage.requestFocus();
+            InputMethodManager inputManager = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (inputManager != null) {
+                inputManager.hideSoftInputFromWindow(searchArtifact.getWindowToken(), 0);
+            }
+            return false;
+        });
     }
 
+    // Check whether any field of the artifact mathes the search keyword
+    private boolean isMatch(ExpandedArtifact card, String newText) {
+        if (card.getArtifactName().toLowerCase().contains(newText.toLowerCase())) {
+            return true;
+        }
+        if (card.getDescription().toLowerCase().contains(newText.toLowerCase())) {
+            return true;
+        }
+        if (card.getCategory().toLowerCase().contains(newText.toLowerCase())) {
+            return true;
+        }
+        if (card.getDynastyPeriod().toLowerCase().contains(newText.toLowerCase())) {
+            return true;
+        }
+        if (card.getLotNumber().contains(newText)) {
+            return true;
+        }
+        return false;
+    }
+
+    // Display cards matching the search keyword
     private void filter(String newText) {
         ArrayList<ExpandedArtifact> filteredList = new ArrayList<>();
         for (ExpandedArtifact card : viewCards) {
-            if (card.getArtifactName().toLowerCase().startsWith(newText.toLowerCase())) {
+            if (isMatch(card, newText)) {
                 filteredList.add(card);
             }
         }
@@ -83,39 +138,48 @@ public class HomeFragment extends BaseFragment {
         adapter.filterList(filteredList);
     }
 
+    // Loads artifacts from the database and displays them in RecyclerView
     private void setUpViewCards() {
+        // Load artifacts from the database
         FirebaseDatabase db = FirebaseDatabase.getInstance("https://cscb07-group3-taamapp-default-rtdb.firebaseio.com/");
         DatabaseReference artifactRef = db.getReference("Artifacts");
 
         artifactRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Clear the current list before loading the new data
                 viewCards.clear();
 
+                // Convert data from the database into an ExpandedArtifact objects
                 for (DataSnapshot child : snapshot.getChildren()) {
                     ExpandedArtifact artifact = child.getValue(ExpandedArtifact.class);
                     String lotNum = child.getKey();
+                    // Add the artifact to the RecyclerView list for display
                     if (artifact != null) {
                         artifact.setLotNumber(lotNum);
                         viewCards.add(artifact);
                     }
                 }
+                // Update the RecyclerView display cards
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Show an error message if artifacts did not load from the database
+                Toast.makeText(requireContext(),
+                        "Failed to load artifacts.",
+                        Toast.LENGTH_SHORT
+                ).show();
             }
         });
 
     }
 
     @Override
-    protected void setPresenter() {
-        //will implement
-    }
+    protected void setPresenter() {}
 
+    // Read current user email
     private void readArguments() {
         Bundle arguments = getArguments();
 
@@ -143,17 +207,4 @@ public class HomeFragment extends BaseFragment {
             }
         });
     }
-
-//    private void setUpViewCards() {
-//
-//        String[] artefactNames = getResources().getStringArray(R.array.artefact_names);
-//        String[] artefactPeriods = getResources().getStringArray(R.array.periods);
-//        String[] artefactDescriptions = getResources().getStringArray(R.array.descriptions);
-//
-//        for (int i = 0; i < artefactNames.length; i++) {
-//            viewCards.add(new ViewCard(i, 0, 0, artefactNames[i], artefactDescriptions[i], "None", "wood", artefactPeriods[i], cardImages[i]));
-//
-//
-//        }
-//    }
 }

@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/artifactCard"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:backgroundTint="@color/white"
         android:clickable="true"
@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp">
 
@@ -32,30 +32,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Artefact_name"
-
                 android:textColor="#402410"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textPeriod"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:text="Period"
-                android:maxLines="1"
                 android:textColor="#7a5c3a"
-                android:textSize="13sp" />
+                android:textSize="8sp" />
 
             <TextView
                 android:id="@+id/textDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Description"
-                android:maxLines="2"
                 android:textColor="#5c3d20"
-                android:textSize="15sp" />
-
-
+                android:textSize="10sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

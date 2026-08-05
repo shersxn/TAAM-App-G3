@@ -1,14 +1,10 @@
 package com.group3.taamapp;
 
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -17,13 +13,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.LayoutInflater;
 import com.bumptech.glide.Glide;
-import com.group3.taamapp.Bases.BundleInitializer;
 
 public class ViewCardAdapter extends RecyclerView.Adapter<ViewCardAdapter.MyViewHolder> {
+    // Handles actions performed on each artifact card
     public interface OnArtifactActionListener {
         void onOpenArtifact(ExpandedArtifact artifact);
     }
     Context context;
+    // List of view artifacts
     ArrayList<ExpandedArtifact> viewCards;
     OnArtifactActionListener listener;
 
@@ -36,14 +33,20 @@ public class ViewCardAdapter extends RecyclerView.Adapter<ViewCardAdapter.MyView
     @NonNull
     @Override
     public ViewCardAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Inflate a single view artifact card and create a view holder
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.artifact_view_card, parent, false);
         return new ViewCardAdapter.MyViewHolder(view);
     }
 
-    public String shortend(String s, int n) {
+    // Shorten the string that exceeds the given maximum length
+    public String shorten(String s, int n) {
         if (s.length() > n) {
             s = s.substring(0, n) + "...";
+        }
+        else {
+            // Pad the string with spaces to maintain the same card height
+            s = s + " ".repeat(n - s.length());
         }
         return s;
     }
@@ -52,37 +55,37 @@ public class ViewCardAdapter extends RecyclerView.Adapter<ViewCardAdapter.MyView
     public void onBindViewHolder(@NonNull ViewCardAdapter.MyViewHolder holder, int position) {
         ExpandedArtifact artifact = viewCards.get(position);
 
-        holder.tvName.setText(shortend(viewCards.get(position).getArtifactName(), 15));
-        holder.tvDescription.setText(shortend(viewCards.get(position).getDescription(), 40));
-        holder.tvPeriod.setText(shortend(viewCards.get(position).getDynastyPeriod(), 25));
+        // Display artifact information
+        holder.tvName.setText(shorten(artifact.getArtifactName(), 18));
+        holder.tvDescription.setText(shorten(artifact.getDescription(), 50));
+        holder.tvPeriod.setText(shorten(artifact.getDynastyPeriod(), 25));
+
+        // Load and display the artifact image, or placeholder if not available
         Glide.with(holder.itemView.getContext())
-                .load(viewCards.get(position).getImageUrl())
+                .load(artifact.getImageUrl())
+                .placeholder(android.R.drawable.ic_menu_gallery)
+                .error(android.R.drawable.ic_menu_gallery)
                 .into(holder.imageView);
 
+        // Open the expanded artifact page
         holder.tvCard.setOnClickListener(item -> {
             if (listener != null) listener.onOpenArtifact(artifact);
         });
-
-//        holder.tvCard.setOnClickListener(item -> {
-//            loadFragment(new HomeFragment(), new BundleInitializer() {
-//                public void initBundle(Bundle bundle) {
-//                    bundle.putString("email", email);
-//                }
-//            });
-//        });
-
     }
 
+    // Return the number of displayed artifacts
     @Override
     public int getItemCount() {
         return viewCards.size();
     }
 
+    // Replace the current list of artifacts with filtered artifacts
     public void filterList(ArrayList<ExpandedArtifact> filteredList) {
         viewCards = filteredList;
         notifyDataSetChanged();
     }
 
+    // Holds references to the views in a single artifact card.
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
