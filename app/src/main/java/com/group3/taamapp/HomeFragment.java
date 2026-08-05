@@ -144,7 +144,7 @@ public class HomeFragment extends BaseFragment {
         FirebaseDatabase db = FirebaseDatabase.getInstance("https://cscb07-group3-taamapp-default-rtdb.firebaseio.com/");
         DatabaseReference artifactRef = db.getReference("Artifacts");
 
-        artifactRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        artifactRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // Clear the current list before loading the new data
