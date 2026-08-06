@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categories_array">
+        <item>Painting and Calligraphy</item>
+        <item>Ceramics</item>
+        <item>Bronze Ware</item>
+        <item>Lacquerware</item>
+        <item>Jade Ware</item>
+        <item>Enamel Ware</item>
+        <item>Glassware</item>
+        <item>Furniture</item>
+        <item>Embroidery and Textiles</item>
+        <item>Documents and Archives</item>
+        <item>Gold and Silverware</item>
+        <item>Clocks and Watches</item>
+        <item>Religious Artifacts</item>
+        <item>Daily-use Items</item>
+        <item>Weaponry</item>
+        <item>Miscellaneous Artifacts</item>
+    </string-array>
+    <array name="com_google_android_gms_fonts_certs">
+        <item>@array/com_google_android_gms_fonts_certs_dev</item>
+        <item>@array/com_google_android_gms_fonts_certs_prod</item>
+    </array>
+    <string-array name="com_google_android_gms_fonts_certs_dev">
+        <item>
+            MIIEqDCCA5CgAwIBAgIJANWFuGx90071MA0GCSqGSIb3DQEBBAUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTAeFw0wODA0MTUyMzM2NTZaFw0zNTA5MDEyMzM2NTZaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTCCASAwDQYJKoZIhvcNAQEBBQADggENADCCAQgCggEBANbOLggKv+IxTdGNs8/TGFy0PTP6DHThvbbR24kT9ixcOd9W+EaBPWW+wPPKQmsHxajtWjmQwWfna8mZuSeJS48LIgAZlKkpFeVyxW0qMBujb8X8ETrWy550NaFtI6t9+u7hZeTfHwqNvacKhp1RbE6dBRGWynwMVX8XW8N1+UjFaq6GCJukT4qmpN2afb8sCjUigq0GuMwYXrFVee74bQgLHWGJwPmvmLHC69EH6kWr22ijx4OKXlSIx2xT1AsSHee70w5iDBiK4aph27yH3TxkXy9V89TDdexAcKk/cVHYNnDBapcavl7y0RiQ4biu8ymM8Ga/nmzhRKya6G0cGw8CAQOjgfwwgfkwHQYDVR0OBBYEFI0cxb6VTEM8YYY6FbBMvAPyT+CyMIHJBgNVHSMEgcEwgb6AFI0cxb6VTEM8YYY6FbBMvAPyT+CyoYGapIGXMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbYIJANWFuGx90071MAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEEBQADggEBABnTDPEF+3iSP0wNfdIjIz1AlnrPzgAIHVvXxunW7SBrDhEglQZBbKJEk5kT0mtKoOD1JMrSu1xuTKEBahWRbqHsXclaXjoBADb0kkjVEJu/Lh5hgYZnOjvlba8Ld7HCKePCVePoTJBdI4fvugnL8TsgK05aIskyY0hKI9L8KfqfGTl1lzOv2KoWD0KWwtAWPoGChZxmQ+nBli+gwYMzM1vAkP+aayLe0a1EQimlOalO762r0GXO0ks+UeXde2Z4e+8S/pf7pITEI/tP+MxJTALw9QUWEv9lKTk+jkbqxbsh8nfBUapfKqYn0eidpwq2AzVp3juYl7//fKnaPhJD9gs=
+        </item>
+    </string-array>
+    <string-array name="com_google_android_gms_fonts_certs_prod">
+        <item>
+            MIIEQzCCAyugAwIBAgIJAMLgh0ZkSjCNMA0GCSqGSIb3DQEBBAUAMHQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDAeFw0wODA4MjEyMzEzMzRaFw0zNjAxMDcyMzEzMzRaMHQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDCCASAwDQYJKoZIhvcNAQEBBQADggENADCCAQgCggEBAKtWLgDYO6IIrgqWbxJOKdoR8qtW0I9Y4sypEwPpt1TTcvZApxsdyxMJZ2JORland2qSGT2y5b+3JKkedxiLDmpHpDsz2WCbdxgxRczfey5YZnTJ4VZbH0xqWVW/8lGmPav5xVwnIiJS6HXk+BVKZF+JcWjAsb/GEuq/eFdpuzSqeYTcfi6idkyugwfYwXFU1+5fZKUaRKYCwkkFQVfcAs1fXA5V+++FGfvjJ/CxURaSxaBvGdGDhfXE28LWuT9ozCl5xw4Yq5OGazvV24mZVSoOO0yZ31j7kYvtwYK6NeADwbSxDdJEqO4k//0zOHKrUiGYXtqw/A0LFFtqoZKFjnkCAQOjgdkwgdYwHQYDVR0OBBYEFMd9jMIhF1Ylmn/Tgt9r45jk14alMIGmBgNVHSMEgZ4wgZuAFMd9jMIhF1Ylmn/Tgt9r45jk14aloXikdjB0MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLR29vZ2xlIEluYy4xEDAOBgNVBAsTB0FuZHJvaWQxEDAOBgNVBAMTB0FuZHJvaWSCCQDC4IdGZEowjTAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBAUAA4IBAQBt0lLO74UwLDYKqs6Tm8/yzKkEu116FmH4rkaymUIE0P9KaMftGlMexFlaYjzmB2OxZyl6euNXEsQH8gjwyxCUKRJNexBiGcCEyj6z+a1fuHHvkiaai+KL8W1EyNmgjmyy8AW7P+LLlkR+ho5zEHatRbM/YAnqGcFh5iZBqpknHf1SKMXFh4dd239FJ1jWYfbMDMy3NS5CTMQ2XFI1MvcyUTdZPErjQfTbQe3aDQsQcafEQPD+nqActifKZ0Np0IS9L9kR/wbNvyz6ENwPiTrjV2KRkEjH78ZMcUQXg0L3BYHJ3lc69Vs5Ddf9uUGGMYldX3WfMBEmh/9iFBDAaTCK
+        </item>
+    </string-array>
+    <string-array name="dynastiesPeriods_array">
+        <item>Shang Dynasty (c. 1600–1046 BCE)</item>
+        <item>Western Zhou Dynasty (c. 1046–771 BCE)</item>
+        <item>Eastern Zhou Dynasty (770–256 BCE)</item>
+        <item>Qin Dynasty (221–206 BCE)</item>
+        <item>Han Dynasty (206 BCE-220 CE)</item>
+        <item>Three Kingdoms Period (220–280 CE)</item>
+        <item>Jin Dynasty (266–420 CE)</item>
+        <item>Southern and Northern Dynasties (420–589 CE)</item>
+        <item>Sui Dynasty (581–618 CE)</item>
+        <item>Tang Dynasty (618–907 CE)</item>
+        <item>Five Dynasties and Ten Kingdoms (907–960 CE)</item>
+        <item>Song Dynasty (960–1279 CE)</item>
+        <item>Liao Dynasty (907–1125 CE)</item>
+        <item>Jin Dynasty (1115–1234 CE)</item>
+        <item>Yuan Dynasty (1271–1368 CE)</item>
+        <item>Ming Dynasty (1368–1644 CE)</item>
+        <item>Qing Dynasty (1644–1912 CE)</item>
+        <item>Republic of China Period (1912–1949 CE)</item>
+    </string-array>
+    <string-array name="materials_array">
+        <item>Bronze</item>
+        <item>Stone</item>
+        <item>Wood</item>
+        <item>Jade</item>
+        <item>Ceramic</item>
+        <item>Lacquerware</item>
+        <item>Ivory</item>
+        <item>Gold</item>
+        <item>Silver</item>
+        <item>Iron</item>
+        <item>Mixed Media</item>
+    </string-array>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/dm_sans</item>
+        <item>@font/dm_sans_thin</item>
+        <item>@font/playfair_display_sc</item>
+    </array>
+    <color name="background_cream">#ede5d4</color>
+    <color name="brown_dark_text">#402410</color>
+    <color name="brown_light">#a47e5a</color>
+    <color name="brown_medium">#a47e5a</color>
+    <color name="white">#ffffff</color>
+    <string name="app_name">My Application</string>
+    <string name="deleteButton_title">Delete</string>
+    <string name="delete_artifact_title">Delete Artifact</string>
+    <string name="gcm_defaultSenderId" translatable="false">981188919569</string>
+    <string name="google_api_key" translatable="false">AIzaSyB03PCsCuylfhIwf6BF8aAc0tSxjVoDvpc</string>
+    <string name="google_app_id" translatable="false">1:981188919569:android:3a37fc16e1cf14e6f3ccb0</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyB03PCsCuylfhIwf6BF8aAc0tSxjVoDvpc</string>
+    <string name="google_storage_bucket" translatable="false">cscb07-group3-taamapp.firebasestorage.app</string>
+    <string name="hint_title">Search or Select Artifact</string>
+    <string name="like_count_format">%1$d likes</string>
+    <string name="project_id" translatable="false">cscb07-group3-taamapp</string>
+    <string name="save_count_format">%1$d saves</string>
+    <string name="supabase_anon_key">sb_publishable_FtzNt3nUNfH5x71_zXUoNw_piNRqOBf</string>
+    <string name="supabase_image_bucket">taam-app-bucket</string>
+    <string name="supabase_url">https://zbackdndprbcnossakbs.supabase.co</string>
+    <style name="Base.Theme.TAAMApp" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+    <style name="Theme.TAAMApp" parent="Base.Theme.TAAMApp"/>
+</resources>

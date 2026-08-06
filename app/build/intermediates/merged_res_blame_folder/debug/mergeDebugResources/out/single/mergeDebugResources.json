@@ -1,0 +1,158 @@
+[
+    {
+        "merged": "com.group3.taamapp-debug-50:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.group3.taamapp-main-52:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.group3.taamapp-main-52:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/layout_fragment_add_edit_artifact.xml.flat",
+        "source": "com.group3.taamapp-main-52:/layout/fragment_add_edit_artifact.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.group3.taamapp-main-52:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.group3.taamapp-main-52:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/layout_artifacts_display_cards.xml.flat",
+        "source": "com.group3.taamapp-main-52:/layout/artifacts_display_cards.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.group3.taamapp-main-52:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/layout_artifacts_view.xml.flat",
+        "source": "com.group3.taamapp-main-52:/layout/artifacts_view.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/menu_bottom_nav.xml.flat",
+        "source": "com.group3.taamapp-main-52:/menu/bottom_nav.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/font_dm_sans_thin.xml.flat",
+        "source": "com.group3.taamapp-main-52:/font/dm_sans_thin.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.group3.taamapp-main-52:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.group3.taamapp-main-52:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.group3.taamapp-main-52:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/font_playfair_display_sc.xml.flat",
+        "source": "com.group3.taamapp-main-52:/font/playfair_display_sc.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/xml_backup_rules.xml.flat",
+        "source": "com.group3.taamapp-main-52:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/drawable_ic_logout.xml.flat",
+        "source": "com.group3.taamapp-main-52:/drawable/ic_logout.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/layout_fragment_home_page.xml.flat",
+        "source": "com.group3.taamapp-main-52:/layout/fragment_home_page.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/layout_logout.xml.flat",
+        "source": "com.group3.taamapp-main-52:/layout/logout.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.group3.taamapp-main-52:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/layout_activity_comment_adapter.xml.flat",
+        "source": "com.group3.taamapp-main-52:/layout/activity_comment_adapter.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.group3.taamapp-main-52:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/layout_activity_main.xml.flat",
+        "source": "com.group3.taamapp-main-52:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/layout_delete_artifact.xml.flat",
+        "source": "com.group3.taamapp-main-52:/layout/delete_artifact.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/font_dm_sans.xml.flat",
+        "source": "com.group3.taamapp-main-52:/font/dm_sans.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/layout_fragment_signup.xml.flat",
+        "source": "com.group3.taamapp-main-52:/layout/fragment_signup.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/layout_fragment_login.xml.flat",
+        "source": "com.group3.taamapp-main-52:/layout/fragment_login.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.group3.taamapp-main-52:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/drawable_add_icon.xml.flat",
+        "source": "com.group3.taamapp-main-52:/drawable/add_icon.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/layout_artifact_view_card.xml.flat",
+        "source": "com.group3.taamapp-main-52:/layout/artifact_view_card.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.group3.taamapp-main-52:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/layout_fragment_expanded_artifact.xml.flat",
+        "source": "com.group3.taamapp-main-52:/layout/fragment_expanded_artifact.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/drawable_outline_arrow_back_ios_24.xml.flat",
+        "source": "com.group3.taamapp-main-52:/drawable/outline_arrow_back_ios_24.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/xml_data_extraction_rules.xml.flat",
+        "source": "com.group3.taamapp-main-52:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.group3.taamapp-main-52:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/layout_fragment_add_comment.xml.flat",
+        "source": "com.group3.taamapp-main-52:/layout/fragment_add_comment.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/layout_saved_collection.xml.flat",
+        "source": "com.group3.taamapp-main-52:/layout/saved_collection.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/drawable_saved_icon.xml.flat",
+        "source": "com.group3.taamapp-main-52:/drawable/saved_icon.xml"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.group3.taamapp-main-52:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.group3.taamapp-debug-50:/drawable_home_icon.xml.flat",
+        "source": "com.group3.taamapp-main-52:/drawable/home_icon.xml"
+    }
+]
