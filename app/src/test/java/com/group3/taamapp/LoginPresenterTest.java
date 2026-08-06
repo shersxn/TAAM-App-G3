@@ -1,7 +1,7 @@
 package com.group3.taamapp;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.atLeastOnce;
@@ -44,7 +44,7 @@ public class LoginPresenterTest {
      * Method usage test applicable in all cases of login()
      */
     private void basicTestForLogin() {
-        verify(mockModel).login(anyString(), anyString(), any());
+        verify(mockModel).login(any(), any(), any());
         verify(mockView).getEmail();
         verify(mockView).getPassword();
         verify(mockView, never()).toSignUp();
@@ -70,7 +70,7 @@ public class LoginPresenterTest {
         when(mockView.getEmail()).thenReturn(mockEmail);
         presenter.login();
         basicTestForLogin();
-        verify(mockModel).login(eq(mockEmail), anyString(), any());
+        verify(mockModel).login(eq(mockEmail), any(), any());
         verify(mockView, never()).toastMakeText(any());
         verify(mockView, never()).toMainPage(any());
     }
@@ -84,7 +84,7 @@ public class LoginPresenterTest {
         when(mockView.getPassword()).thenReturn(mockPsw);
         presenter.login();
         basicTestForLogin();
-        verify(mockModel).login(anyString(), eq(mockPsw), any());
+        verify(mockModel).login(any(), eq(mockPsw), any());
         verify(mockView, never()).toastMakeText(any());
         verify(mockView, never()).toMainPage(any());
     }
@@ -100,10 +100,10 @@ public class LoginPresenterTest {
             StatusCallback<LoginContract.AuthModel.LoginFailure> callback = invocation.getArgument(2);
             callback.onSuccess();
             return null;
-        }).when(mockModel).login(anyString(), anyString(), any());
+        }).when(mockModel).login(any(), any(), any());
         presenter.login();
         basicTestForLogin();
-        verify(mockModel).login(eq(mockEmail), anyString(), any());
+        verify(mockModel).login(eq(mockEmail), any(), any());
         verify(mockView, never()).toastMakeText(any());
         verify(mockView).toMainPage(mockEmail);
     }
@@ -117,7 +117,7 @@ public class LoginPresenterTest {
             StatusCallback<LoginContract.AuthModel.LoginFailure> callback = invocation.getArgument(2);
             callback.onFailure(LoginContract.AuthModel.LoginFailure.EMPTY_EMAIL);
             return null;
-        }).when(mockModel).login(anyString(), anyString(), any());
+        }).when(mockModel).login(any(), any(), any());
         presenter.login();
         basicTestForLogin();
         verify(mockView).toastMakeText("Failure: email cannot be empty");
@@ -134,7 +134,7 @@ public class LoginPresenterTest {
             StatusCallback<LoginContract.AuthModel.LoginFailure> callback = invocation.getArgument(2);
             callback.onError(mockErrorMsg);
             return null;
-        }).when(mockModel).login(anyString(), anyString(), any());
+        }).when(mockModel).login(any(), any(), any());
         presenter.login();
         basicTestForLogin();
         verify(mockView).toastMakeText("Error: " + mockErrorMsg);

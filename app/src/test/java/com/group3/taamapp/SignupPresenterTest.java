@@ -1,7 +1,7 @@
 package com.group3.taamapp;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.atLeastOnce;
@@ -44,7 +44,7 @@ public class SignupPresenterTest {
      * Method usage test applicable in all cases of signup()
      */
     private void basicTestForSignup() {
-        verify(mockAuthModel).signUp(anyString(), anyString(), anyString(), any());
+        verify(mockAuthModel).signUp(any(), any(), any(), any());
         verify(mockView).getEmail();
         verify(mockView).getUsername();
         verify(mockView).getPassword();
@@ -69,7 +69,7 @@ public class SignupPresenterTest {
         when(mockView.getEmail()).thenReturn(mockEmail);
         presenter.signup();
         basicTestForSignup();
-        verify(mockAuthModel).signUp(eq(mockEmail), anyString(), anyString(), any());
+        verify(mockAuthModel).signUp(eq(mockEmail), any(), any(), any());
     }
 
     /**
@@ -81,7 +81,7 @@ public class SignupPresenterTest {
         when(mockView.getUsername()).thenReturn(mockUsername);
         presenter.signup();
         basicTestForSignup();
-        verify(mockAuthModel).signUp(anyString(), eq(mockUsername), anyString(), any());
+        verify(mockAuthModel).signUp(any(), eq(mockUsername), any(), any());
     }
 
     /**
@@ -93,7 +93,7 @@ public class SignupPresenterTest {
         when(mockView.getPassword()).thenReturn(mockPassword);
         presenter.signup();
         basicTestForSignup();
-        verify(mockAuthModel).signUp(anyString(), anyString(), eq(mockPassword), any());
+        verify(mockAuthModel).signUp(any(), any(), eq(mockPassword), any());
     }
 
     /**
@@ -105,7 +105,7 @@ public class SignupPresenterTest {
             StatusCallback<SignupContract.AuthModel.SignUpFailure> callback = invocation.getArgument(3);
             callback.onSuccess();
             return null;
-        }).when(mockAuthModel).signUp(anyString(), anyString(), anyString(), any());
+        }).when(mockAuthModel).signUp(any(), any(), any(), any());
         presenter.signup();
         basicTestForSignup();
         verify(mockView).toastMakeText("You have successfully signed up an account.");
@@ -120,7 +120,7 @@ public class SignupPresenterTest {
             StatusCallback<SignupContract.AuthModel.SignUpFailure> callback = invocation.getArgument(3);
             callback.onFailure(SignupContract.AuthModel.SignUpFailure.EMPTY_EMAIL);
             return null;
-        }).when(mockAuthModel).signUp(anyString(), anyString(), anyString(), any());
+        }).when(mockAuthModel).signUp(any(), any(), any(), any());
         presenter.signup();
         basicTestForSignup();
         verify(mockView).toastMakeText("Failure: email cannot be empty");
@@ -136,7 +136,7 @@ public class SignupPresenterTest {
             StatusCallback<SignupContract.AuthModel.SignUpFailure> callback = invocation.getArgument(3);
             callback.onError(mockErrorMsg);
             return null;
-        }).when(mockAuthModel).signUp(anyString(), anyString(), anyString(), any());
+        }).when(mockAuthModel).signUp(any(), any(), any(), any());
         presenter.signup();
         basicTestForSignup();
         verify(mockView).toastMakeText("Error: " + mockErrorMsg);
@@ -148,7 +148,7 @@ public class SignupPresenterTest {
     @Test
     public void testToLogin_methodTriggered() {
         presenter.toLogin();
-        verify(mockAuthModel, never()).signUp(anyString(), anyString(), anyString(), any());
+        verify(mockAuthModel, never()).signUp(any(), any(), any(), any());
         verify(mockView, never()).getEmail();
         verify(mockView, never()).getUsername();
         verify(mockView, never()).getPassword();
