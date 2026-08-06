@@ -1,0 +1,215 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.group3.taamapp"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+7-->INJECTED
+8        android:minSdkVersion="24"
+8-->INJECTED
+9        android:targetSdkVersion="36" />
+9-->INJECTED
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:5:5-83
+11-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:5:22-64
+12
+13    <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
+14    <!-- <uses-sdk android:minSdkVersion="21"/> -->
+15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+15-->[com.google.firebase:firebase-database:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/75d59b66a8614d79e7b93df8ca2b7589/transformed/firebase-database-22.0.1/AndroidManifest.xml:22:5-79
+15-->[com.google.firebase:firebase-database:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/75d59b66a8614d79e7b93df8ca2b7589/transformed/firebase-database-22.0.1/AndroidManifest.xml:22:22-76
+16
+17    <permission
+17-->[androidx.core:core:1.16.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/e27020eb1fc38c16c051c1ffdf9df44c/transformed/core-1.16.0/AndroidManifest.xml:22:5-24:47
+18        android:name="com.group3.taamapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+18-->[androidx.core:core:1.16.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/e27020eb1fc38c16c051c1ffdf9df44c/transformed/core-1.16.0/AndroidManifest.xml:23:9-81
+19        android:protectionLevel="signature" />
+19-->[androidx.core:core:1.16.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/e27020eb1fc38c16c051c1ffdf9df44c/transformed/core-1.16.0/AndroidManifest.xml:24:9-44
+20
+21    <uses-permission android:name="com.group3.taamapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+21-->[androidx.core:core:1.16.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/e27020eb1fc38c16c051c1ffdf9df44c/transformed/core-1.16.0/AndroidManifest.xml:26:5-97
+21-->[androidx.core:core:1.16.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/e27020eb1fc38c16c051c1ffdf9df44c/transformed/core-1.16.0/AndroidManifest.xml:26:22-94
+22
+23    <application
+23-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:7:5-29:19
+24        android:allowBackup="true"
+24-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:8:9-35
+25        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+25-->[androidx.core:core:1.16.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/e27020eb1fc38c16c051c1ffdf9df44c/transformed/core-1.16.0/AndroidManifest.xml:28:18-86
+26        android:dataExtractionRules="@xml/data_extraction_rules"
+26-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:9:9-65
+27        android:debuggable="true"
+28        android:extractNativeLibs="false"
+28-->INJECTED
+29        android:fullBackupContent="@xml/backup_rules"
+29-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:10:9-54
+30        android:icon="@mipmap/ic_launcher"
+30-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:11:9-43
+31        android:label="@string/app_name"
+31-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:12:9-41
+32        android:roundIcon="@mipmap/ic_launcher_round"
+32-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:13:9-54
+33        android:supportsRtl="true"
+33-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:14:9-35
+34        android:testOnly="true"
+35        android:theme="@style/Theme.TAAMApp" >
+35-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:15:9-45
+36        <activity
+36-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:16:9-25:20
+37            android:name="com.group3.taamapp.MainActivity"
+37-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:17:13-41
+38            android:exported="true"
+38-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:18:13-36
+39            android:windowSoftInputMode="adjustResize" >
+39-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:19:13-55
+40            <intent-filter>
+40-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:20:13-24:29
+41                <action android:name="android.intent.action.MAIN" />
+41-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:21:17-69
+41-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:21:25-66
+42
+43                <category android:name="android.intent.category.LAUNCHER" />
+43-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:23:17-77
+43-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:23:27-74
+44            </intent-filter>
+45        </activity>
+46
+47        <meta-data
+47-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:26:9-28:57
+48            android:name="preloaded_fonts"
+48-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:27:13-43
+49            android:resource="@array/preloaded_fonts" />
+49-->/Users/rakhim/Documents/Courses/CSCB07/TAAM-App-G3/app/src/main/AndroidManifest.xml:28:13-54
+50
+51        <service
+51-->[com.google.firebase:firebase-database:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/75d59b66a8614d79e7b93df8ca2b7589/transformed/firebase-database-22.0.1/AndroidManifest.xml:26:9-35:19
+52            android:name="com.google.firebase.components.ComponentDiscoveryService"
+52-->[com.google.firebase:firebase-database:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/75d59b66a8614d79e7b93df8ca2b7589/transformed/firebase-database-22.0.1/AndroidManifest.xml:27:13-84
+53            android:directBootAware="true"
+53-->[com.google.firebase:firebase-common:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/44b21db65adf13a38fe353b3ef656548/transformed/firebase-common-22.0.1/AndroidManifest.xml:32:13-43
+54            android:exported="false" >
+54-->[com.google.firebase:firebase-database:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/75d59b66a8614d79e7b93df8ca2b7589/transformed/firebase-database-22.0.1/AndroidManifest.xml:28:13-37
+55            <meta-data
+55-->[com.google.firebase:firebase-database:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/75d59b66a8614d79e7b93df8ca2b7589/transformed/firebase-database-22.0.1/AndroidManifest.xml:29:13-31:85
+56                android:name="com.google.firebase.components:com.google.firebase.database.FirebaseDatabaseKtxRegistrar"
+56-->[com.google.firebase:firebase-database:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/75d59b66a8614d79e7b93df8ca2b7589/transformed/firebase-database-22.0.1/AndroidManifest.xml:30:17-120
+57                android:value="com.google.firebase.components.ComponentRegistrar" />
+57-->[com.google.firebase:firebase-database:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/75d59b66a8614d79e7b93df8ca2b7589/transformed/firebase-database-22.0.1/AndroidManifest.xml:31:17-82
+58            <meta-data
+58-->[com.google.firebase:firebase-database:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/75d59b66a8614d79e7b93df8ca2b7589/transformed/firebase-database-22.0.1/AndroidManifest.xml:32:13-34:85
+59                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
+59-->[com.google.firebase:firebase-database:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/75d59b66a8614d79e7b93df8ca2b7589/transformed/firebase-database-22.0.1/AndroidManifest.xml:33:17-109
+60                android:value="com.google.firebase.components.ComponentRegistrar" />
+60-->[com.google.firebase:firebase-database:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/75d59b66a8614d79e7b93df8ca2b7589/transformed/firebase-database-22.0.1/AndroidManifest.xml:34:17-82
+61            <meta-data
+61-->[com.google.firebase:firebase-common:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/44b21db65adf13a38fe353b3ef656548/transformed/firebase-common-22.0.1/AndroidManifest.xml:35:13-37:85
+62                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+62-->[com.google.firebase:firebase-common:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/44b21db65adf13a38fe353b3ef656548/transformed/firebase-common-22.0.1/AndroidManifest.xml:36:17-109
+63                android:value="com.google.firebase.components.ComponentRegistrar" />
+63-->[com.google.firebase:firebase-common:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/44b21db65adf13a38fe353b3ef656548/transformed/firebase-common-22.0.1/AndroidManifest.xml:37:17-82
+64        </service>
+65
+66        <activity
+66-->[com.google.android.gms:play-services-base:18.1.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/f81284feb32f8ab3dabfc23082294547/transformed/play-services-base-18.1.0/AndroidManifest.xml:20:9-22:45
+67            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+67-->[com.google.android.gms:play-services-base:18.1.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/f81284feb32f8ab3dabfc23082294547/transformed/play-services-base-18.1.0/AndroidManifest.xml:20:19-85
+68            android:exported="false"
+68-->[com.google.android.gms:play-services-base:18.1.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/f81284feb32f8ab3dabfc23082294547/transformed/play-services-base-18.1.0/AndroidManifest.xml:22:19-43
+69            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+69-->[com.google.android.gms:play-services-base:18.1.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/f81284feb32f8ab3dabfc23082294547/transformed/play-services-base-18.1.0/AndroidManifest.xml:21:19-78
+70
+71        <provider
+71-->[com.google.firebase:firebase-common:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/44b21db65adf13a38fe353b3ef656548/transformed/firebase-common-22.0.1/AndroidManifest.xml:23:9-28:39
+72            android:name="com.google.firebase.provider.FirebaseInitProvider"
+72-->[com.google.firebase:firebase-common:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/44b21db65adf13a38fe353b3ef656548/transformed/firebase-common-22.0.1/AndroidManifest.xml:24:13-77
+73            android:authorities="com.group3.taamapp.firebaseinitprovider"
+73-->[com.google.firebase:firebase-common:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/44b21db65adf13a38fe353b3ef656548/transformed/firebase-common-22.0.1/AndroidManifest.xml:25:13-72
+74            android:directBootAware="true"
+74-->[com.google.firebase:firebase-common:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/44b21db65adf13a38fe353b3ef656548/transformed/firebase-common-22.0.1/AndroidManifest.xml:26:13-43
+75            android:exported="false"
+75-->[com.google.firebase:firebase-common:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/44b21db65adf13a38fe353b3ef656548/transformed/firebase-common-22.0.1/AndroidManifest.xml:27:13-37
+76            android:initOrder="100" />
+76-->[com.google.firebase:firebase-common:22.0.1] /Users/rakhim/.gradle/caches/9.4.1/transforms/44b21db65adf13a38fe353b3ef656548/transformed/firebase-common-22.0.1/AndroidManifest.xml:28:13-36
+77        <provider
+77-->[androidx.emoji2:emoji2:1.3.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/9e742c3868c84516e80761b2e4fb0391/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+78            android:name="androidx.startup.InitializationProvider"
+78-->[androidx.emoji2:emoji2:1.3.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/9e742c3868c84516e80761b2e4fb0391/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+79            android:authorities="com.group3.taamapp.androidx-startup"
+79-->[androidx.emoji2:emoji2:1.3.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/9e742c3868c84516e80761b2e4fb0391/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+80            android:exported="false" >
+80-->[androidx.emoji2:emoji2:1.3.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/9e742c3868c84516e80761b2e4fb0391/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+81            <meta-data
+81-->[androidx.emoji2:emoji2:1.3.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/9e742c3868c84516e80761b2e4fb0391/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+82                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+82-->[androidx.emoji2:emoji2:1.3.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/9e742c3868c84516e80761b2e4fb0391/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+83                android:value="androidx.startup" />
+83-->[androidx.emoji2:emoji2:1.3.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/9e742c3868c84516e80761b2e4fb0391/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+84            <meta-data
+84-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/rakhim/.gradle/caches/9.4.1/transforms/da27c418d243d76c9d43acf247fd1f55/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:29:13-31:52
+85                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+85-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/rakhim/.gradle/caches/9.4.1/transforms/da27c418d243d76c9d43acf247fd1f55/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:30:17-78
+86                android:value="androidx.startup" />
+86-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/rakhim/.gradle/caches/9.4.1/transforms/da27c418d243d76c9d43acf247fd1f55/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:31:17-49
+87            <meta-data
+87-->[com.squareup.okhttp3:okhttp-android:5.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/7734228c6d7b0862295650c583767322/transformed/okhttp/AndroidManifest.xml:16:13-18:52
+88                android:name="okhttp3.internal.platform.PlatformInitializer"
+88-->[com.squareup.okhttp3:okhttp-android:5.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/7734228c6d7b0862295650c583767322/transformed/okhttp/AndroidManifest.xml:17:17-77
+89                android:value="androidx.startup" />
+89-->[com.squareup.okhttp3:okhttp-android:5.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/7734228c6d7b0862295650c583767322/transformed/okhttp/AndroidManifest.xml:18:17-49
+90            <meta-data
+90-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:29:13-31:52
+91                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+91-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:30:17-85
+92                android:value="androidx.startup" />
+92-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:31:17-49
+93        </provider>
+94
+95        <meta-data
+95-->[com.google.android.gms:play-services-basement:18.3.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/1f0f0d31db972ef53e79cc4bbda00b63/transformed/play-services-basement-18.3.0/AndroidManifest.xml:21:9-23:69
+96            android:name="com.google.android.gms.version"
+96-->[com.google.android.gms:play-services-basement:18.3.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/1f0f0d31db972ef53e79cc4bbda00b63/transformed/play-services-basement-18.3.0/AndroidManifest.xml:22:13-58
+97            android:value="@integer/google_play_services_version" />
+97-->[com.google.android.gms:play-services-basement:18.3.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/1f0f0d31db972ef53e79cc4bbda00b63/transformed/play-services-basement-18.3.0/AndroidManifest.xml:23:13-66
+98
+99        <receiver
+99-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:34:9-52:20
+100            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+100-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:35:13-76
+101            android:directBootAware="false"
+101-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:36:13-44
+102            android:enabled="true"
+102-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:37:13-35
+103            android:exported="true"
+103-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:38:13-36
+104            android:permission="android.permission.DUMP" >
+104-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:39:13-57
+105            <intent-filter>
+105-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:40:13-42:29
+106                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+106-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:17-91
+106-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:25-88
+107            </intent-filter>
+108            <intent-filter>
+108-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:43:13-45:29
+109                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+109-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:17-85
+109-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:25-82
+110            </intent-filter>
+111            <intent-filter>
+111-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:46:13-48:29
+112                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+112-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:17-88
+112-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:25-85
+113            </intent-filter>
+114            <intent-filter>
+114-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:49:13-51:29
+115                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+115-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:17-95
+115-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/rakhim/.gradle/caches/9.4.1/transforms/c4bcfbe08455d64f1a18e3e072f79fd4/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:25-92
+116            </intent-filter>
+117        </receiver>
+118    </application>
+119
+120</manifest>

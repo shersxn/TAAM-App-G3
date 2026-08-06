@@ -120,6 +120,9 @@ public class HomeFragment extends BaseFragment {
         if (card.getDynastyPeriod().toLowerCase().contains(newText.toLowerCase())) {
             return true;
         }
+        if (card.getMaterial().toLowerCase().contains(newText.toLowerCase())) {
+            return true;
+        }
         if (card.getLotNumber().contains(newText)) {
             return true;
         }

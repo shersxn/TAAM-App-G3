@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">981188919569</string>
+    <string name="google_api_key" translatable="false">AIzaSyB03PCsCuylfhIwf6BF8aAc0tSxjVoDvpc</string>
+    <string name="google_app_id" translatable="false">1:981188919569:android:3a37fc16e1cf14e6f3ccb0</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyB03PCsCuylfhIwf6BF8aAc0tSxjVoDvpc</string>
+    <string name="google_storage_bucket" translatable="false">cscb07-group3-taamapp.firebasestorage.app</string>
+    <string name="project_id" translatable="false">cscb07-group3-taamapp</string>
+</resources>
