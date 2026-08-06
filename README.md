@@ -58,8 +58,11 @@ normally
 1. Clone the repository using https://github.com/shersxn/TAAM-App-G3.git
 2. Open the application in Android Studio
 3. Wait for the Gradle project sync and build to finish in Android Studio
-4. Select an Android device or emulator for running the application
+4. Select an Android device or emulator (Pixel 10 emulator recommended) for running the application
 5. Click **Run** in Android Studio to start the application
+
+## Troubleshooting
+If you run into an "SDK location not found" error when opening the project, please make sure to sync the project with Gradle files first, and then try opening the project again
 
 ## Contributors
 
