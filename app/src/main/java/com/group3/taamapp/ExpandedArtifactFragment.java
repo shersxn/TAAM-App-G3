@@ -46,6 +46,14 @@ public class ExpandedArtifactFragment extends BaseFragment {
     private TextView lotNumberTextView;
     private TextView categoryTextView;
     private TextView materialTextView;
+    private TextView culturalOriginTextView;
+    private TextView dimensionsTextView;
+    private TextView conditionReportTextView;
+    private TextView currentLocationTextView;
+    private TextView acquisitionMethodTextView;
+    private TextView provenanceTextView;
+    private TextView accessionNumberTextView;
+    private TextView notesTextView;
     private TextView likeCountTextView;
 
     private Chip categoryChip;
@@ -97,6 +105,14 @@ public class ExpandedArtifactFragment extends BaseFragment {
         lotNumberTextView = view.findViewById(R.id.lotNumberTextView);
         categoryTextView = view.findViewById(R.id.categoryTextView);
         materialTextView = view.findViewById(R.id.materialTextView);
+        culturalOriginTextView = view.findViewById(R.id.culturalOriginTextView);
+        dimensionsTextView = view.findViewById(R.id.dimensionsTextView);
+        conditionReportTextView = view.findViewById(R.id.conditionReportTextView);
+        currentLocationTextView = view.findViewById(R.id.currentLocationTextView);
+        acquisitionMethodTextView = view.findViewById(R.id.acquisitionMethodTextView);
+        provenanceTextView = view.findViewById(R.id.provenanceTextView);
+        accessionNumberTextView = view.findViewById(R.id.accessionNumberTextView);
+        notesTextView = view.findViewById(R.id.notesTextView);
         likeCountTextView = view.findViewById(R.id.likeCountTextView);
         // connect the category and material chips
         categoryChip = view.findViewById(R.id.categoryChip);
@@ -244,16 +260,19 @@ public class ExpandedArtifactFragment extends BaseFragment {
             @NonNull DataSnapshot snapshot
     ) {
         String name = getStringValue(snapshot, "artifactName");
-        String description =
-                getStringValue(snapshot, "description");
-        String category =
-                getStringValue(snapshot, "category");
-        String material =
-                getStringValue(snapshot, "material");
-        String dynasty =
-                getStringValue(snapshot, "dynastyPeriod");
-        String imageUrl =
-                getStringValue(snapshot, "imageUrl");
+        String description = getStringValue(snapshot, "description");
+        String category = getStringValue(snapshot, "category");
+        String material = getStringValue(snapshot, "material");
+        String dynasty = getStringValue(snapshot, "dynastyPeriod");
+        String imageUrl = getStringValue(snapshot, "imageUrl");
+        String culturalOrigin = getStringValue(snapshot, "culturalOrigin");
+        String dimensions = getStringValue(snapshot, "dimensions");
+        String conditionReport = getStringValue(snapshot, "conditionReport");
+        String currentLocation = getStringValue(snapshot, "currentLocation");
+        String acquisitionMethod = getStringValue(snapshot, "acquisitionMethod");
+        String provenance = getStringValue(snapshot, "provenance");
+        String accessionNumber = getStringValue(snapshot, "accessionNumber");
+        String notes = getStringValue(snapshot, "notes");
 
         artifactNameTextView.setText(name);
         descriptionTextView.setText(description);
@@ -262,6 +281,14 @@ public class ExpandedArtifactFragment extends BaseFragment {
         dynastyPeriodTextView.setText(dynasty);
         dynastyPeriodDetailTextView.setText(dynasty);
         lotNumberTextView.setText(lotNumber);
+        culturalOriginTextView.setText(culturalOrigin);
+        dimensionsTextView.setText(dimensions);
+        conditionReportTextView.setText(conditionReport);
+        currentLocationTextView.setText(currentLocation);
+        acquisitionMethodTextView.setText(acquisitionMethod);
+        provenanceTextView.setText(provenance);
+        accessionNumberTextView.setText(accessionNumber);
+        notesTextView.setText(notes);
 
         categoryChip.setText(category);
         materialChip.setText(material);

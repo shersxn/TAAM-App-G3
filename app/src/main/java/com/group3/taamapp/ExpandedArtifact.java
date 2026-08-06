@@ -9,6 +9,14 @@ public class ExpandedArtifact {
     private String category;
     private String material;
     private String dynastyPeriod;
+    private String culturalOrigin;
+    private String dimensions;
+    private String conditionReport;
+    private String currentLocation;
+    private String acquisitionMethod;
+    private String provenance;
+    private String accessionNumber;
+    private String notes;
     private String imageUrl;
     private int likeCount;
     private Map<String, Comment> comments;
@@ -39,6 +47,41 @@ public class ExpandedArtifact {
         this.imageUrl = imageUrl;
         this.likeCount = likeCount;
         this.comments = null;
+    }
+
+    // Full constructor. Only lotNumber, artifactName, description, category,
+    // material and dynastyPeriod are mandatory; the remaining String fields
+    // may be null or empty.
+    public ExpandedArtifact(
+            String lotNumber,
+            String artifactName,
+            String description,
+            String category,
+            String material,
+            String dynastyPeriod,
+            String culturalOrigin,
+            String dimensions,
+            String conditionReport,
+            String currentLocation,
+            String acquisitionMethod,
+            String provenance,
+            String accessionNumber,
+            String notes,
+            String imageUrl,
+            int likeCount,
+            Map<String, Comment> comments
+    ) {
+        this(lotNumber, artifactName, description, category, material,
+                dynastyPeriod, imageUrl, likeCount, comments);
+        this.culturalOrigin = culturalOrigin;
+        this.dimensions = dimensions;
+        this.conditionReport = conditionReport;
+        this.currentLocation = currentLocation;
+        this.acquisitionMethod = acquisitionMethod;
+        this.provenance = provenance;
+        this.accessionNumber = accessionNumber;
+        this.notes = notes;
+        this.comments = comments;
     }
 
 
@@ -90,6 +133,38 @@ public class ExpandedArtifact {
         this.dynastyPeriod = dynastyPeriod;
     }
 
+    public String getCulturalOrigin() { return culturalOrigin; }
+
+    public void setCulturalOrigin(String culturalOrigin) { this.culturalOrigin = culturalOrigin; }
+
+    public String getDimensions() { return dimensions; }
+
+    public void setDimensions(String dimensions) { this.dimensions = dimensions; }
+
+    public String getConditionReport() { return conditionReport; }
+
+    public void setConditionReport(String conditionReport) { this.conditionReport = conditionReport; }
+
+    public String getCurrentLocation() { return currentLocation; }
+
+    public void setCurrentLocation(String currentLocation) { this.currentLocation = currentLocation; }
+
+    public String getAcquisitionMethod() { return acquisitionMethod; }
+
+    public void setAcquisitionMethod(String acquisitionMethod) { this.acquisitionMethod = acquisitionMethod; }
+
+    public String getProvenance() { return provenance; }
+
+    public void setProvenance(String provenance) { this.provenance = provenance; }
+
+    public String getAccessionNumber() { return accessionNumber; }
+
+    public void setAccessionNumber(String accessionNumber) { this.accessionNumber = accessionNumber; }
+
+    public String getNotes() { return notes; }
+
+    public void setNotes(String notes) { this.notes = notes; }
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -110,5 +185,4 @@ public class ExpandedArtifact {
 
     public void setComments(Map<String, Comment> comments) { this.comments = comments; }
 }
-
 
