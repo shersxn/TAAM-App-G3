@@ -110,9 +110,10 @@ public class LoginPresenterTest {
 
     /**
      * Test the method usage of callback.onFailure() sent from Presenter.login to Model.login
+     * Test the msg passed to toastMakeTest
      */
     @Test
-    public void testLogin_actionWhenFail() {
+    public void testLogin_actionWhenEmailEmpty() {
         doAnswer(invocation -> {
             StatusCallback<LoginContract.AuthModel.LoginFailure> callback = invocation.getArgument(2);
             callback.onFailure(LoginContract.AuthModel.LoginFailure.EMPTY_EMAIL);
@@ -121,6 +122,74 @@ public class LoginPresenterTest {
         presenter.login();
         basicTestForLogin();
         verify(mockView).toastMakeText("Failure: email cannot be empty");
+        verify(mockView, never()).toMainPage(any());
+    }
+
+    /**
+     * Test the method usage of callback.onFailure() sent from Presenter.login to Model.login
+     * Test the msg passed to toastMakeTest
+     */
+    @Test
+    public void testLogin_actionWhenPasswordEmpty() {
+        doAnswer(invocation -> {
+            StatusCallback<LoginContract.AuthModel.LoginFailure> callback = invocation.getArgument(2);
+            callback.onFailure(LoginContract.AuthModel.LoginFailure.EMPTY_PASSWORD);
+            return null;
+        }).when(mockModel).login(any(), any(), any());
+        presenter.login();
+        basicTestForLogin();
+        verify(mockView).toastMakeText("Failure: password cannot be empty");
+        verify(mockView, never()).toMainPage(any());
+    }
+
+    /**
+     * Test the method usage of callback.onFailure() sent from Presenter.login to Model.login
+     * Test the msg passed to toastMakeTest
+     */
+    @Test
+    public void testLogin_actionWhenEmailDNE() {
+        doAnswer(invocation -> {
+            StatusCallback<LoginContract.AuthModel.LoginFailure> callback = invocation.getArgument(2);
+            callback.onFailure(LoginContract.AuthModel.LoginFailure.EMAIL_DNE);
+            return null;
+        }).when(mockModel).login(any(), any(), any());
+        presenter.login();
+        basicTestForLogin();
+        verify(mockView).toastMakeText("Failure: The email you use for login does not exist");
+        verify(mockView, never()).toMainPage(any());
+    }
+
+    /**
+     * Test the method usage of callback.onFailure() sent from Presenter.login to Model.login
+     * Test the msg passed to toastMakeTest
+     */
+    @Test
+    public void testLogin_actionWhenEmailPasswordNotMatch() {
+        doAnswer(invocation -> {
+            StatusCallback<LoginContract.AuthModel.LoginFailure> callback = invocation.getArgument(2);
+            callback.onFailure(LoginContract.AuthModel.LoginFailure.EMAIL_PASSWORD_NOT_MATCH);
+            return null;
+        }).when(mockModel).login(any(), any(), any());
+        presenter.login();
+        basicTestForLogin();
+        verify(mockView).toastMakeText("Failure: Your email or password are incorrect");
+        verify(mockView, never()).toMainPage(any());
+    }
+
+    /**
+     * Test the method usage of callback.onFailure() sent from Presenter.login to Model.login
+     * Test the msg passed to toastMakeTest
+     */
+    @Test
+    public void testLogin_actionWhenNotRecognizableFailure() {
+        doAnswer(invocation -> {
+            StatusCallback<LoginContract.AuthModel.LoginFailure> callback = invocation.getArgument(2);
+            callback.onFailure(null);
+            return null;
+        }).when(mockModel).login(any(), any(), any());
+        presenter.login();
+        basicTestForLogin();
+        verify(mockView).toastMakeText("Failure: null");
         verify(mockView, never()).toMainPage(any());
     }
 

@@ -113,9 +113,10 @@ public class SignupPresenterTest {
 
     /**
      * Test the method usage of callback.onFailure() sent from Presenter.signup to Model.signup
+     * Test the msg passed to toastMakeTest
      */
     @Test
-    public void testSignup_whenFailure() {
+    public void testSignup_whenEmailEmpty() {
         doAnswer(invocation -> {
             StatusCallback<SignupContract.AuthModel.SignUpFailure> callback = invocation.getArgument(3);
             callback.onFailure(SignupContract.AuthModel.SignUpFailure.EMPTY_EMAIL);
@@ -124,6 +125,86 @@ public class SignupPresenterTest {
         presenter.signup();
         basicTestForSignup();
         verify(mockView).toastMakeText("Failure: email cannot be empty");
+    }
+
+    /**
+     * Test the method usage of callback.onFailure() sent from Presenter.signup to Model.signup
+     * Test the msg passed to toastMakeTest
+     */
+    @Test
+    public void testSignup_whenUsernameEmpty() {
+        doAnswer(invocation -> {
+            StatusCallback<SignupContract.AuthModel.SignUpFailure> callback = invocation.getArgument(3);
+            callback.onFailure(SignupContract.AuthModel.SignUpFailure.EMPTY_USERNAME);
+            return null;
+        }).when(mockAuthModel).signUp(any(), any(), any(), any());
+        presenter.signup();
+        basicTestForSignup();
+        verify(mockView).toastMakeText("Failure: username cannot be empty");
+    }
+
+    /**
+     * Test the method usage of callback.onFailure() sent from Presenter.signup to Model.signup
+     * Test the msg passed to toastMakeTest
+     */
+    @Test
+    public void testSignup_whenPasswordEmpty() {
+        doAnswer(invocation -> {
+            StatusCallback<SignupContract.AuthModel.SignUpFailure> callback = invocation.getArgument(3);
+            callback.onFailure(SignupContract.AuthModel.SignUpFailure.EMPTY_PASSWORD);
+            return null;
+        }).when(mockAuthModel).signUp(any(), any(), any(), any());
+        presenter.signup();
+        basicTestForSignup();
+        verify(mockView).toastMakeText("Failure: password cannot be empty");
+    }
+
+    /**
+     * Test the method usage of callback.onFailure() sent from Presenter.signup to Model.signup
+     * Test the msg passed to toastMakeTest
+     */
+    @Test
+    public void testSignup_whenEmailInvalid() {
+        doAnswer(invocation -> {
+            StatusCallback<SignupContract.AuthModel.SignUpFailure> callback = invocation.getArgument(3);
+            callback.onFailure(SignupContract.AuthModel.SignUpFailure.INVALID_EMAIL);
+            return null;
+        }).when(mockAuthModel).signUp(any(), any(), any(), any());
+        presenter.signup();
+        basicTestForSignup();
+        verify(mockView).toastMakeText("Failure: This is not a valid email");
+    }
+
+    /**
+     * Test the method usage of callback.onFailure() sent from Presenter.signup to Model.signup
+     * Test the msg passed to toastMakeTest
+     */
+    @Test
+    public void testSignup_whenEmailExisted() {
+        doAnswer(invocation -> {
+            StatusCallback<SignupContract.AuthModel.SignUpFailure> callback = invocation.getArgument(3);
+            callback.onFailure(SignupContract.AuthModel.SignUpFailure.EMAIL_EXISTS);
+            return null;
+        }).when(mockAuthModel).signUp(any(), any(), any(), any());
+        presenter.signup();
+        basicTestForSignup();
+        verify(mockView).toastMakeText("Failure: The email you use for login has existed");
+    }
+
+    /**
+     * Test the method usage of callback.onFailure() sent from Presenter.signup to Model.signup
+     * Test the msg passed to toastMakeTest
+     */
+    @Test
+    public void testSignup_whenNotRecognizableFailure() {
+        doAnswer(invocation -> {
+            StatusCallback<SignupContract.AuthModel.SignUpFailure> callback = invocation.getArgument(3);
+            callback.onFailure(null);
+            return null;
+        }).when(mockAuthModel).signUp(any(), any(), any(), any());
+        presenter.signup();
+        basicTestForSignup();
+        verify(mockView).toastMakeText("Failure: null");
     }
 
     /**
