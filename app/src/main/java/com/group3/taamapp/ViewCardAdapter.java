@@ -19,10 +19,10 @@ public class ViewCardAdapter extends RecyclerView.Adapter<ViewCardAdapter.MyView
     public interface OnArtifactActionListener {
         void onOpenArtifact(ExpandedArtifact artifact);
     }
-    Context context;
+    private Context context;
     // List of view artifacts
-    ArrayList<ExpandedArtifact> viewCards;
-    OnArtifactActionListener listener;
+    private ArrayList<ExpandedArtifact> viewCards;
+    private OnArtifactActionListener listener;
 
     public ViewCardAdapter(Context context, ArrayList<ExpandedArtifact> viewCards, OnArtifactActionListener listener) {
         this.context = context;
@@ -40,7 +40,7 @@ public class ViewCardAdapter extends RecyclerView.Adapter<ViewCardAdapter.MyView
     }
 
     // Shorten the string that exceeds the given maximum length
-    public String shorten(String s, int n) {
+    private String shorten(String s, int n) {
         if (s.length() > n) {
             s = s.substring(0, n) + "...";
         }

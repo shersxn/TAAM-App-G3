@@ -28,12 +28,12 @@ public class HomeFragment extends BaseFragment {
 
     public static final String ARG_EMAIL = "email";
 
-    ArrayList<ExpandedArtifact> viewCards = new ArrayList<>();
-    ViewCardAdapter adapter;
-    View homePage;
-    SearchView searchArtifact;
-    RecyclerView recyclerView;
-    ImageButton logout;
+    private ArrayList<ExpandedArtifact> viewCards = new ArrayList<>();
+    private ViewCardAdapter adapter;
+    private View homePage;
+    private SearchView searchArtifact;
+    private RecyclerView recyclerView;
+    private ImageButton logout;
     private String currentUserEmail;
 
     @Override
@@ -108,23 +108,28 @@ public class HomeFragment extends BaseFragment {
 
     // Check whether any field of the artifact mathes the search keyword
     private boolean isMatch(ExpandedArtifact card, String newText) {
-        if (card.getArtifactName().toLowerCase().contains(newText.toLowerCase())) {
-            return true;
-        }
-        if (card.getDescription().toLowerCase().contains(newText.toLowerCase())) {
-            return true;
-        }
-        if (card.getCategory().toLowerCase().contains(newText.toLowerCase())) {
-            return true;
-        }
-        if (card.getDynastyPeriod().toLowerCase().contains(newText.toLowerCase())) {
-            return true;
-        }
-        if (card.getMaterial().toLowerCase().contains(newText.toLowerCase())) {
-            return true;
-        }
-        if (card.getLotNumber().contains(newText)) {
-            return true;
+        String[] fields = {
+                card.getLotNumber(),
+                card.getArtifactName(),
+                card.getDescription(),
+                card.getCategory(),
+                card.getMaterial(),
+                card.getDynastyPeriod(),
+                card.getCulturalOrigin(),
+                card.getDimensions(),
+                card.getConditionReport(),
+                card.getCurrentLocation(),
+                card.getAcquisitionMethod(),
+                card.getProvenance(),
+                card.getAccessionNumber(),
+                card.getNotes()
+        };
+        String keyword = newText.toLowerCase();
+
+        for (String field : fields) {
+            if (field != null && field.toLowerCase().contains(keyword)) {
+                return true;
+            }
         }
         return false;
     }
