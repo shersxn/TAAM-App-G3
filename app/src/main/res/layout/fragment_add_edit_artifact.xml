@@ -236,7 +236,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="34dp"
         android:layout_marginEnd="333dp"
-        android:text="CulturalOrigin:"
+        android:text="Cultural origin:"
         android:textColor="#402410"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
