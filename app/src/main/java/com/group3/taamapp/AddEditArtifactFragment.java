@@ -31,6 +31,9 @@ public class AddEditArtifactFragment extends Fragment {
     private ImageButton artifactImageButton;
     private Spinner spinnerCategory, spinnerMaterial, spinnerDynastyPeriod;
     private EditText editTextName, editTextLotNumber, editTextDescription;
+    private EditText editTextCulturalOrigin, editTextDimensions, editTextConditionReport;
+    private EditText editTextCurrentLocation, editTextAcquisitionMethod, editTextProvenance;
+    private EditText editTextAccessionNumber, editTextNotes;
     private FirebaseDatabase db;
     private DatabaseReference dataReference;
     private ActivityResultLauncher<PickVisualMediaRequest> imagePicker;
@@ -45,6 +48,14 @@ public class AddEditArtifactFragment extends Fragment {
     private String category;
     private String material;
     private String dynastyPeriod;
+    private String culturalOrigin;
+    private String dimensions;
+    private String conditionReport;
+    private String currentLocation;
+    private String acquisitionMethod;
+    private String provenance;
+    private String accessionNumber;
+    private String notes;
     private String userEmail;
 
 
@@ -66,6 +77,14 @@ public class AddEditArtifactFragment extends Fragment {
         editTextName = view.findViewById(R.id.editTextName);
         editTextLotNumber = view.findViewById(R.id.editTextLotNumber);
         spinnerDynastyPeriod = view.findViewById(R.id.spinnerDynastyPeriod);
+        editTextCulturalOrigin = view.findViewById(R.id.editTextCulturalOrigin);
+        editTextDimensions = view.findViewById(R.id.editTextDimensions);
+        editTextConditionReport = view.findViewById(R.id.editTextConditionReport);
+        editTextCurrentLocation = view.findViewById(R.id.editTextCurrentLocation);
+        editTextAcquisitionMethod = view.findViewById(R.id.editTextAcquisitionMethod);
+        editTextProvenance = view.findViewById(R.id.editTextProvenance);
+        editTextAccessionNumber = view.findViewById(R.id.editTextAccessionNumber);
+        editTextNotes = view.findViewById(R.id.editTextNotes);
 
         // Set up spinner with categories
         ArrayAdapter<CharSequence> categoriesAdapter = ArrayAdapter.createFromResource(
@@ -147,6 +166,14 @@ public class AddEditArtifactFragment extends Fragment {
                         editTextLotNumber.setEnabled(false);
                         editTextName.setText(editingArtifact.getArtifactName());
                         editTextDescription.setText(editingArtifact.getDescription());
+                        editTextCulturalOrigin.setText(editingArtifact.getCulturalOrigin());
+                        editTextDimensions.setText(editingArtifact.getDimensions());
+                        editTextConditionReport.setText(editingArtifact.getConditionReport());
+                        editTextCurrentLocation.setText(editingArtifact.getCurrentLocation());
+                        editTextAcquisitionMethod.setText(editingArtifact.getAcquisitionMethod());
+                        editTextProvenance.setText(editingArtifact.getProvenance());
+                        editTextAccessionNumber.setText(editingArtifact.getAccessionNumber());
+                        editTextNotes.setText(editingArtifact.getNotes());
                         spinnerCategory.setSelection(categoriesAdapter.getPosition(
                                 editingArtifact.getCategory()));
                         spinnerMaterial.setSelection(materialsAdapter.getPosition(
@@ -178,6 +205,14 @@ public class AddEditArtifactFragment extends Fragment {
             category = spinnerCategory.getSelectedItem().toString();
             material = spinnerMaterial.getSelectedItem().toString();
             dynastyPeriod = spinnerDynastyPeriod.getSelectedItem().toString();
+            culturalOrigin = editTextCulturalOrigin.getText().toString().trim();
+            dimensions = editTextDimensions.getText().toString().trim();
+            conditionReport = editTextConditionReport.getText().toString().trim();
+            currentLocation = editTextCurrentLocation.getText().toString().trim();
+            acquisitionMethod = editTextAcquisitionMethod.getText().toString().trim();
+            provenance = editTextProvenance.getText().toString().trim();
+            accessionNumber = editTextAccessionNumber.getText().toString().trim();
+            notes = editTextNotes.getText().toString().trim();
 
             if (areNonEmptyInputs(name, description, category, material, dynastyPeriod)) {
                 if (isAdding) {
@@ -272,7 +307,9 @@ public class AddEditArtifactFragment extends Fragment {
         if (isAdding) {
             dataReference = db.getReference("Artifacts");
             ExpandedArtifact artifact = new ExpandedArtifact(lotNumber, name, description, category,
-                    material, dynastyPeriod, artifactImageUrl, 0, null);
+                    material, dynastyPeriod, culturalOrigin, dimensions, conditionReport,
+                    currentLocation, acquisitionMethod, provenance, accessionNumber, notes,
+                    artifactImageUrl, 0, null);
 
             dataReference.child(lotNumber).setValue(artifact).addOnCompleteListener(
                     task -> {
@@ -301,6 +338,14 @@ public class AddEditArtifactFragment extends Fragment {
             artifact.setCategory(category);
             artifact.setMaterial(material);
             artifact.setDynastyPeriod(dynastyPeriod);
+            artifact.setCulturalOrigin(culturalOrigin);
+            artifact.setDimensions(dimensions);
+            artifact.setConditionReport(conditionReport);
+            artifact.setCurrentLocation(currentLocation);
+            artifact.setAcquisitionMethod(acquisitionMethod);
+            artifact.setProvenance(provenance);
+            artifact.setAccessionNumber(accessionNumber);
+            artifact.setNotes(notes);
             if (artifactImageUrl != null) {
                 artifact.setImageUrl(artifactImageUrl);
             }
