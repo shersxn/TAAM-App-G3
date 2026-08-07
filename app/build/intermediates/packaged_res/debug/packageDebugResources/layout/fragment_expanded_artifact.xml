@@ -378,6 +378,198 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans"
+                            android:text="Cultural Origin"
+                            android:textColor="@color/brown_dark_text"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/culturalOriginTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans"
+                            android:textColor="@color/brown_dark_text"
+                            tools:text="Chinese" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans"
+                            android:text="Dimensions"
+                            android:textColor="@color/brown_dark_text"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/dimensionsTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans"
+                            android:textColor="@color/brown_dark_text"
+                            tools:text="10 × 8 × 8 cm" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans"
+                            android:text="Condition Report"
+                            android:textColor="@color/brown_dark_text"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/conditionReportTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans"
+                            android:textColor="@color/brown_dark_text"
+                            tools:text="Good condition" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans"
+                            android:text="Current Location"
+                            android:textColor="@color/brown_dark_text"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/currentLocationTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans"
+                            android:textColor="@color/brown_dark_text"
+                            tools:text="Gallery 2" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans"
+                            android:text="Acquisition Method"
+                            android:textColor="@color/brown_dark_text"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/acquisitionMethodTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans"
+                            android:textColor="@color/brown_dark_text"
+                            tools:text="Donation" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans"
+                            android:text="Provenance"
+                            android:textColor="@color/brown_dark_text"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/provenanceTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans"
+                            android:textColor="@color/brown_dark_text"
+                            tools:text="Private collection" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans"
+                            android:text="Accession Number"
+                            android:textColor="@color/brown_dark_text"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/accessionNumberTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans"
+                            android:textColor="@color/brown_dark_text"
+                            tools:text="2026.001" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans"
+                            android:text="Notes"
+                            android:textColor="@color/brown_dark_text"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/notesTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/dm_sans"
+                            android:textColor="@color/brown_dark_text"
+                            tools:text="Additional notes" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>

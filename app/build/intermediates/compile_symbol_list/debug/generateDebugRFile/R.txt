@@ -20,6 +20,8 @@ int drawable saved_icon 0x0
 int font dm_sans 0x0
 int font dm_sans_thin 0x0
 int font playfair_display_sc 0x0
+int id accessionNumberTextView 0x0
+int id acquisitionMethodTextView 0x0
 int id add 0x0
 int id adminControlsLayout 0x0
 int id artefact_gallery 0x0
@@ -50,10 +52,14 @@ int id comment 0x0
 int id commentFragmentContainer 0x0
 int id commenter 0x0
 int id comments_recycler_view 0x0
+int id conditionReportTextView 0x0
+int id culturalOriginTextView 0x0
+int id currentLocationTextView 0x0
 int id deleteArtifactButton 0x0
 int id delete_button 0x0
 int id delete_comment 0x0
 int id descriptionTextView 0x0
+int id dimensionsTextView 0x0
 int id dynastyPeriodDetailTextView 0x0
 int id dynastyPeriodTextView 0x0
 int id editArtifactButton 0x0
@@ -82,6 +88,8 @@ int id main 0x0
 int id materialChip 0x0
 int id materialTextView 0x0
 int id navigationBar 0x0
+int id notesTextView 0x0
+int id provenanceTextView 0x0
 int id related_recycler_view 0x0
 int id rvBrowseArtifacts 0x0
 int id rv_saved_artifacts 0x0

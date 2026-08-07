@@ -22,6 +22,8 @@ drawable saved_icon
 font dm_sans
 font dm_sans_thin
 font playfair_display_sc
+id accessionNumberTextView
+id acquisitionMethodTextView
 id add
 id adminControlsLayout
 id artefact_gallery
@@ -52,10 +54,14 @@ id comment
 id commentFragmentContainer
 id commenter
 id comments_recycler_view
+id conditionReportTextView
+id culturalOriginTextView
+id currentLocationTextView
 id deleteArtifactButton
 id delete_button
 id delete_comment
 id descriptionTextView
+id dimensionsTextView
 id dynastyPeriodDetailTextView
 id dynastyPeriodTextView
 id editArtifactButton
@@ -84,6 +90,8 @@ id main
 id materialChip
 id materialTextView
 id navigationBar
+id notesTextView
+id provenanceTextView
 id related_recycler_view
 id rvBrowseArtifacts
 id rv_saved_artifacts
