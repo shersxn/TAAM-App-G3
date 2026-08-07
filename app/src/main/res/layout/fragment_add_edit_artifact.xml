@@ -28,8 +28,8 @@
         android:text="Material:"
         android:textColor="#402410"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/spinnerCategory"
-        app:layout_constraintStart_toStartOf="@id/textViewLotNumber" />
+        app:layout_constraintStart_toStartOf="@id/textViewLotNumber"
+        app:layout_constraintTop_toBottomOf="@id/spinnerCategory" />
 
     <TextView
         android:id="@+id/textViewDynastyPeriod"
@@ -52,8 +52,8 @@
         android:text="Category:"
         android:textColor="#402410"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/editTextDescription"
-        app:layout_constraintStart_toStartOf="@id/textViewLotNumber" />
+        app:layout_constraintStart_toStartOf="@id/textViewLotNumber"
+        app:layout_constraintTop_toBottomOf="@id/editTextDescription" />
 
     <EditText
         android:id="@+id/editTextDescription"
@@ -64,8 +64,8 @@
         android:inputType="text"
         android:textColor="#908D8C"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/textViewDescription"
-        app:layout_constraintStart_toStartOf="@id/textViewLotNumber" />
+        app:layout_constraintStart_toStartOf="@id/textViewLotNumber"
+        app:layout_constraintTop_toBottomOf="@id/textViewDescription" />
 
     <TextView
         android:id="@+id/textViewDescription"
@@ -75,8 +75,8 @@
         android:text="Description:"
         android:textColor="#402410"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/editTextName"
-        app:layout_constraintStart_toStartOf="@id/textViewLotNumber" />
+        app:layout_constraintStart_toStartOf="@id/textViewLotNumber"
+        app:layout_constraintTop_toBottomOf="@id/editTextName" />
 
     <EditText
         android:id="@+id/editTextName"
@@ -87,8 +87,8 @@
         android:inputType="text"
         android:textColor="#908D8C"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/textViewName"
-        app:layout_constraintStart_toStartOf="@id/textViewLotNumber" />
+        app:layout_constraintStart_toStartOf="@id/textViewLotNumber"
+        app:layout_constraintTop_toBottomOf="@id/textViewName" />
 
     <TextView
         android:id="@+id/textViewName"
@@ -98,8 +98,8 @@
         android:text="Artifact name:"
         android:textColor="#402410"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/editTextLotNumber"
-        app:layout_constraintStart_toStartOf="@id/textViewLotNumber" />
+        app:layout_constraintStart_toStartOf="@id/textViewLotNumber"
+        app:layout_constraintTop_toBottomOf="@id/editTextLotNumber" />
 
     <EditText
         android:id="@+id/editTextLotNumber"
@@ -110,16 +110,16 @@
         android:inputType="text"
         android:textColor="#908D8C"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/textViewLotNumber"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/textViewLotNumber"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/textViewLotNumber" />
 
     <TextView
         android:id="@+id/textViewLotNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
         android:layout_marginStart="25dp"
+        android:layout_marginTop="18dp"
         android:text="Lot number:"
         android:textColor="#402410"
         android:textSize="16sp"
@@ -173,8 +173,8 @@
         android:layout_width="122dp"
         android:layout_height="57dp"
         android:layout_marginStart="245dp"
-        android:layout_marginEnd="25dp"
         android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
         android:backgroundTint="#a47e5a"
         android:text="Done"
@@ -215,5 +215,207 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/textViewLotNumber"
         app:layout_constraintTop_toBottomOf="@+id/textViewDynastyPeriod" />
+
+    <EditText
+        android:id="@+id/editTextCulturalOrigin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="281dp"
+        android:ems="10"
+        android:hint="Enter cultural origin..."
+        android:inputType="text"
+        android:textColor="#908D8C"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textViewCulturalOrigin"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCulturalOrigin" />
+
+    <TextView
+        android:id="@+id/textViewCulturalOrigin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="333dp"
+        android:text="CulturalOrigin:"
+        android:textColor="#402410"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/artifactImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/artifactImageButton" />
+
+    <EditText
+        android:id="@+id/editTextDimensions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="281dp"
+        android:ems="10"
+        android:hint="Enter dimensions..."
+        android:inputType="text"
+        android:textColor="#908D8C"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textViewDimensions"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDimensions" />
+
+    <TextView
+        android:id="@+id/textViewDimensions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dimensions:"
+        android:textColor="#402410"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/editTextCulturalOrigin"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCulturalOrigin" />
+
+    <EditText
+        android:id="@+id/editTextConditionReport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="281dp"
+        android:ems="10"
+        android:hint="Enter condition report..."
+        android:inputType="text"
+        android:textColor="#908D8C"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textViewConditionReport"
+        app:layout_constraintTop_toBottomOf="@+id/textViewConditionReport" />
+
+    <TextView
+        android:id="@+id/textViewConditionReport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Condition report:"
+        android:textColor="#402410"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/editTextDimensions"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDimensions" />
+
+    <EditText
+        android:id="@+id/editTextCurrentLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="281dp"
+        android:ems="10"
+        android:hint="Enter current location..."
+        android:inputType="text"
+        android:textColor="#908D8C"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textViewCurrentLocation"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCurrentLocation" />
+
+    <TextView
+        android:id="@+id/textViewCurrentLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current location:"
+        android:textColor="#402410"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/editTextConditionReport"
+        app:layout_constraintTop_toBottomOf="@+id/editTextConditionReport" />
+
+    <EditText
+        android:id="@+id/editTextAcquisitionMethod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="281dp"
+        android:ems="10"
+        android:hint="Enter acquisition method..."
+        android:inputType="text"
+        android:textColor="#908D8C"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textViewAcquisitionMethod"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAcquisitionMethod" />
+
+    <TextView
+        android:id="@+id/textViewAcquisitionMethod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:text="Acquisition method:"
+        android:textColor="#402410"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/editTextCurrentLocation"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCurrentLocation" />
+
+    <EditText
+        android:id="@+id/editTextProvenance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="280dp"
+        android:ems="10"
+        android:hint="Enter provenance..."
+        android:inputType="text"
+        android:textColor="#908D8C"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textViewProvenance"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProvenance" />
+
+    <TextView
+        android:id="@+id/textViewProvenance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:text="Provenance:"
+        android:textColor="#402410"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/editTextAcquisitionMethod"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAcquisitionMethod" />
+
+    <EditText
+        android:id="@+id/editTextAccessionNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="280dp"
+        android:ems="10"
+        android:hint="Enter accession number..."
+        android:inputType="text"
+        android:textColor="#908D8C"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textViewAccessionNumber"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAccessionNumber" />
+
+    <TextView
+        android:id="@+id/textViewAccessionNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accession number:"
+        android:textColor="#402410"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/editTextProvenance"
+        app:layout_constraintTop_toBottomOf="@+id/editTextProvenance" />
+
+    <EditText
+        android:id="@+id/editTextNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="280dp"
+        android:ems="10"
+        android:hint="Enter notes..."
+        android:inputType="text"
+        android:textColor="#908D8C"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textViewNotes"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNotes" />
+
+    <TextView
+        android:id="@+id/textViewNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="364dp"
+        android:text="Notes:"
+        android:textColor="#402410"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextAccessionNumber"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAccessionNumber" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
